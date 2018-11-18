@@ -2,10 +2,13 @@ const express = require('express');
 
 const app = express();
 
+app.set('view-engine', 'ejs');
+app.set('views', 'views');
+
 const port = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
-  res.send('Welcome to admission Trends');
+  res.render('index.ejs', { date: new Date() });
 });
 
 app.listen(port, () => {
