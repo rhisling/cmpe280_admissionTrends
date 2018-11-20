@@ -11,6 +11,9 @@ const port = process.env.PORT || 3000;
 app.get('/', (req, res) => {
   res.render('sign-in.ejs', { title: 'Admission Trends' });
 });
+app.get('/add-entry', (req, res) => {
+  res.render('add-entry.ejs');
+});
 
 app.listen(port, () => {
   console.log(`server started on port: ${port}`);
