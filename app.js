@@ -17,6 +17,9 @@ app.get('/add-entry', (req, res) => {
 app.get('/update-entry', (req, res) => {
   res.render('update-entry.ejs');
 });
+app.get('/index', (req, res) => {
+  res.render('dashboard.ejs');
+});
 app.listen(port, () => {
   console.log(`server started on port: ${port}`);
 });
