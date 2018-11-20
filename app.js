@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const key = require('./config/mongodb-key');
 //const routes = require('./routes/routes');
-//const adminRoutes = require('./routes/admin');
+const adminRoutes = require('./routes/admin');
 const dashboardRoutes = require('./routes/dashboard');
 
 
@@ -17,6 +17,9 @@ const port = process.env.PORT || 3000;
 app.get('/', (req, res) => {
   res.render('sign-in.ejs', { title: 'Admission Trends' });
 });
+app.get('/admin/add-entry', (req, res) => {
+  res.render('add-entry.ejs'); //?
+});
 app.get('/add-entry', (req, res) => {
   res.render('add-entry.ejs');
 });
@@ -28,7 +31,7 @@ app.listen(port, () => {
 });
 
 //app.use('/', routes);
-//app.use(adminRoutes);
+app.use(adminRoutes);
 app.use(dashboardRoutes);
 
 mongoose
