@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Top Universities</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.0/chartist.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.0/chartist.min.js"></script>
+    <style>
+        #chart {
+            height: 300px;
+            width: 90%;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="chart-section">
+        <h1> Top 3 universities with Highest Graduation and Retention Rate </h1>
+        <div class="ct-chart" id="chart"></div>
+    </section>
+    <form action="home" method="GET">
+        <input type="submit" value="Back to Home" />
+    </form>
+    <script type="text/javascript" src="https://rawgit.com/gionkunz/chartist-js/master/dist/chartist.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var data = {
+                labels: ['UC Berkeley', 'UCLA', 'UC Irvine'],
+                series: [
+                    [97, 94, 92],
+                    [80, 70, 85]
+                ]
+            };
+
+            var responsiveOptions = {
+                seriesBarDistance: 20,
+                reverseData: true,
+                horizontalBars: true,
+                axisY: {
+                    offset: 100
+                }
+            };
+            new Chartist.Bar('#chart', data, responsiveOptions);
+
+        });
+        // Main function to draw and set up the visualization, once we have the data.
+
+    </script>
+
+</body>
+
+</html>

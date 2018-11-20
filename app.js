@@ -1,4 +1,10 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const key = require('./config/mongodb-key');
+//const routes = require('./routes/routes');
+//const adminRoutes = require('./routes/admin');
+const dashboardRoutes = require('./routes/dashboard');
+
 
 const app = express();
 
@@ -17,9 +23,21 @@ app.get('/add-entry', (req, res) => {
 app.get('/update-entry', (req, res) => {
   res.render('update-entry.ejs');
 });
-app.get('/index', (req, res) => {
-  res.render('dashboard.ejs');
-});
 app.listen(port, () => {
   console.log(`server started on port: ${port}`);
 });
+
+//app.use('/', routes);
+//app.use(adminRoutes);
+app.use(dashboardRoutes);
+
+mongoose
+  .connect(
+    key.mongodbUrl || 'mongodb://localhost:27017/AdmissionTrends',
+    { useNewUrlParser: true }
+  )
+  .then(result => {
+    console.log('MongoDB client connected');
+    app.listen(7000, () => console.log('server is up on port 7000'));
+  })
+  .catch(err => console.log(err));
