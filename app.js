@@ -14,7 +14,9 @@ app.get('/', (req, res) => {
 app.get('/add-entry', (req, res) => {
   res.render('add-entry.ejs');
 });
-
+app.get('/update-entry', (req, res) => {
+  res.render('update-entry.ejs');
+});
 app.listen(port, () => {
   console.log(`server started on port: ${port}`);
 });
