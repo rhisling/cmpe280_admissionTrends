@@ -31,10 +31,13 @@ app.get('/admin/add-entry', (req, res) => {
 app.get('/admin/update-entry', (req, res) => {
   res.render('update-entry.ejs');
 });
-
-
+app.get('/admin/delete-entry', (req, res) => {
+  res.render('delete-entry.ejs');
+});
+app.get('/admin/find-entry', (req, res) => {
+  res.render('find-entry.ejs');
+});
 //app.use('/', routes);
-
 app.use(adminRoutes);
 app.use(dashboardRoutes);
 

@@ -2,7 +2,7 @@ const Ustats = require('../models/ustats');
 var value = require('./dashboard');
 console.log(value.queryResults);
 module.exports.showAdminPage = (req, res) => {
-  res.render('admin');
+  res.render('/admin');
 };
 
 module.exports.addEntry = (req, res) => {
