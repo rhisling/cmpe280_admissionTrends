@@ -17,13 +17,13 @@ const port = process.env.PORT || 3000;
 app.get('/', (req, res) => {
   res.render('sign-in.ejs', { title: 'Admission Trends' });
 });
-app.get('/admin/add-entry', (req, res) => {
-  res.render('add-entry.ejs'); //?
+app.get('/admin', (req, res) => {
+  res.render('admin.ejs'); //?
 });
-app.get('/add-entry', (req, res) => {
+app.get('/admin/add-entry', (req, res) => {
   res.render('add-entry.ejs');
 });
-app.get('/update-entry', (req, res) => {
+app.get('/admin/update-entry', (req, res) => {
   res.render('update-entry.ejs');
 });
 app.listen(port, () => {
