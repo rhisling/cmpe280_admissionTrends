@@ -243,11 +243,10 @@
                 <li class="active open"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-accounts-outline"></i><span>Administrator</span> </a>
                     <ul class="ml-menu">
                         <li><a href="/admin">Admin Panel</a></li>
-                        <li><a href="students.html">All Students</a></li>
-                        <li><a href="/admin/add-entry">Add Entry</a></li>   
-                        <li class="active"><a href="/admin/update-entry">Update Entry</a></li> 
+                        <li><a href="/admin/add-entry">Add Entry</a></li>    
+                        <li><a href="/admin/update-entry"">Update Entry</a></li> 
                         <li><a href="/admin/delete-entry">Delete Entry</a></li>
-                        <li><a href="/admin/find-entry">Find Entry</a></li>
+                        <li class="active"><a href="/admin/find-entry">Find Entry</a></li>
                         <li><a href="/admin/find-all-entry">Find All Entries</a></li>
                         <li><a href="students-profile.html">Students Profile</a></li>
                         <li><a href="students-invoice.html">Students Invoice</a></li>
@@ -511,14 +510,14 @@
 <section class="content">
     <div class="container-fluid">
         <div class="block-header">
-            <h2>Update Entry</h2>
+            <h2>Add Entry</h2>
             <small class="text-muted">Welcome to University Trends, Administrator!</small>
         </div>
         <div class="row clearfix">
 			<div class="col-lg-12 col-md-12 col-sm-12">
 				<div class="card">
 					<div class="header">
-						<h2>Update a university entry<small>Please provide information for the following fields:</small> </h2>
+						<h2>Add a new university entry<small>Please provide information for the following fields:</small> </h2>
 						<ul class="header-dropdown">
 							<li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="zmdi zmdi-more-vert"></i></a>
 								<ul class="dropdown-menu pull-right">
@@ -530,7 +529,7 @@
 						</ul>
 					</div>
 					<div class="body">
-                    <form action="/admin/update-entry" method="POST">
+                    <form action="/admin/find-entry/INSTNM" method="GET">
                         <div class="row clearfix">
                             <div class="col-lg-6 col-md-12">
                                 <div class="form-group">
@@ -540,110 +539,18 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-12">
-                                <div class="form-group">
-                                    <div class="form-line">
-                    <label class="form-control" for="year">Year:</label>
-                    <input class="form-control col-md-12" type="number" id="year" name="YEAR" value="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row clearfix">
-                            <div class="col-lg-4 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <div class="form-line">
-                    <label class="form-control for="admission-rate">Admission Rate:</label>
-                    <input class="form-control col-md-12" type="number" id="admission-rate" name="ADM_RATE" step=0.0001
-                        value="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <div class="form-line">
-                    <label class="form-control" for="average-sat">Average SAT:</label>
-                    <input class="form-control col-md-12" class="form-control col-md-2" type="number" id="average-sat"
-                        name="SAT_AVG" value="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <div class="form-line">
-                    <label class="form-control" for="in-state-tuition">In-State Tution:</label>
-                    <input class="form-control col-md-12" type="number" id="in-state-tuition" name="TUITIONFEE_IN" value="">
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-sm-12">
                                 <button type="submit" class="btn btn-raised g-bg-blush2">Submit</button>
 <!--                                 <button type="submit" class="btn btn-raised btn-default ">Cancel</button>
  -->                            </div>
                             </form>
-
                         </div>
                     </div>
 				</div>
 			</div>
-		</div>
-<!--         <div class="row clearfix">
-			<div class="col-md-12">
-				<div class="card">
-					<div class="header">
-						<h2>Account Information <small>Description text here...</small> </h2>
-						<ul class="header-dropdown">
-							<li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="zmdi zmdi-more-vert"></i></a>
-								<ul class="dropdown-menu pull-right">
-									<li><a href="javascript:void(0);" class=" waves-effect waves-block">Action</a></li>
-									<li><a href="javascript:void(0);" class=" waves-effect waves-block">Another action</a></li>
-									<li><a href="javascript:void(0);" class=" waves-effect waves-block">Something else here</a></li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-					<div class="body">
-                        <div class="row clearfix">
-                            <div class="col-lg-6 col-md-12">
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" placeholder="Email">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-12">
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" placeholder="Phone">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-12">
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" placeholder="Password">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-12">
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" placeholder="Confirm Password">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <button type="submit" class="btn btn-raised btn-default ">Submit</button>
-                                <button type="submit" class="btn btn-raised btn-default ">Cancel</button>
-                            </div>
-                        </div>                        
-                    </div>
-				</div>
-			</div>
-		</div>  -->       
+		</div>    
     </div>
 </section>
-
 
 <div class="color-bg"></div>
 <!-- Jquery Core Js --> 

@@ -15,7 +15,7 @@ app.set('views', 'views');
 
 app.use(express.json()); // to support JSON-encoded bodies
 app.use(express.urlencoded({ extended: true })); // to support URL-encoded bodies
-const router = express.Router();
+
 
 const port = process.env.PORT || 3000;
 
@@ -39,15 +39,26 @@ app.get('/sign-up', (req, res) => {
 
 
 
-app.get('/admin/add-entry', (req, res) => {
-  res.render('add-entry.ejs'); //?
+app.get('/admin', (req, res) => {
+  res.render('admin.ejs'); //?
 });
-app.get('/add-entry', (req, res) => {
+app.get('/admin/add-entry', (req, res) => {
   res.render('add-entry.ejs');
 });
-app.get('/update-entry', (req, res) => {
+app.get('/admin/update-entry', (req, res) => {
   res.render('update-entry.ejs');
 });
+app.get('/admin/delete-entry', (req, res) => {
+  res.render('delete-entry.ejs');
+});
+app.get('/admin/find-entry', (req, res) => {
+  res.render('find-entry.ejs');
+});
+//app.use('/', routes);
+app.use(adminRoutes);
+app.use(dashboardRoutes);
+
+
 app.listen(port, () => {
   console.log(`server started on port: ${port}`);
 });
@@ -66,5 +77,3 @@ mongoose
     app.listen(7000, () => console.log('server is up on port 7000'));
   })
   .catch(err => console.log(err));
-
-
