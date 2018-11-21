@@ -35,7 +35,7 @@
           <span class="msg">Sign in to start your session</span>
         </h1>
         <div class="col-sm-12">
-          <form id="sign_in" method="POST">
+          <form id="sign_in" action= '/api/auth/login' method="POST">
             <div class="input-group">
               <span class="input-group-addon">
                 <i class="zmdi zmdi-account"></i>
@@ -44,8 +44,8 @@
                 <input
                   type="text"
                   class="form-control"
-                  name="username"
-                  placeholder="Username"
+                  name="email"
+                  placeholder="Email"
                   required
                   autofocus
                 />
@@ -75,9 +75,12 @@
               <label for="rememberme">Remember Me</label>
             </div>
             <div class="text-center">
-              <a href="index"
+<!--
+              <a href="/api/auth"
                 class="btn btn-raised waves-effect g-bg-blush2">SIGN IN</a>
-              <a href="sign-up.html" class="btn btn-raised waves-effect">SIGN UP</a>
+-->
+                <button class="btn btn-raised waves-effect g-bg-blush2" type="submit">sign in</button>
+              <a href="sign-up" class="btn btn-raised waves-effect">SIGN UP</a>
             </div>
             <div class="text-center">
               <a href="forgot-password.html">Forgot Password?</a>

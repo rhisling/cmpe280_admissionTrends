@@ -1,7 +1,7 @@
 const express = require('express');
 
 const adminController = require('../controller/admin');
-
+const AuthController = require('../auth/AuthController');
 const router = express.Router();
 
 router.get('/admin', adminController.showAdminPage);
@@ -13,7 +13,7 @@ router.post('/admin/update-entry/', adminController.updateEntry); // Update a us
 
 router.get('/admin/add-entry', adminController.addEntryPage); // new
 router.get('/admin/update-entry', adminController.updateEntryPage); // edit
-
+//router.post('/login', AuthController.login_user);
 module.exports = router;
 //NEW - just a form
 //EDIT - just a form
