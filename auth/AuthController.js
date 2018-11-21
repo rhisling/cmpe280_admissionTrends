@@ -72,10 +72,22 @@ router.post('/register', function(req, res) {
 
 router.get('/me', VerifyToken, function(req, res, next) {
   User.findById(req.userId, { password: 0 }, function (err, user) {
-    if (err) return res.status(500).send("There was a problem finding the user.");
-    if (!user) return res.status(404).send("No user found.");
+    if (err) {
+
+     // return res.status(500).send("There was a problem finding the user.");
+        console.log("There was a problem finding the user.")
+        res.redirect('/');
+    }
+
+    if (!user) {
+
+     // return res.status(404).send("No user found.");
+        console.log("no user found")
+      res.redirect('/');
+    }
     
-    res.status(200).send(user);
+    //res.status(200).send(user);
+    next();
   });
 });
 // add the middleware function

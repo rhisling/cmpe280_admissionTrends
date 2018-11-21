@@ -5,8 +5,8 @@ const key = require('./config/mongodb-key');
 const adminRoutes = require('./routes/admin');
 const dashboardRoutes = require('./routes/dashboard');
 
-
-
+var VerifyToken = require('./auth/VerifyToken');
+const AuthController = require('./auth/AuthController');
 const app = express();
 
 app.set('view-engine', 'ejs');
@@ -23,16 +23,26 @@ app.get('/api', function (req, res) {
   res.status(200).send('API works.');
 });
 
+
+
+
+
 /* JWT authentication*/
 
-const AuthController = require('./auth/AuthController');
+
 app.use('/api/auth',AuthController);
 
 
 app.get('/', (req, res) => {
   res.render('sign-in.ejs', { title: 'Admission Trends' });
 });
+app.use((req,res,next)=>{
+    console.log("i am in app.js");
+ res.redirect('/me');
+    //next();
+    //app.use('/me',AuthController)
 
+});
 app.get('/sign-up', (req, res) => {
   res.render('sign-up.ejs', { title: 'Admission Trends' });
 });
