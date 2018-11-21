@@ -9,10 +9,10 @@
 <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 <!-- Custom Css -->
-<link href="assets/css/main.css" rel="stylesheet">
+<link href="assets/css/main.css" rel="stylesheet" type="text/css">
 <!-- This Page CSS -->
-<link href="assets/css/morris.css" rel="stylesheet">
-<link href="assets/css/themes/all-themes.css" rel="stylesheet" />
+<link href="assets/css/morris.css" rel="stylesheet" type="text/css">
+<link href="assets/css/themes/all-themes.css" rel="stylesheet" type="text/css"/>
 </head>
 
 <body class="theme-blush">
@@ -501,185 +501,6 @@
             <small class="text-muted">Welcome to AdmissionTrends</small>
         </div>
         <header>
-
-
-
-
-
-
-
-
-
-
-        
-        <div class="container-fluid">
-                <h4>Select your university of interest:</h4>
-                <form method="POST" action="chart3">
-                    <select id="univOption" required>
-                        <option selected value="University of California-Irvine">UC Irvine</option>
-                        <option value="University of California-Berkeley">UC Berkeley</option>
-                        <option value="University of California-Los Angeles">UCLA</option>
-                        <option value="University of California-Davis">UC Davis</option>
-                        <option value="University of California-Santa Barbara">UC Santa Barbara</option>
-                        <option value="University of California-Riverside">UC Riverside</option>
-                        <option value="University of California-San Diego">UC San Diego</option>
-                        <option value="University of California-Merced">UC Merced</option>
-                    </select> <br /><br />
-                    <!-- ============================================================== -->
-                    <!-- Start Page Content -->
-                    <!-- ============================================================== -->
-                    <div class="row">
-                        <!-- column -->
-                        <div class="col-lg-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title">Average SAT Score Per University</h4>
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <i class="fa fa-circle m-r-5 text-inverse"></i>UCB
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <i class="fa fa-circle m-r-5 text-info"></i>UCD
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <i class="fa fa-circle m-r-5 text-success"></i>UCI
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <i class="fa fa-circle m-r-5 text-primary"></i>UCLA
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <i class="fa fa-circle m-r-5 text-secondary"></i>UCR
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <i class="fa fa-circle m-r-5 text-danger"></i>UCSD
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <i class="fa fa-circle m-r-5 text-warning"></i>UCSB
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <i class="fa fa-circle m-r-5 text-purple"></i>UCSC
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <i class="fa fa-circle m-r-5 text-orange"></i>UCM
-                                        </li>
-                                    </ul>
-                                    <div id="morris-area-chart"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- column -->
-                        <!-- column -->
-
-                        <!-- column -->
-                        <!-- column -->
-                        <div class="col-lg-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title">Student SAT Score Midpoint</h4>
-                                    <ul class="list-inline text-center">
-                                        <li class="list-inline-item">
-                                            <h5><i class="fa fa-circle m-r-5 text-danger"></i>Critical Reading</h5>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <h5><i class="fa fa-circle m-r-5 text-info"></i>Math</h5>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <h5><i class="fa fa-circle m-r-5 text-success"></i>Writing</h5>
-                                        </li>
-
-                                    </ul>
-                                    <div id="morris-line-chart"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- column -->
-                        <!-- column -->
-                        <div class="col-lg-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title">Student Debt After Graduation</h4>
-                                    <!-- <ul class="list-inline text-right">
-                                                                <li class="list-inline-item">
-                                                                    <h5><i class="fa fa-circle m-r-5 text-info"></i>Site A View</h5>
-                                                                </li>
-                                                                <li class="list-inline-item">
-                                                                    <h5><i class="fa fa-circle m-r-5 text-inverse"></i>Site B View</h5>
-                                                                </li>
-                                                            </ul> -->
-                                    <div id="morris-area-chart2"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {{!-- <div class="col-lg-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title">Donut Chart</h4>
-                                    <div id="morris-donut-chart"></div>
-                                </div>
-                            </div>
-                        </div> --}}
-                        <!-- column -->
-                        <!-- column -->
-                        <div class="col-lg-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title">Mean Student Earnings after Graduation</h4>
-                                    <div id="morris-line-chart1"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- column -->
-                        <!-- column -->
-                        <div class="col-lg-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title">Student Diversity</h4>
-                                    <ul class="list-inline text-center m-t-40">
-                                        <li class="list-inline-item">
-                                            <h5><i class="fa fa-circle m-r-5 text-inverse"></i>2 or More Races</h5>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <h5><i class="fa fa-circle m-r-5 text-info"></i>American Indian/Alaska
-                                                native</h5>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <h5><i class="fa fa-circle m-r-5 text-success"></i>Asian</h5>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <h5><i class="fa fa-circle m-r-5 text-primary"></i>Black</h5>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <h5><i class="fa fa-circle m-r-5 text-secondary"></i>Hispanic</h5>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <h5><i class="fa fa-circle m-r-5 text-danger"></i>Native Hawaiian</h5>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <h5><i class="fa fa-circle m-r-5 text-warning"></i>Non resident alien</h5>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <h5><i class="fa fa-circle m-r-5 text-purple"></i>Race Unknown</h5>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <h5><i class="fa fa-circle m-r-5 text-orange"></i>White</h5>
-                                        </li>
-                                    </ul>
-                                    <div id="extra-area-chart"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- column -->
-                    </div>
-            </div>
-
-
-
-
-
-
-
-
         <div class="row clearfix top-report">
             <div class="col-lg-3 col-sm-6 col-md-6">
                 <div class="card">
@@ -762,6 +583,46 @@
                     </div>
                     <div class="body">
                         <canvas id="bar_chart" height="150"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="card">
+                    <div class="header">
+                        <h2>Student Passing</h2>
+                        <ul class="header-dropdown">
+                            <li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                    aria-haspopup="true" aria-expanded="false"> <i class="zmdi zmdi-more-vert"></i> </a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a href="javascript:void(0);">Action</a></li>
+                                    <li><a href="javascript:void(0);">Another action</a></li>
+                                    <li><a href="javascript:void(0);">Something else here</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="body">
+                        <canvas id="line_chart1" height="150"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="card">
+                    <div class="header">
+                        <h2>Student Passing</h2>
+                        <ul class="header-dropdown">
+                            <li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                    aria-haspopup="true" aria-expanded="false"> <i class="zmdi zmdi-more-vert"></i> </a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a href="javascript:void(0);">Action</a></li>
+                                    <li><a href="javascript:void(0);">Another action</a></li>
+                                    <li><a href="javascript:void(0);">Something else here</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="body">
+                        <canvas id="bar_chart1" height="150"></canvas>
                     </div>
                 </div>
             </div>
@@ -943,60 +804,6 @@
             </div>
             <!-- #END# Task Info --> 
         </div>
-        <div class="row clearfix">
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="card">
-                    <div class="body thumbnail">
-                        <img src="assets/images/puppy-2.jpg" class="img-fluid img-thumbnail" alt=" /">
-                        <div class="caption m-t-20">
-                            <h3>UI UX Design Course</h3>
-                            <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
-                                text ever since the 1500s </p>
-                            <a href="javascript:void(0);" class="btn btn-raised waves-effect btn-sm" role="button">Read more</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="card">
-                    <div class="body thumbnail">
-                        <img src="assets/images/puppy-3.jpg" class="img-fluid img-thumbnail" alt="">
-                        <div class="caption m-t-20">
-                            <h3>Magento Programmer Course</h3>
-                            <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
-                                text ever since the 1500s </p>
-                            <a href="javascript:void(0);" class="btn btn-raised waves-effect btn-sm" role="button">Read more</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="card">
-                    <div class="body thumbnail">
-                        <img src="assets/images/puppy-1.jpg" class="img-fluid img-thumbnail" alt="">
-                        <div class="caption m-t-20">
-                            <h3>iOS Application Course <span class="label label-info">New</span></h3>
-                            <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
-                                text ever since the 1500s </p>
-                            <a href="javascript:void(0);" class="btn btn-raised g-bg-blush2 waves-effect btn-sm" role="button">Read more</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="card">
-                    <div class="body thumbnail">
-                        <img src="assets/images/puppy-3.jpg" class="img-fluid img-thumbnail" alt="">
-                        <div class="caption m-t-20">
-                            <h3>Java Course</h3>
-                            <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
-                                text ever since the 1500s </p>
-                            <a href="javascript:void(0);" class="btn btn-raised waves-effect btn-sm" role="button">Read more</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 		<div class="row clearfix">
             <div class="col-lg-4 col-md-12 col-sm-12">
                 <div class="card">
@@ -1159,6 +966,8 @@
 
 <div class="color-bg"></div>
 
+
+
 <!-- Jquery Core Js --> 
 <script src="assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
 <script src="assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
@@ -1170,12 +979,6 @@
 <script src="assets/bundles/mainscripts.bundle.js"></script><!-- Custom Js --> 
 <script src="assets/js/pages/charts/sparkline.min.js"></script> 
 <script src="assets/js/pages/index.js"></script>
-
-
-
-
-
-
 
 
 
