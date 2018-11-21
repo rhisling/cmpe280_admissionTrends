@@ -6,7 +6,9 @@ module.exports.showAdminPage = (req, res) => {
 };
 
 module.exports.addEntry = (req, res) => {
-  console.log(req.body);
+  console.log(req.body); 
+   console.log(req.query);
+
   /*   const ustats = new Ustats({
     name: 'University of California - San Diego',
     year: 2016,

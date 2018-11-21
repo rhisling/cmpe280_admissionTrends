@@ -6,11 +6,16 @@ const adminRoutes = require('./routes/admin');
 const dashboardRoutes = require('./routes/dashboard');
 
 
+
 const app = express();
 
 app.set('view-engine', 'ejs');
 app.use(express.static('public'));
 app.set('views', 'views');
+
+app.use(express.json()); // to support JSON-encoded bodies
+app.use(express.urlencoded({ extended: true })); // to support URL-encoded bodies
+
 
 const port = process.env.PORT || 3000;
 
@@ -26,13 +31,30 @@ app.get('/admin/add-entry', (req, res) => {
 app.get('/admin/update-entry', (req, res) => {
   res.render('update-entry.ejs');
 });
+
+
+//app.use('/', routes);
+
+app.use(adminRoutes);
+app.use(dashboardRoutes);
+
+
 app.listen(port, () => {
   console.log(`server started on port: ${port}`);
 });
 
+
+
+
+
+
+
+
+
+
+
 //app.use('/', routes);
-app.use(adminRoutes);
-app.use(dashboardRoutes);
+
 
 mongoose
   .connect(
