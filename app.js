@@ -59,9 +59,7 @@ app.use(adminRoutes);
 app.use(dashboardRoutes);
 
 
-app.listen(port, () => {
-  console.log(`server started on port: ${port}`);
-});
+
 
 //app.use('/', routes);
 app.use(adminRoutes);
@@ -74,6 +72,6 @@ mongoose
   )
   .then(result => {
     console.log('MongoDB client connected');
-    app.listen(7000, () => console.log('server is up on port 7000'));
+    app.listen(port, () => console.log('server is up on port',port));
   })
   .catch(err => console.log(err));
