@@ -22,13 +22,13 @@
     <div class="card">
         <h1 class="title"><span><%= title %></span>Register <span class="msg">Register a new membership</span></h1>
         <div class="col-sm-12">
-            <form id="sign_up" method="POST">            
+            <form id="sign_up" action= '/api/auth/register' method="POST">
             <div class="input-group">
                 <span class="input-group-addon">
                     <i class="zmdi zmdi-account"></i>
                 </span>
                 <div class="form-line">
-                    <input type="text" class="form-control" name="namesurname" placeholder="Name Surname" required="" autofocus>
+                    <input type="text" class="form-control" name="name" placeholder="Name" required="" autofocus>
                 </div>
             </div>
             <div class="input-group">
@@ -60,8 +60,10 @@
                 <label for="terms">I read and agree to the <a href="javascript:void(0);">terms of usage</a>.</label>
             </div>
             <div class="text-center">
-                <a href="#" class="btn btn-raised g-bg-blush2 waves-effect" >SIGN UP</a>
+                <button class="btn btn-raised waves-effect g-bg-blush2" type="submit">SIGN UP</button>
+                <!--<a href="#" class="btn btn-raised g-bg-blush2 waves-effect" >SIGN UP</a>-->
             </div>
+
             <div class="m-t-10 m-b--5 align-center">
                 <a href="/">You already have a membership?</a>
             </div>

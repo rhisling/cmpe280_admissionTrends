@@ -39,7 +39,7 @@ router.post('/login', function(req, res) {
     var token = jwt.sign({ id: user._id }, config.secret, {
       expiresIn: 86400 // expires in 24 hours
     });
-      res.render('index.ejs')
+      res.redirect("/index");
     //res.status(200).send({ auth: true, token: token });
   });
 });
@@ -66,7 +66,8 @@ router.post('/register', function(req, res) {
     var token = jwt.sign({ id: user._id }, config.secret, {
       expiresIn: 86400 // expires in 24 hours
     });
-    res.status(200).send({ auth: true, token: token });
+    res.redirect('/');
+    //res.status(200).send({ auth: true, token: token });
   }); 
 });
 
