@@ -61,6 +61,18 @@ app.get('/ucb', (req, res) => {
 app.get('/uci', (req, res) => {
     res.render('uci.ejs');
 });
+app.get('/ucsd', (req, res) => {
+    res.render('ucsd.ejs');
+});
+app.get('/ucla', (req, res) => {
+    res.render('ucla.ejs');
+});
+app.get('/ucsb', (req, res) => {
+    res.render('ucsb.ejs');
+});
+app.get('/ucr', (req, res) => {
+    res.render('ucr.ejs');
+});
 
 //app.use('/', routes);
 app.use(adminRoutes);
