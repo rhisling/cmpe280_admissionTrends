@@ -54,6 +54,12 @@ app.get('/admin/delete-entry', (req, res) => {
 app.get('/admin/find-entry', (req, res) => {
   res.render('find-entry.ejs');
 });
+
+app.get('/ucb', (req, res) => {
+    res.render('ucb.ejs');
+});
+
+
 //app.use('/', routes);
 app.use(adminRoutes);
 app.use(dashboardRoutes);

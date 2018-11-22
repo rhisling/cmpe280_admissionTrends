@@ -23,6 +23,9 @@ router.get('/ucb',controllerMain.ucb);
 router.get('/uci',controllerMain.uci);
 router.get('/ucsd',controllerMain.ucsd);
 router.get('/ucla',controllerMain.ucla);
-router.get('/ucsf',controllerMain.ucsf);
+router.get('/ucsb',controllerMain.ucsb);
+router.get('/ucr',controllerMain.ucr);
+router.get('/ucm',controllerMain.ucm);
+router.get('/ucb',controllerMain.ucb);
 
 module.exports = router;
