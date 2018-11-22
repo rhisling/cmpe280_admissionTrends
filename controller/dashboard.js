@@ -14,18 +14,12 @@ module.exports.showDashboard = (req, res) => {
 //1. fetching the university names,sat score and year
 module.exports.getSatResults = (req, res) => {
   var satResults = [];
-  //var alldata=[];
   Ustats.find({}, { INSTNM: 1, SAT_AVG: 1, YEAR: 1 }).exec(function(
     err,
     results
   ) {
     satResults = results;
-    //alldata[0]=satResults
     res.send(JSON.stringify(satResults));
-    //alldata.push(satResults);
-
-    // module.exports.satResults=results;
-    // console.log("satResults in ",alldata[0]);
   });
 };
 
@@ -51,12 +45,8 @@ module.exports.getRangeResults = (req, res) => {
       SATWRMID: 1
     }
   ).exec(function(err, results) {
-    //module.exports.rangeResults = results;
     rangeResults = results;
     res.send(JSON.stringify(rangeResults));
-    //console.log("rangeResults",module.exports.rangeResults);
-    // alldata[1]=rangeResults
-    //alldata.push(rangeResults);
   });
 };
 
@@ -68,12 +58,8 @@ module.exports.getearningsResults = (req, res) => {
     err,
     results
   ) {
-    // module.exports.earningsResults = results;
-    //console.log("earningsResults",module.exports.earningsResults);
     earningsResults = results;
     res.send(JSON.stringify(earningsResults));
-    // alldata[2]=earningsResults
-    //alldata.push(earningsResults);
   });
 };
 
@@ -85,12 +71,9 @@ module.exports.getgradResults = (req, res) => {
     err,
     results
   ) {
-    //module.exports.gradResults = results;
-    //console.log("gradResults",module.exports.gradResults);
     gradResults = results;
     res.send(JSON.stringify(gradResults));
     alldata[3] = gradResults;
-    // alldata.push(gradResults);
   });
 };
 
@@ -114,15 +97,8 @@ module.exports.getdiversityResults = (req, res) => {
       UGDS_UNKN: 1
     }
   ).exec(function(err, results) {
-    //module.exports.diversityResults = results;
-    //console.log("diversityResults",module.exports.diversityResults);
     diversityResults = results;
     res.send(JSON.stringify(diversityResults));
-    //alldata[4]=diversityResults;
-    // alldata.push(diversityResults);
-
-    // console.log("grad results",alldata.length)
-    // res.send(JSON.stringify(alldata))
   });
 };
 
