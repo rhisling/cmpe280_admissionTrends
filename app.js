@@ -58,7 +58,9 @@ app.get('/admin/find-entry', (req, res) => {
 app.get('/ucb', (req, res) => {
     res.render('ucb.ejs');
 });
-
+app.get('/uci', (req, res) => {
+    res.render('uci.ejs');
+});
 
 //app.use('/', routes);
 app.use(adminRoutes);
