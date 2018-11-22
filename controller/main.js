@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 
 const root = (req, res) => {
   console.log('session', req.session);
-  res.render('sign-in', { title: 'Admission Trends' });
+  res.render('sign-in', { title: 'Admission Trends', message: false });
 };
 
 const loginPost = function(req, res) {
@@ -12,14 +12,20 @@ const loginPost = function(req, res) {
   User.findOne({ email: email })
     .then(user => {
       if (!user) {
-        return res.redirect('/');
+        return res.render('sign-in', {
+          message: 'Invalid User. Please Register!',
+          title: 'Admission Trends'
+        });
       }
       bcrypt.compare(password, user.password).then(doMatch => {
         if (doMatch) {
           req.session.user = user;
           return res.redirect('/index');
         }
-        res.redirect('/');
+        res.render('sign-in', {
+          message: 'Invalid Credentials. Please try Again!',
+          title: 'Admission Trends'
+        });
       });
     })
     .catch(err => res.redirect('/'));
@@ -48,7 +54,9 @@ const signupPost = (req, res) => {
     })
     .then(results => {
       console.log('User signed up');
-      res.redirect('/');
+      res.render('sign-in', {
+        message: 'Account already exists. Please login!'
+      });
     })
     .catch(err => console.log(err));
 };

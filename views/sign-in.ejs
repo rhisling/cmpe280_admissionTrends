@@ -34,6 +34,9 @@
           <span><%= title %></span>Login
           <span class="msg">Sign in to start your session</span>
         </h1>
+        <% if (message) { %>
+        <div class="alert alert-warning" role="alert"><%= message %></div>
+        <% } %>
         <div class="col-sm-12">
           <form id="sign_in" action="/login" method="POST">
             <div class="input-group">

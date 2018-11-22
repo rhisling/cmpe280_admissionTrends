@@ -4,10 +4,15 @@ module.exports.showDashboard = (req, res) => {
   if (req.session.user) {
     res.render('dashboard.ejs', {
       isAuthenticated: req.session.user.name == 'admin',
-      user: capitalize(req.session.user.name)
+      user: capitalize(req.session.user.name),
+      message: false,
+      title: 'Admission Trends'
     });
   } else {
-    res.redirect('/');
+    res.render('sign-in', {
+      message: 'Invalid Session. Please login!',
+      title: 'Admission Trends'
+    });
   }
 };
 
