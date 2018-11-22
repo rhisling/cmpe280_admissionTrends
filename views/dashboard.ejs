@@ -206,12 +206,12 @@
         <div class="user-info">
             <div class="admin-image"> <img src="assets/images/random-avatar7.jpg" alt=""> </div>
             <div class="admin-action-info"> <span>Welcome</span>
-                <h3>Prof. John Smith</h3>
+                <h3><%= user %></h3>
                 <ul>
                     <li><a data-placement="bottom" title="Go to Inbox" href="mail-inbox.html"><i class="zmdi zmdi-email"></i></a></li>
                     <li><a data-placement="bottom" title="Go to Profile" href="profile.html"><i class="zmdi zmdi-account"></i></a></li>                    
                     <li><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="zmdi zmdi-settings"></i></a></li>
-                    <li><a data-placement="bottom" title="Full Screen" href="sign-in.html" ><i class="zmdi zmdi-sign-in"></i></a></li>
+                    <li><a data-placement="bottom" title="Full Screen" href="logout" ><i class="zmdi zmdi-sign-in"></i></a></li>
                 </ul>
             </div>
         </div>
@@ -228,7 +228,8 @@
                         <li><a href="add-professors.html">Add professors</a></li>                       
                         <li><a href="profile.html">professors Profile</a></li>
                     </ul>
-                </li>                
+                </li>   
+                <% if (isAuthenticated) { %>             
                 <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-accounts-outline"></i><span>Administrator</span> </a>
                     <ul class="ml-menu">
                         <li><a href="/admin">Admin Panel</a></li>
@@ -241,6 +242,7 @@
                         <li><a href="students-invoice.html">Students Invoice</a></li>
                     </ul>
                 </li>
+                <% } %>
                 <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-graduation-cap"></i><span>Courses</span> </a>
                     <ul class="ml-menu">
                         <li><a href="courses.html">All Courses</a></li>
@@ -503,8 +505,8 @@
             <small class="text-muted">Welcome to AdmissionTrends</small>
         </div>
             <div class="row">
-                <div class="col-md-2 p-4" style="text-align:right">Select University:</div>
-                <select class="form-control col-md-2 m-3" id="univOption" style="border: 1px solid black" required>
+                <div class="col-md-2 col-lg-2 col-sm-2 p-4" style="text-align:right">Select University:</div>
+                <select class="form-control col-md-2 m-3 col-lg-2 col-sm-2 p-4" id="univOption" style="border: 1px solid black" required>
                     <option selected value="University of California-Berkeley">UC Berkeley</option>
                     <option value="University of California-Irvine">UC Irvine</option>
                     <option value="University of California-Los Angeles">UCLA</option>
