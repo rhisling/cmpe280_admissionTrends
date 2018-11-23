@@ -3,6 +3,14 @@ const bcrypt = require('bcryptjs');
 
 const root = (req, res) => {
   console.log('session', req.session);
+  if (req.session.user) {
+    res.render('dashboard', {
+      isAuthenticated: req.session.user.name == 'admin',
+      user: capitalize(req.session.user.name),
+      message: false,
+      title: 'Admission Trends'
+    });
+  }
   res.render('sign-in', { title: 'Admission Trends', message: false });
 };
 
@@ -113,3 +121,7 @@ module.exports = {
   ucla,
   ucsf
 };
+
+function capitalize(s) {
+  return s && s[0].toUpperCase() + s.slice(1);
+}

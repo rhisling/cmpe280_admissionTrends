@@ -87,3 +87,7 @@ module.exports.addEntryPage = (req, res) => {
 module.exports.updateEntryPage = (req, res) => {
   res.render('update-entry.ejs');
 };
+
+function capitalize(s) {
+  return s && s[0].toUpperCase() + s.slice(1);
+}
