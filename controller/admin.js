@@ -16,9 +16,6 @@ module.exports.showAdminPage = (req, res) => {
 };
 
 module.exports.addEntry = (req, res) => {
-  console.log(req.body); 
-   console.log(req.query);
-
   /*   const ustats = new Ustats({
     name: 'University of California - San Diego',
     year: 2016,
@@ -27,7 +24,6 @@ module.exports.addEntry = (req, res) => {
     inStateTuition: 13431
   }); */
   const ustats = new Ustats(req.body);
-  console.log('ustats', ustats);
   ustats
     .save()
     .then(result => console.log('Added university'))
