@@ -4,7 +4,7 @@ const key = require('./config/mongodb-key');
 //const routes = require('./routes/routes');
 const adminRoutes = require('./routes/admin');
 const dashboardRoutes = require('./routes/dashboard');
-
+const userRoutes = require('./routes/userRoutes');
 var VerifyToken = require('./auth/VerifyToken');
 const AuthController = require('./auth/AuthController');
 const app = express();
@@ -36,13 +36,7 @@ app.use('/api/auth',AuthController);
 app.get('/', (req, res) => {
   res.render('sign-in.ejs', { title: 'Admission Trends' });
 });
-app.use((req,res,next)=>{
-    console.log("i am in app.js");
- res.redirect('/me');
-    //next();
-    //app.use('/me',AuthController)
 
-});
 app.get('/sign-up', (req, res) => {
   res.render('sign-up.ejs', { title: 'Admission Trends' });
 });
@@ -64,9 +58,10 @@ app.get('/admin/delete-entry', (req, res) => {
 app.get('/admin/find-entry', (req, res) => {
   res.render('find-entry.ejs');
 });
-//app.use('/', routes);
-app.use(adminRoutes);
-app.use(dashboardRoutes);
+
+app.get('/getScorestats',(req, res) => {
+    res.render('fetch-GpaStats.ejs');
+});
 
 
 
@@ -74,6 +69,7 @@ app.use(dashboardRoutes);
 //app.use('/', routes);
 app.use(adminRoutes);
 app.use(dashboardRoutes);
+app.use(userRoutes);
 
 mongoose
   .connect(

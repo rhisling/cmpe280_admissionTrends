@@ -31,19 +31,22 @@ module.exports.findEntry = (req, res) => {
   //Ustats.find(req.body)
   console.log(req.query);
   Ustats.find(req.query)
-    .then(results => res.render('showAllData', { results: results }))
+    .then(results => res.render('showAllData', {results }))
     .catch(err => res.send(err));
+  //console.log("results is",results);
 };
 
 module.exports.findAllEntry = (req, res) => {
   //Ustats.find()
   // .then(results => res.send(results))
   // .catch(err => res.send(err));
+    var results;
+    //res.render('showAllData', { results:results })
   Ustats.find()
     //.then(result => res.send(result))
-    .then(results => res.render('showAllData', { results }))
+    .then(results =>res.render('showAllData.ejs',{results}))
     .catch(err => res.send(err));
-  console.log('inside admin', value.satResults);
+  ;
 };
 
 module.exports.deleteEntry = (req, res) => {

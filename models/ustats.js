@@ -27,7 +27,12 @@ const ucstatsSchema = new Schema({
     type: String,
     default:'0'
     //required: true
-  }
+  },
+    GPA_Val: {
+        type: String,
+        default:'0'
+        //required: true
+    }
 });
 
 module.exports = mongoose.model('Ustats', ucstatsSchema);

@@ -544,15 +544,18 @@
                     </tr>
                 </thread>
                 <tbody>
-                    {{#each results}}
+
+                <% for(var i=0; i < results.length; i++) { %>
                     <tr>
-                        <td> {{INSTNM}}</td>
-                        <td> {{YEAR}}</td>
-                        <td>{{ADM_RATE}}</td>
-                        <td>{{SAT_AVG}}</td>
-                        <td>{{TUITIONFEE_IN}}</td>
+
+
+                        <td> <%= results[i].INSTNM %></td>
+                        <td> <%= results[i].YEAR %></td>
+                        <td><%= results[i].ADM_RATE %></td>
+                        <td><%= results[i].SAT_AVG %></td>
+                        <td><%= results[i].TUITIONFEE_IN %></td>
                     </tr>
-                    {{/each}}
+                <% } %>
                 </tbody>
             </table>
         </div>
