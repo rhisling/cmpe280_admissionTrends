@@ -12,6 +12,7 @@ const adminRoutes = require('./routes/admin');
 const dashboardRoutes = require('./routes/dashboard');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
+const univRoutes = require('./routes/univRoutes');
 
 const app = express();
 const store = new MongoDBStore({
@@ -73,25 +74,7 @@ app.get('/getScorestats',(req, res) => {
     res.render('fetch-GpaStats.ejs');
 });
 
-
-app.get('/ucb', (req, res) => {
-  res.render('ucb.ejs');
-});
-app.get('/uci', (req, res) => {
-  res.render('uci.ejs');
-});
-app.get('/ucsd', (req, res) => {
-  res.render('ucsd.ejs');
-});
-app.get('/ucla', (req, res) => {
-  res.render('ucla.ejs');
-});
-app.get('/ucsb', (req, res) => {
-  res.render('ucsb.ejs');
-});
-app.get('/ucr', (req, res) => {
-  res.render('ucr.ejs');
-}); */
+*/
 
 function isLoggedIn(req, res, next) {
   if (req.user) {
@@ -110,6 +93,7 @@ app.use(authRoutes);
 app.use(adminRoutes);
 app.use(userRoutes);
 app.use(isLoggedIn, dashboardRoutes);
+app.use(univRoutes);
 
 mongoose
   .connect(
