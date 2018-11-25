@@ -11,6 +11,7 @@ const routes = require('./routes/routes');
 const adminRoutes = require('./routes/admin');
 const dashboardRoutes = require('./routes/dashboard');
 const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 const store = new MongoDBStore({
@@ -52,9 +53,7 @@ app.use(passport.session());
  */
 const port = process.env.PORT || 3000;
 
-/* JWT authentication*/
-
-app.get('/admin', (req, res) => {
+/* app.get('/admin', (req, res) => {
   res.render('admin.ejs'); //?
 });
 app.get('/admin/add-entry', (req, res) => {
@@ -69,6 +68,11 @@ app.get('/admin/delete-entry', (req, res) => {
 app.get('/admin/find-entry', (req, res) => {
   res.render('find-entry.ejs');
 });
+
+app.get('/getScorestats',(req, res) => {
+    res.render('fetch-GpaStats.ejs');
+});
+
 
 app.get('/ucb', (req, res) => {
   res.render('ucb.ejs');
@@ -87,7 +91,7 @@ app.get('/ucsb', (req, res) => {
 });
 app.get('/ucr', (req, res) => {
   res.render('ucr.ejs');
-});
+}); */
 
 function isLoggedIn(req, res, next) {
   if (req.user) {
@@ -104,6 +108,7 @@ function isLoggedIn(req, res, next) {
 app.use('/', routes);
 app.use(authRoutes);
 app.use(adminRoutes);
+app.use(userRoutes);
 app.use(isLoggedIn, dashboardRoutes);
 
 mongoose
