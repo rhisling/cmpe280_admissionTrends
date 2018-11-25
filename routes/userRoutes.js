@@ -5,7 +5,8 @@ const userController = require('../controller/UserController');
 
 const router = express.Router();
 router.get('/getScorestats',(req, res) => {
-    res.render('fetch-GpaStats.ejs');
+   // res.render('fetchScoreStats.ejs');
+    res.render('fetchScoreStats.ejs');
 });
 router.get('/getUserScoreStats', userController.getScoreStats);
 //router.post('/admin/add-entry', adminController.addEntry);
