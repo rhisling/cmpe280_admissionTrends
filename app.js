@@ -10,6 +10,7 @@ const routes = require('./routes/routes');
 const adminRoutes = require('./routes/admin');
 const dashboardRoutes = require('./routes/dashboard');
 const userRoutes = require('./routes/userRoutes');
+
 const app = express();
 const store = new MongoDBStore({
   uri: key.mongodbUrl,
@@ -80,10 +81,24 @@ app.get('/ucr', (req, res) => {
   res.render('ucr.ejs');
 }); */
 
+function isLoggedIn(req, res, next) {
+  if (req.session.user) {
+    console.log('Logged in User', req.session.user);
+    next();
+  } else {
+    res.render('sign-in', {
+      title: 'Admission Trends',
+      message: 'Invalid session. Please login!'
+    });
+  }
+}
+
 app.use('/', routes);
 app.use(adminRoutes);
 app.use(dashboardRoutes);
 app.use(userRoutes);
+app.use(isLoggedIn, dashboardRoutes);
+
 mongoose
   .connect(
     key.mongodbUrl || 'mongodb://localhost:27017/AdmissionTrends',

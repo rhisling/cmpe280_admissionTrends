@@ -51,20 +51,28 @@ const signupPost = (req, res) => {
   User.findOne({ email })
     .then(userDoc => {
       if (userDoc) {
-        return res.redirect('/signup');
+        return res.render('sign-in', {
+          message: 'Account already exists. Please login to continue!',
+          title: 'Admission Trends'
+        });
       }
 
       return bcrypt.hash(password, 12);
     })
     .then(hashedPassword => {
-      const user = new User({ name, email, password: hashedPassword });
-      return user.save();
+      if (hashedPassword) {
+        const user = new User({ name, email, password: hashedPassword });
+        return user.save();
+      }
     })
     .then(results => {
-      console.log('User signed up');
-      res.render('sign-in', {
-        message: 'Account already exists. Please login!'
-      });
+      if (results) {
+        console.log('User signed up');
+        return res.render('sign-in', {
+          message: 'Account created. Please login to continue!',
+          title: 'Admission Trends'
+        });
+      }
     })
     .catch(err => console.log(err));
 };
