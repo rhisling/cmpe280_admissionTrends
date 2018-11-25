@@ -1,29 +1,107 @@
 
-
 module.exports.showUcb = (req, res) => {
-    res.render('ucb.ejs');
+    const user = req.session.user || req.user;
+    const photo = req.user.photo || false;
+    res.render('ucb.ejs', {
+        isAuthenticated: true,
+        user: capitalize(user.name).split(' ')[0],
+        message: false,
+        title: 'Admission Trends',
+        photo: photo
+    });
 };
 module.exports.showUci = (req, res) => {
-    res.render('uci.ejs');
+    const user = req.session.user || req.user;
+    const photo = req.user.photo || false;
+    res.render('uci.ejs', {
+        isAuthenticated: true,
+        user: capitalize(user.name).split(' ')[0],
+        message: false,
+        title: 'Admission Trends',
+        photo: photo
+    });
 };
+
 module.exports.showUcsd = (req, res) => {
-    res.render('ucsd.ejs');
+    const user = req.session.user || req.user;
+    const photo = req.user.photo || false;
+    res.render('ucsd.ejs', {
+        isAuthenticated: true,
+        user: capitalize(user.name).split(' ')[0],
+        message: false,
+        title: 'Admission Trends',
+        photo: photo
+    });
 };
+
 module.exports.showUcla = (req, res) => {
-    res.render('ucla.ejs');
+    const user = req.session.user || req.user;
+    const photo = req.user.photo || false;
+    res.render('ucla.ejs', {
+        isAuthenticated: true,
+        user: capitalize(user.name).split(' ')[0],
+        message: false,
+        title: 'Admission Trends',
+        photo: photo
+    });
 };
 module.exports.showUcsb = (req, res) => {
-    res.render('ucsb.ejs');
+    const user = req.session.user || req.user;
+    const photo = req.user.photo || false;
+    res.render('ucsb.ejs', {
+        isAuthenticated: true,
+        user: capitalize(user.name).split(' ')[0],
+        message: false,
+        title: 'Admission Trends',
+        photo: photo
+    });
 };
 module.exports.showUcr = (req, res) => {
-    res.render('ucr.ejs');
+    const user = req.session.user || req.user;
+    const photo = req.user.photo || false;
+    res.render('ucr.ejs', {
+        isAuthenticated: true,
+        user: capitalize(user.name).split(' ')[0],
+        message: false,
+        title: 'Admission Trends',
+        photo: photo
+    });
 };
 module.exports.showUcm = (req, res) => {
-    res.render('ucm.ejs');
+    const user = req.session.user || req.user;
+    const photo = req.user.photo || false;
+    res.render('ucm.ejs', {
+        isAuthenticated: true,
+        user: capitalize(user.name).split(' ')[0],
+        message: false,
+        title: 'Admission Trends',
+        photo: photo
+    });
 };
 module.exports.showUcsc = (req, res) => {
-    res.render('ucsc.ejs');
+    const user = req.session.user || req.user;
+    const photo = req.user.photo || false;
+    res.render('ucsc.ejs', {
+        isAuthenticated: true,
+        user: capitalize(user.name).split(' ')[0],
+        message: false,
+        title: 'Admission Trends',
+        photo: photo
+    });
 };
 module.exports.showUcd = (req, res) => {
-    res.render('ucd.ejs');
+    const user = req.session.user || req.user;
+    const photo = req.user.photo || false;
+    res.render('ucd.ejs', {
+        isAuthenticated: true,
+        user: capitalize(user.name).split(' ')[0],
+        message: false,
+        title: 'Admission Trends',
+        photo: photo
+    });
+};
+
+
+function capitalize(s) {
+    return s && s[0].toUpperCase() + s.slice(1);
 };
