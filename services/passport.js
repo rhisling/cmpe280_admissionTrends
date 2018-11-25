@@ -1,6 +1,7 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const LocalStrategy = require('passport-local').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 const mongoose = require('mongoose');
 const keys = require('../config/keys');
 const bcrypt = require('bcryptjs');
@@ -38,6 +39,39 @@ passport.use(
             const photo = profile.photos[0].value;
             const user = new User({
               googleId,
+              name,
+              email,
+              photo
+            });
+            user.save().then(user => done(null, user));
+          }
+        })
+        .catch(err => console.log(err));
+    }
+  )
+);
+
+passport.use(
+  new FacebookStrategy(
+    {
+      clientID: keys.facebookClientID,
+      clientSecret: keys.facebookClientSecret,
+      callbackURL: '/auth/facebook/callback',
+      profileFields: ['id', 'displayName', 'photos', 'emails']
+    },
+    (accessToken, refreshToken, profile, done) => {
+      console.log('Facebook profile', profile);
+      User.findOne({ facebookId: profile.id })
+        .then(existingUser => {
+          if (existingUser) {
+            done(null, existingUser);
+          } else {
+            const facebookId = profile.id;
+            const name = profile.displayName;
+            const email = profile.emails[0].value;
+            const photo = profile.photos[0].value;
+            const user = new User({
+              facebookId,
               name,
               email,
               photo

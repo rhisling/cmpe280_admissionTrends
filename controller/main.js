@@ -2,8 +2,8 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 
 const root = (req, res) => {
-  console.log('session', req.session);
-  console.log('root', req.user);
+  // console.log('session', req.session);
+  // console.log('root', req.user);
   if (req.session.user || req.user) {
     const user = req.session.user || req.user;
     const photo = req.user.photo || false;

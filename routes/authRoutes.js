@@ -25,4 +25,20 @@ router.get(
   }
 );
 
+router.get(
+  '/auth/facebook',
+  passport.authenticate('facebook', {
+    scope: ['user_friends', 'manage_pages', 'email']
+  })
+);
+
+router.get(
+  '/auth/facebook/callback',
+  passport.authenticate('facebook'),
+  (req, res) => {
+    //res.redirect('/api/current_user');
+    res.redirect('/index');
+  }
+);
+
 module.exports = router;
