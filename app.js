@@ -40,31 +40,7 @@ app.use((req, res, next) => {
 
 const port = process.env.PORT || 3000;
 
-app.get('/api', function (req, res) {
-  res.status(200).send('API works.');
-});
-
-
-
-
-
-/* JWT authentication*/
-
-
-//app.use('/api/auth',AuthController);
-
-
-app.get('/', (req, res) => {
-  res.render('sign-in.ejs', { title: 'Admission Trends' });
-});
-
-app.get('/sign-up', (req, res) => {
-  res.render('sign-up.ejs', { title: 'Admission Trends' });
-});
-
-
-
-app.get('/admin', (req, res) => {
+/* app.get('/admin', (req, res) => {
   res.render('admin.ejs'); //?
 });
 app.get('/admin/add-entry', (req, res) => {
@@ -85,13 +61,6 @@ app.get('/getScorestats',(req, res) => {
 });
 
 
-
-
-//app.use('/', routes);
-app.use(adminRoutes);
-app.use(dashboardRoutes);
-app.use(userRoutes);
-
 app.get('/ucb', (req, res) => {
   res.render('ucb.ejs');
 });
@@ -109,7 +78,7 @@ app.get('/ucsb', (req, res) => {
 });
 app.get('/ucr', (req, res) => {
   res.render('ucr.ejs');
-});
+}); */
 
 app.use('/', routes);
 app.use(adminRoutes);
@@ -122,6 +91,6 @@ mongoose
   )
   .then(result => {
     console.log('MongoDB client connected');
-    app.listen(port, () => console.log('server is up on port',port));
+    app.listen(port, () => console.log('server is up on port', port));
   })
   .catch(err => console.log(err));
