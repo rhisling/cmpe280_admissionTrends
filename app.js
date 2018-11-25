@@ -83,7 +83,7 @@ app.get('/ucr', (req, res) => {
 app.use('/', routes);
 app.use(adminRoutes);
 app.use(dashboardRoutes);
-
+app.use(userRoutes);
 mongoose
   .connect(
     key.mongodbUrl || 'mongodb://localhost:27017/AdmissionTrends',
