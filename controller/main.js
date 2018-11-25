@@ -3,12 +3,16 @@ const bcrypt = require('bcryptjs');
 
 const root = (req, res) => {
   console.log('session', req.session);
-  if (req.session.user) {
+  console.log('root', req.user);
+  if (req.session.user || req.user) {
+    const user = req.session.user || req.user;
+    const photo = req.user.photo || false;
     res.render('dashboard', {
-      isAuthenticated: req.session.user.name == 'admin',
-      user: capitalize(req.session.user.name),
+      isAuthenticated: user.name == 'admin',
+      user: capitalize(user.name).split(' ')[0],
       message: false,
-      title: 'Admission Trends'
+      title: 'Admission Trends',
+      photo: photo
     });
   }
   res.render('sign-in', { title: 'Admission Trends', message: false });
@@ -72,6 +76,10 @@ const signupPost = (req, res) => {
 const logout = (req, res) => {
   req.session.destroy(err => {
     console.log(err);
+    res.set(
+      'Cache-Control',
+      'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0'
+    );
     res.redirect('/');
   });
 };
