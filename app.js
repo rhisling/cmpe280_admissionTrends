@@ -3,12 +3,14 @@ const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
+const passport = require('passport');
 
 const key = require('./config/mongodb-key');
 
 const routes = require('./routes/routes');
 const adminRoutes = require('./routes/admin');
 const dashboardRoutes = require('./routes/dashboard');
+const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 
 const app = express();
@@ -20,6 +22,9 @@ const store = new MongoDBStore({
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
+/**
+ * Middlewares start
+ */
 app.use(express.json()); // to support JSON-encoded bodies
 app.use(express.urlencoded({ extended: true })); // to support URL-encoded bodies
 app.use(express.static(path.join(__dirname, 'public')));
@@ -31,6 +36,7 @@ app.use(
     store: store
   })
 );
+
 app.use((req, res, next) => {
   res.set(
     'Cache-Control',
@@ -39,6 +45,12 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(passport.initialize());
+app.use(passport.session());
+
+/**
+ * Middlewares end
+ */
 const port = process.env.PORT || 3000;
 
 /* app.get('/admin', (req, res) => {
@@ -82,8 +94,8 @@ app.get('/ucr', (req, res) => {
 }); */
 
 function isLoggedIn(req, res, next) {
-  if (req.session.user) {
-    console.log('Logged in User', req.session.user);
+  if (req.user) {
+    console.log('Logged in User', req.user);
     next();
   } else {
     res.render('sign-in', {
@@ -94,8 +106,8 @@ function isLoggedIn(req, res, next) {
 }
 
 app.use('/', routes);
+app.use(authRoutes);
 app.use(adminRoutes);
-app.use(dashboardRoutes);
 app.use(userRoutes);
 app.use(isLoggedIn, dashboardRoutes);
 
