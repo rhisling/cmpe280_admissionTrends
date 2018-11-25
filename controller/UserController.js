@@ -14,7 +14,8 @@ module.exports.getScoreStats = (req, res) => {
     Ustats.find(obj,{"INSTNM":1,"SAT_AVG":1,"GPA_Val":1})
         .then(results =>{
 
-
+            res.send(JSON.stringify(results));
+            /*
             console.log("results for score stats",results);
             //results[i]['GPA']
             //console.log("results for score stats",results[0]['YEAR'])
@@ -37,7 +38,7 @@ module.exports.getScoreStats = (req, res) => {
 
             }
           //console.log("list is ",list[0],list[1])
-
+*/
         } )
         .catch(err => res.send(err));
 
