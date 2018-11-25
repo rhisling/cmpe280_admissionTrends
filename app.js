@@ -95,6 +95,8 @@ function isLoggedIn(req, res, next) {
 
 app.use('/', routes);
 app.use(adminRoutes);
+app.use(dashboardRoutes);
+app.use(userRoutes);
 app.use(isLoggedIn, dashboardRoutes);
 
 mongoose
