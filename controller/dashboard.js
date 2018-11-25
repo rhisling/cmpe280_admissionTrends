@@ -1,19 +1,24 @@
 const Ustats = require('../models/ustats');
 var alldata = [0, 0, 0, 0, 0];
 module.exports.showDashboard = (req, res) => {
-  if (req.session.user) {
-    res.render('dashboard.ejs', {
-      isAuthenticated: req.session.user.name == 'admin',
-      user: capitalize(req.session.user.name),
-      message: false,
-      title: 'Admission Trends'
-    });
-  } else {
-    res.render('sign-in', {
-      message: 'Invalid Session. Please login!',
-      title: 'Admission Trends'
-    });
-  }
+  //   if (req.session.user) {
+
+  //   } else {
+  //     res.render('sign-in', {
+  //       message: 'Invalid Session. Please login!',
+  //       title: 'Admission Trends'
+  //     });
+  //   }
+
+  const user = req.session.user || req.user;
+  const photo = req.user.photo || false;
+  res.render('dashboard.ejs', {
+    isAuthenticated: true,
+    user: capitalize(user.name).split(' ')[0],
+    message: false,
+    title: 'Admission Trends',
+    photo: photo
+  });
 };
 
 //1. fetching the university names,sat score and year
