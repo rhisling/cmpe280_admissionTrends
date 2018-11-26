@@ -13,6 +13,33 @@ module.exports.showAdminPage = (req, res) => {
     photo: photo
   });
 };
+module.exports.showDeletePage = (req, res) => {
+  console.log('Admin Page:', req.session.user);
+  const user = req.session.user || req.user;
+  const photo = req.user.photo || false;
+
+  res.render('delete-entry', {
+    isAuthenticated: req.user.name === 'admin',
+    user: capitalize(user.name).split(' ')[0],
+    message: false,
+    title: 'Admission Trends',
+    photo: photo
+  });
+};
+module.exports.showFindPage = (req, res) => {
+  console.log('Admin Page:', req.session.user);
+  const user = req.session.user || req.user;
+  const photo = req.user.photo || false;
+
+  res.render('find-entry', {
+    isAuthenticated: req.user.name === 'admin',
+    user: capitalize(user.name).split(' ')[0],
+    message: false,
+    title: 'Admission Trends',
+    photo: photo
+  });
+};
+
 
 module.exports.addEntry = (req, res) => {
   const ustats = new Ustats(req.body);
@@ -29,7 +56,13 @@ module.exports.findEntry = (req, res) => {
   //Ustats.find(req.body)
   console.log(req.query);
   Ustats.find(req.query)
-    .then(results => res.render('showAllData', { results }))
+    .then(results => res.render('showAllData', {
+    isAuthenticated: req.user.name === 'admin',
+    user: capitalize(user.name).split(' ')[0],
+    message: false,
+    title: 'Admission Trends',
+    photo: photo
+  }, results))
     .catch(err => res.send(err));
 };
 
