@@ -42,4 +42,25 @@ module.exports.getScoreStats = (req, res) => {
         } )
         .catch(err => res.send(err));
 
+
+
+};
+
+
+module.exports.showStats = (req, res) => {
+
+
+    const user = req.session.user || req.user;
+    const photo = req.user.photo || false;
+    res.render('fetchScoreStats.ejs', {
+        isAuthenticated: true,
+        user: capitalize(user.name).split(' ')[0],
+        message: false,
+        title: 'Admission Trends',
+        photo: photo
+    });
+}
+
+function capitalize(s) {
+    return s && s[0].toUpperCase() + s.slice(1);
 };
