@@ -6,7 +6,7 @@ module.exports.showAdminPage = (req, res) => {
   const photo = req.user.photo || false;
 
   res.render('admin', {
-    isAuthenticated: req.user.name == 'admin',
+    isAuthenticated: req.user.name === 'admin',
     user: capitalize(user.name).split(' ')[0],
     message: false,
     title: 'Admission Trends',
@@ -88,7 +88,7 @@ module.exports.addEntryPage = (req, res) => {
   const user = req.session.user || req.user;
   const photo = req.user.photo || false;
   res.render('add-entry', {
-    isAuthenticated: req.session.user.name == 'admin',
+    isAuthenticated: req.user.name === 'admin',
     user: capitalize(user.name).split(' ')[0],
     message: false,
     title: 'Admission Trends',
@@ -100,7 +100,7 @@ module.exports.updateEntryPage = (req, res) => {
   const user = req.session.user || req.user;
   const photo = req.user.photo || false;
   res.render('update-entry', {
-    isAuthenticated: req.session.user.name == 'admin',
+    isAuthenticated: req.user.name === 'admin',
     user: capitalize(user.name).split(' ')[0],
     message: false,
     title: 'Admission Trends',
