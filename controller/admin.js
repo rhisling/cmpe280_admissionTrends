@@ -1,14 +1,21 @@
 const Ustats = require('../models/ustats');
 var value = require('./dashboard');
-console.log(value.queryResults);
 module.exports.showAdminPage = (req, res) => {
-  res.render('/admin');
+  console.log('Admin Page:', req.session.user);
+  if (req.session.user) {
+    res.render('admin', {
+      isAuthenticated: req.session.user.name == 'admin',
+      user: capitalize(req.session.user.name)
+    });
+  } else {
+    res.render('sign-in', {
+      message: 'Session Timed out. Please login!',
+      title: 'Admission Trends'
+    });
+  }
 };
 
 module.exports.addEntry = (req, res) => {
-  console.log(req.body); 
-   console.log(req.query);
-
   /*   const ustats = new Ustats({
     name: 'University of California - San Diego',
     year: 2016,
@@ -17,7 +24,6 @@ module.exports.addEntry = (req, res) => {
     inStateTuition: 13431
   }); */
   const ustats = new Ustats(req.body);
-  console.log('ustats', ustats);
   ustats
     .save()
     .then(result => console.log('Added university'))
@@ -31,7 +37,7 @@ module.exports.findEntry = (req, res) => {
   //Ustats.find(req.body)
   console.log(req.query);
   Ustats.find(req.query)
-    .then(results => res.render('showAllData', { results: results }))
+    .then(results => res.render('showAllData', {results }))
     .catch(err => res.send(err));
 };
 
@@ -86,3 +92,7 @@ module.exports.addEntryPage = (req, res) => {
 module.exports.updateEntryPage = (req, res) => {
   res.render('update-entry.ejs');
 };
+
+function capitalize(s) {
+  return s && s[0].toUpperCase() + s.slice(1);
+}
