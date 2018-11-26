@@ -8,6 +8,8 @@ router.get('/index', dashboardController.showDashboard);
 
 //router.get('/dashboard/data', dashboardController.getAllData);
 
+router.get('/index/tuition', dashboardController.getTuition);
+
 router.get('/index/sat', dashboardController.getSatResults);
 
 router.get('/index/range', dashboardController.getRangeResults);

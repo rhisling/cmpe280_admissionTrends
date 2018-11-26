@@ -18,11 +18,24 @@ module.exports.getSatResults = (req, res) => {
         //alldata.push(satResults);
 
         // module.exports.satResults=results;
-        // console.log("satResults in ",alldata[0]);
+         console.log("satResults in ",alldata[0]);
     });
 
 }
+module.exports.getTuition = (req, res) => {
 
+    var tuitionResults=[];
+    //var alldata=[];
+    Ustats.find({},{"INSTNM":1,"TUITIONFEE_IN":1,"YEAR":1}).exec(function(err, results) {
+        satResults = results;
+        //alldata[0]=satResults
+        res.send(JSON.stringify(tuitionResults))
+        //alldata.push(satResults);
+
+        // module.exports.satResults=results;
+         console.log("tuitionResults in ",alldata[0]);
+    });
+}
 
 //2.drop-down-menu (pick university) vs. SAT 25, 50, 75, 100 ranges,
 
