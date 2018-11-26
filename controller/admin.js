@@ -2,17 +2,16 @@ const Ustats = require('../models/ustats');
 var value = require('./dashboard');
 module.exports.showAdminPage = (req, res) => {
   console.log('Admin Page:', req.session.user);
-  if (req.session.user) {
-    res.render('admin', {
-      isAuthenticated: req.session.user.name == 'admin',
-      user: capitalize(req.session.user.name)
-    });
-  } else {
-    res.render('sign-in', {
-      message: 'Session Timed out. Please login!',
-      title: 'Admission Trends'
-    });
-  }
+  const user = req.session.user || req.user;
+  const photo = req.user.photo || false;
+
+  res.render('admin', {
+    isAuthenticated: req.user.name == 'admin',
+    user: capitalize(user.name).split(' ')[0],
+    message: false,
+    title: 'Admission Trends',
+    photo: photo
+  });
 };
 
 module.exports.addEntry = (req, res) => {
@@ -37,7 +36,7 @@ module.exports.findEntry = (req, res) => {
   //Ustats.find(req.body)
   console.log(req.query);
   Ustats.find(req.query)
-    .then(results => res.render('showAllData', {results }))
+    .then(results => res.render('showAllData', { results }))
     .catch(err => res.send(err));
 };
 
@@ -86,11 +85,27 @@ module.exports.updateEntry = (req, res) => {
 };
 
 module.exports.addEntryPage = (req, res) => {
-  res.render('add-entry.ejs');
+  const user = req.session.user || req.user;
+  const photo = req.user.photo || false;
+  res.render('add-entry', {
+    isAuthenticated: req.session.user.name == 'admin',
+    user: capitalize(user.name).split(' ')[0],
+    message: false,
+    title: 'Admission Trends',
+    photo: photo
+  });
 };
 
 module.exports.updateEntryPage = (req, res) => {
-  res.render('update-entry.ejs');
+  const user = req.session.user || req.user;
+  const photo = req.user.photo || false;
+  res.render('update-entry', {
+    isAuthenticated: req.session.user.name == 'admin',
+    user: capitalize(user.name).split(' ')[0],
+    message: false,
+    title: 'Admission Trends',
+    photo: photo
+  });
 };
 
 function capitalize(s) {

@@ -90,7 +90,7 @@ function isLoggedIn(req, res, next) {
 
 app.use('/', routes);
 app.use(authRoutes);
-app.use(adminRoutes);
+app.use(isLoggedIn, adminRoutes);
 app.use(userRoutes);
 app.use(isLoggedIn, dashboardRoutes);
 app.use(univRoutes);
