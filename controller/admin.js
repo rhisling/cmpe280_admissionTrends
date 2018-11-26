@@ -15,13 +15,6 @@ module.exports.showAdminPage = (req, res) => {
 };
 
 module.exports.addEntry = (req, res) => {
-  /*   const ustats = new Ustats({
-    name: 'University of California - San Diego',
-    year: 2016,
-    admissionRate: 0.1688,
-    averageSAT: 1397,
-    inStateTuition: 13431
-  }); */
   const ustats = new Ustats(req.body);
   ustats
     .save()
