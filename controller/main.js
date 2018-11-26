@@ -14,8 +14,9 @@ const root = (req, res) => {
       title: 'Admission Trends',
       photo: photo
     });
+  } else {
+    res.render('sign-in', { title: 'Admission Trends', message: false });
   }
-  res.render('sign-in', { title: 'Admission Trends', message: false });
 };
 
 const loginPost = function(req, res) {
