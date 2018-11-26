@@ -40,7 +40,6 @@ module.exports.showFindPage = (req, res) => {
   });
 };
 
-
 module.exports.addEntry = (req, res) => {
   const ustats = new Ustats(req.body);
   ustats
@@ -52,27 +51,40 @@ module.exports.addEntry = (req, res) => {
 };
 
 module.exports.findEntry = (req, res) => {
-  //console.log(req.body);
-  //Ustats.find(req.body)
-  console.log(req.query);
+  const user = req.session.user || req.user;
+  const photo = req.user.photo || false;
   Ustats.find(req.query)
-    .then(results => res.render('showAllData', {
-    isAuthenticated: req.user.name === 'admin',
-    user: capitalize(user.name).split(' ')[0],
-    message: false,
-    title: 'Admission Trends',
-    photo: photo
-  }, results))
+    .then(results => {
+      console.log('Results: ' + results);
+      console.log('Going to render1');
+      res.render('showAllData', {
+        isAuthenticated: req.user.name === 'admin',
+        user: capitalize(user.name).split(' ')[0],
+        message: false,
+        title: 'Admission Trends',
+        photo: photo,
+        results
+      });
+      //res.send(results);
+    })
     .catch(err => res.send(err));
 };
 
 module.exports.findAllEntry = (req, res) => {
-  //Ustats.find()
-  // .then(results => res.send(results))
-  // .catch(err => res.send(err));
+  const user = req.session.user || req.user;
+  const photo = req.user.photo || false;
   Ustats.find()
     //.then(result => res.send(result))
-    .then(results => res.render('showAllData', { results }))
+    .then(results =>
+      res.render('showAllData', {
+        isAuthenticated: req.user.name === 'admin',
+        user: capitalize(user.name).split(' ')[0],
+        message: false,
+        title: 'Admission Trends',
+        photo: photo,
+        results
+      })
+    )
     .catch(err => res.send(err));
   console.log('inside admin', value.satResults);
 };
