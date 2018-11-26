@@ -23,20 +23,16 @@ module.exports.getSatResults = (req, res) => {
     res.send(JSON.stringify(satResults));
   });
 };
+
 module.exports.getTuition = (req, res) => {
   var tuitionResults = [];
-  //var alldata=[];
   Ustats.find({}, { INSTNM: 1, TUITIONFEE_IN: 1, YEAR: 1 }).exec(function(
     err,
     results
   ) {
-    satResults = results;
-    //alldata[0]=satResults
+    tuitionResults = results;
     res.send(JSON.stringify(tuitionResults));
-    //alldata.push(satResults);
-
-    // module.exports.satResults=results;
-    console.log('tuitionResults in ', alldata[0]);
+    //console.log("tuitionResults in ",JSON.stringify(tuitionResults));
   });
 };
 

@@ -4,54 +4,20 @@ var realtime = 'on';
 
 ('use strict');
 $(function() {
-  //   new Chart(
-  //     document.getElementById('line_chart').getContext('2d'),
-  //     getChartJs('line')
-  //   );
-  //   new Chart(
-  //     document.getElementById('bar_chart').getContext('2d'),
-  //     getChartJs('bar')
-  //   );
-  //   new Chart(
-  //     document.getElementById('line_chart1').getContext('2d'),
-  //     getChartJs('line')
-  //   );
-
-  //let filterCriteriaByUniv = $('#univOption option:selected').val();
-  let filterCriteriaByUniv = 'University of California-Berkeley';
+  let filterCriteriaByUniv = $('#univOption').val();
   console.log(filterCriteriaByUniv);
+/*  let filterCriteriaByUniv = $('#univOption').val();
+  $('#univOption').change(function() {
+  filterCriteriaByUniv = $('#univOption').val();
+  console.log(filterCriteriaByUniv);*/
+
   $('#line_chart1').empty();
   $('#line_chart2').empty();
   
   drawGraphForSATAVG();
   drawGraphForTuitionFee();
-/*  $('#univOption').change(function() {
-    filterCriteriaByUniv = 'University of California-Berkeley';
-    console.log(filterCriteriaByUniv);
-    //When drop down is changed, call the 4 methods again
-    //$('#morris-area-chart').empty();
-    $('#line_chart1').empty();
-/*    $('#line_chart2').empty();
-    $('#line_chart3').empty();
-    $('#bar_chart1').empty();
-    $('#bar_chart2').empty();*/
-
-    //getSATMidpointResults(filterCriteriaByUniv);
-   // getGradDebtProjection(filterCriteriaByUniv);
-    //getEarningResults(filterCriteriaByUniv);
-   // getDiversityResults(filterCriteriaByUniv);
   });
 
-  //drawGraphForSATAVG();
- // getSATMidpointResults(filterCriteriaByUniv);
- // getGradDebtProjection(filterCriteriaByUniv);
-//  getEarningResults(filterCriteriaByUniv);
-//  getDiversityResults(filterCriteriaByUniv);
-  /* new Chart(
-    document.getElementById('bar_chart1').getContext('2d'),
-    getChartJs('bar')
-  ); 
-});*/
 
 function drawGraphForSATAVG() {
   $.ajax({
