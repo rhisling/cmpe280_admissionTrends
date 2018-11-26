@@ -35,15 +35,10 @@ Ustats.find({}, { INSTNM: 1, SAT_AVG: 1, YEAR: 1 }).exec(function(
 module.exports.getTuition = (req, res) => {
 
     var tuitionResults=[];
-    //var alldata=[];
-    Ustats.find({},{"INSTNM":1,"TUITIONFEE_IN":1,"YEAR":1}).exec(function(err, results) {
-        satResults = results;
-        //alldata[0]=satResults
+    Ustats.find({},{INSTNM:1, TUITIONFEE_IN:1, YEAR:1}).exec(function(err, results) {
+        tuitionResults = results;
         res.send(JSON.stringify(tuitionResults))
-        //alldata.push(satResults);
-
-        // module.exports.satResults=results;
-         console.log("tuitionResults in ",alldata[0]);
+         //console.log("tuitionResults in ",JSON.stringify(tuitionResults));
     });
 }
 
