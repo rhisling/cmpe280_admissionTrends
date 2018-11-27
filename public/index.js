@@ -213,7 +213,8 @@ function drawGraphForSATAVG() {
             data: ucmData,
             backgroundColor: '#b5c567'
           }
-        ]
+        ],
+
       };
 
       let config = {
@@ -221,7 +222,28 @@ function drawGraphForSATAVG() {
         data: data,
         options: {
           responsive: true,
-          legend: false
+            legend: {
+                display: false,
+            },
+            scales: {
+                xAxes: [{
+
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'YEAR',
+                        fontSize: 16
+                    }
+                }],
+                yAxes: [{
+
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'AVG_SAT',
+                        fontSize: 16
+                    }
+                }]
+            }
+
         }
       };
 
@@ -316,7 +338,25 @@ function getSATMidpointResults(filterValue) {
         data: data,
         options: {
           responsive: true,
-          legend: false
+          legend: false,
+            scales: {
+                xAxes: [{
+
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'YEAR',
+                        fontSize: 16
+                    }
+                }],
+                yAxes: [{
+
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'SAT',
+                        fontSize: 16
+                    }
+                }]
+            }
         }
       };
       new Chart(
@@ -384,7 +424,25 @@ function getGradDebtProjection(filterValue) {
         data: data,
         options: {
           responsive: true,
-          legend: false
+          legend: false,
+            scales: {
+                xAxes: [{
+
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'YEAR',
+                        fontSize: 16
+                    }
+                }],
+                yAxes: [{
+
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'DEBT',
+                        fontSize: 16
+                    }
+                }]
+            }
         }
       };
       new Chart(
@@ -452,7 +510,25 @@ function getEarningResults(filterValue) {
         data: data,
         options: {
           responsive: true,
-          legend: false
+          legend: false,
+            scales: {
+                xAxes: [{
+
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'YEAR',
+                        fontSize: 16
+                    }
+                }],
+                yAxes: [{
+
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Mean Earnings',
+                        fontSize: 16
+                    }
+                }]
+            }
         }
       };
       new Chart(
