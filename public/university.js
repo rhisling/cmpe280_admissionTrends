@@ -92,7 +92,7 @@ function drawGraphForSATAVG(filterValue) {
   });
 }
 
-function drawGraphForTuitionFee() {
+function drawGraphForTuitionFee(filterValue) {
   $.ajax({
     url: 'index/tuition',
     dataType: 'json',
@@ -129,14 +129,14 @@ function drawGraphForTuitionFee() {
 
       datas.forEach(data => {
         labels.push(data['year']);
-        ucbData.push(data['University of California-Berkeley']);
+        ucbData.push(data[String(filterValue)]);
       });
 
       let data = {
         labels: labels,
         datasets: [
           {
-            label: 'UCB',
+            label: String(filterValue),
             data: ucbData,
             backgroundColor: '#dd5e89'
           }
