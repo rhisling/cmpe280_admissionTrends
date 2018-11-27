@@ -4,7 +4,7 @@ var realtime = 'on';
 
 ('use strict');
 $(function() {
-  let filterCriteriaByUniv = $('#univOption').val();
+  let filterCriteriaByUniv = document.getElementById("univOption").innerHTML;//$('#univOption').val();
   console.log(filterCriteriaByUniv);
 /*  let filterCriteriaByUniv = $('#univOption').val();
   $('#univOption').change(function() {
@@ -14,24 +14,27 @@ $(function() {
   $('#line_chart1').empty();
   $('#line_chart2').empty();
   
-  drawGraphForSATAVG();
-  drawGraphForTuitionFee();
+  drawGraphForSATAVG(filterCriteriaByUniv);
+  drawGraphForTuitionFee(filterCriteriaByUniv);
   });
 
 
-function drawGraphForSATAVG() {
+function drawGraphForSATAVG(filterValue) {
   $.ajax({
     url: 'index/sat',
     dataType: 'json',
     success: function(results) {
       //console.log('results:' + JSON.stringify(results));
       let datas = [];
-      results.forEach(result => {
+      results
+      .forEach(result => {
         if (
           datas.length > 0 &&
           datas.filter(data => data.year === result['YEAR']).length > 0
         ) {
           name = result['INSTNM'];
+          console.log(String(filterValue));
+
           datas.forEach((data, index) => {
             if (data.year === result['YEAR']) {
               data[name] = parseInt(result['SAT_AVG']);
@@ -52,26 +55,19 @@ function drawGraphForSATAVG() {
         a['year'] > b['year'] ? 1 : b['year'] > a['year'] ? -1 : 0
       );
       let labels = [];
-      let ucbData = [];
-      let ucdData = [];
-      let uciData = [];
-      let uclaData = [];
-      let ucrData = [];
-      let ucsdData = [];
-      let ucscData = [];
-      let ucmData = [];
+      let ucData = [];
 
       datas.forEach(data => {
         labels.push(data['year']);
-        ucbData.push(data['University of California-Berkeley']);
+        ucData.push(data[String(filterValue)]);
       });
 
       let data = {
         labels: labels,
         datasets: [
           {
-            label: 'UCB',
-            data: ucbData,
+            label: String(filterValue),
+            data: ucData,
             backgroundColor: '#dd5e89'
           }
         ]
