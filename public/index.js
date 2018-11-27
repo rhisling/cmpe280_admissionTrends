@@ -155,6 +155,7 @@ function drawGraphForSATAVG() {
       let uclaData = [];
       let ucrData = [];
       let ucsdData = [];
+      let ucsbData = [];
       let ucscData = [];
       let ucmData = [];
 
@@ -166,6 +167,7 @@ function drawGraphForSATAVG() {
         uclaData.push(data['University of California-Los Angeles']);
         ucrData.push(data['University of California-Riverside']);
         ucsdData.push(data['University of California-San Diego']);
+        ucsbData.push(data['University of California-Santa Barbara']);
         ucscData.push(data['University of California-Santa Cruz']);
         ucmData.push(data['University of California-Merced']);
       });
@@ -207,6 +209,11 @@ function drawGraphForSATAVG() {
             label: 'UCSC',
             data: ucscData,
             backgroundColor: '#a4b678'
+          },
+          {
+            label: 'UCSB',
+            data: ucsbData,
+            backgroundColor: '#dd5e89'
           },
           {
             label: 'UCM',
