@@ -19,4 +19,12 @@ router.get('/index/earnings', dashboardController.getearningsResults);
 router.get('/index/grad', dashboardController.getgradResults);
 
 router.get('/index/diversity', dashboardController.getdiversityResults);
+
+/**
+ * recently added routes
+ */
+router.get('/recentdash/admitrate', dashboardController.getAdmitrate);
+router.get('/recentdash/retentionrate', dashboardController.getRetentionRate);
+router.get('/recentdash/gpa', dashboardController.getGPA);
+
 module.exports = router;

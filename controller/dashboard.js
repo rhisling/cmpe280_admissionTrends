@@ -118,3 +118,60 @@ module.exports.getdiversityResults = (req, res) => {
 function capitalize(s) {
   return s && s[0].toUpperCase() + s.slice(1);
 }
+
+
+
+/**
+ * recently added functionality
+ */
+module.exports.getAdmitrate = (req, res) => {
+    var admitResults = [];
+    var obj = JSON.parse('{ "YEAR":"2017"}');
+    Ustats.find(
+        obj,
+        {
+            INSTNM: 1,
+            ADM_RATE: 1
+
+        }
+    ).exec(function(err, results) {
+        admitResults = results;
+        console.log("admitResults",admitResults);
+        res.send(JSON.stringify(admitResults));
+    });
+};
+
+
+module.exports.getRetentionRate = (req, res) => {
+    var retentionResults = [];
+    var obj = JSON.parse('{ "YEAR":"2017"}');
+    Ustats.find(
+        obj,
+        {
+            INSTNM: 1,
+            RET_FT4: 1
+
+        }
+    ).exec(function(err, results) {
+        retentionResults = results;
+        console.log("retentionResults",retentionResults);
+        res.send(JSON.stringify(retentionResults));
+    });
+};
+
+module.exports.getGPA = (req, res) => {
+    var gpaResults = [];
+    var obj = JSON.parse('{ "YEAR":"2017"}');
+    Ustats.find(
+        obj,
+        {
+            INSTNM: 1,
+            GPA_Val: 1
+
+        }
+    ).exec(function(err, results) {
+        gpaResults = results;
+        console.log("gpaResults",gpaResults);
+        res.send(JSON.stringify(gpaResults));
+    });
+};
