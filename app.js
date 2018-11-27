@@ -53,23 +53,7 @@ app.use(passport.session());
  * Middlewares end
  */
 const port = process.env.PORT || 3000;
-
-/* app.get('/admin', (req, res) => {
-  res.render('admin.ejs'); //?
-});
-app.get('/admin/add-entry', (req, res) => {
-  res.render('add-entry.ejs');
-});
-app.get('/admin/update-entry', (req, res) => {
-  res.render('update-entry.ejs');
-});
-app.get('/admin/delete-entry', (req, res) => {
-  res.render('delete-entry.ejs');
-});
-app.get('/admin/find-entry', (req, res) => {
-  res.render('find-entry.ejs');
-});
-
+/*
 app.get('/getScorestats',(req, res) => {
     res.render('fetch-GpaStats.ejs');
 });
@@ -93,7 +77,7 @@ app.use(authRoutes);
 app.use(isLoggedIn, adminRoutes);
 app.use(userRoutes);
 app.use(isLoggedIn, dashboardRoutes);
-app.use(univRoutes);
+app.use(isLoggedIn, univRoutes);
 
 mongoose
   .connect(
