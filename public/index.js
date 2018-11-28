@@ -103,6 +103,8 @@ $(function() {
     getGradDebtProjection(filterCriteriaByUniv);
     getEarningResults(filterCriteriaByUniv);
     getDiversityResults(filterCriteriaByUniv);
+    getRetention(filterCriteriaByUniv);
+
   });
 
   drawGraphForSATAVG();
@@ -111,11 +113,13 @@ $(function() {
   getEarningResults(filterCriteriaByUniv);
   getDiversityResults(filterCriteriaByUniv);
   getTuitionOutGraph(filterCriteriaByUniv);
+  getRetention(filterCriteriaByUniv);
 
-  /* new Chart(
-    document.getElementById('bar_chart1').getContext('2d'),
-    getChartJs('bar')
-  ); */
+
+    /* new Chart(
+      document.getElementById('bar_chart1').getContext('2d'),
+      getChartJs('bar')
+    ); */
 });
 
 function drawGraphForSATAVG() {
@@ -858,4 +862,26 @@ function getChartJs(type) {
   }
 
   return config;
+}
+
+
+function getRetention(filterValue) {
+    // get the rangeResults
+    $.ajax({
+        url: 'recentdash/retentionrate',
+        dataType: 'json',
+
+        success: function(results) {
+            let retention = results
+                .filter(
+                    result => result['INSTNM'].toLowerCase() === filterValue.toLowerCase()
+                );
+            var ret_value = retention[0]['RET_FT4'] * 100 ;
+            console.log("Ret value", ret_value);
+            document.getElementById('ret').innerHTML = ret_value;
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert('error ' + textStatus + ' ' + errorThrown);
+        }
+    });
 }
