@@ -255,11 +255,13 @@ function getSATMidpointResults1() {
       $('#univ-tbody').empty();
       if (universities.length === 0) {
         $('#univ-tbody').append(
-          '<tr><td> Sorry we cannot recommend any universities for your score</td></tr>'
+          '<tr style="text-align: center;"><td> Sorry we cannot recommend any universities for your score</td></tr>'
         );
       }
       universities.forEach(university => {
-        $('#univ-tbody').append('<tr><td>' + university + '</td></tr>');
+        $('#univ-tbody').append(
+          '<tr style="text-align: center;"><td>' + university + '</td></tr>'
+        );
       });
     },
     error: function(jqXHR, textStatus, errorThrown) {
@@ -269,21 +271,23 @@ function getSATMidpointResults1() {
 }
 
 function getGpaSatData() {
-    document.getElementById("graph").style.display = "block";
-    var sat = parseFloat(document.getElementById("SAT").value);
-    var gpa = parseFloat(document.getElementById("GPA").value);
-    var university = [];
-    //console.log("in getGpaSatData()", r);
+  document.getElementById('graph').style.display = 'block';
+  var sat = parseFloat(document.getElementById('SAT').value);
+  var gpa = parseFloat(document.getElementById('GPA').value);
+  var university = [];
+  //console.log("in getGpaSatData()", r);
 
-    //console.log("results in the getGpaSatData()", results);
-    for (var i = 0; i < r.length; i++) {
-        //console.log("univ",r[i]["INSTNM"],r[i]["GPA_Val"],r[i]["SAT_AVG"],gpa,sat);
-        //console.log("check",r[i]["INSTNM"],typeof sat)
-        if (parseFloat(r[i]["GPA_Val"]) <= gpa && parseFloat(r[i]["SAT_AVG"]) <= sat) {
-            //console.log("univ",r[i]["INSTNM"]);
-            university.push(r[i]["INSTNM"]);
-        }
+  //console.log("results in the getGpaSatData()", results);
+  for (var i = 0; i < r.length; i++) {
+    //console.log("univ",r[i]["INSTNM"],r[i]["GPA_Val"],r[i]["SAT_AVG"],gpa,sat);
+    //console.log("check",r[i]["INSTNM"],typeof sat)
+    if (
+      parseFloat(r[i]['GPA_Val']) <= gpa &&
+      parseFloat(r[i]['SAT_AVG']) <= sat
+    ) {
+      //console.log("univ",r[i]["INSTNM"]);
+      university.push(r[i]['INSTNM']);
     }
-    return university;
-
+  }
+  return university;
 }
