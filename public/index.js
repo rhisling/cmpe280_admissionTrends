@@ -353,8 +353,8 @@ function getTuitionOutGraph(filterValue) {
         }
       };
 
-      $('#progress-bar1 .progress-bar').text(23 + '%');
-      $('#progress-bar1 .progress-bar').css({'width':23+'%'});
+      $('#progress-bar1 .progress-bar').val('23%');
+      $('#progress-bar1 .progress-bar').css({'width':'23%'});
       console.log(data);
       //element.barPercentage = data;
       // new Chart(
