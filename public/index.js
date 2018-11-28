@@ -104,7 +104,6 @@ $(function() {
     getEarningResults(filterCriteriaByUniv);
     getDiversityResults(filterCriteriaByUniv);
     getRetention(filterCriteriaByUniv);
-
   });
 
   drawGraphForSATAVG();
@@ -115,8 +114,7 @@ $(function() {
   getTuitionOutGraph(filterCriteriaByUniv);
   getRetention(filterCriteriaByUniv);
 
-
-    /* new Chart(
+  /* new Chart(
       document.getElementById('bar_chart1').getContext('2d'),
       getChartJs('bar')
     ); */
@@ -226,8 +224,7 @@ function drawGraphForSATAVG() {
             data: ucmData,
             backgroundColor: '#b5c567'
           }
-        ],
-
+        ]
       };
 
       let config = {
@@ -235,28 +232,29 @@ function drawGraphForSATAVG() {
         data: data,
         options: {
           responsive: true,
-            legend: {
-                display: false,
-            },
-            scales: {
-                xAxes: [{
-
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'YEAR',
-                        fontSize: 16
-                    }
-                }],
-                yAxes: [{
-
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'AVG_SAT',
-                        fontSize: 16
-                    }
-                }]
-            }
-
+          legend: {
+            display: false
+          },
+          scales: {
+            xAxes: [
+              {
+                scaleLabel: {
+                  display: true,
+                  labelString: 'YEAR',
+                  fontSize: 16
+                }
+              }
+            ],
+            yAxes: [
+              {
+                scaleLabel: {
+                  display: true,
+                  labelString: 'AVG_SAT',
+                  fontSize: 16
+                }
+              }
+            ]
+          }
         }
       };
 
@@ -269,6 +267,7 @@ function drawGraphForSATAVG() {
     }
   });
 }
+
 function getTuitionOutGraph(filterValue) {
   // get the earningsResults
   $.ajax({
@@ -276,91 +275,25 @@ function getTuitionOutGraph(filterValue) {
     dataType: 'json',
 
     success: function(results) {
-      //$("#test").append(data);
-      // d=JSON.stringify(data)
-      let datas = [];
+      console.log('In Tuition Out Graph', JSON.stringify(results));
+      let tuitionFeeOut;
       results
         .filter(
           result => result['INSTNM'].toLowerCase() === filterValue.toLowerCase()
         )
+        .filter(result => result['YEAR'] === '2017')
         .forEach(result => {
-          let tempObj = {};
-          tempObj['tuition'] = parseInt(result['TUITIONFEE_OUT']);
-         // tempObj['year'] = result['YEAR'];
-          datas.push(tempObj);
+          tuitionFeeOut = result['TUITIONFEE_OUT'];
         });
-      console.log('Processed earning results:', JSON.stringify(datas));
+      console.log('Processed earning results:', JSON.stringify(tuitionFeeOut));
+      let finalVal = (parseFloat(tuitionFeeOut) / 100000) * 100;
 
-
-      let dataset = [];
-      let labels = [];
-      datas.forEach(data => {
-        //labels.push(data['year']);
-        dataset.push(data['tuition']);
-      });
-
-      let data = {
-        labels: labels,
-        datasets: [
-          {
-            label: 'Amount in USD',
-            data: dataset,
-            borderColor: 'rgba(0, 188, 212, 0.75)',
-            backgroundColor: 'rgba(0, 188, 212, 0.3)',
-            pointBorderColor: 'rgba(0, 188, 212, 0)',
-            pointBackgroundColor: 'rgba(0, 188, 212, 0.9)',
-            pointBorderWidth: 1
-          }
-        ]
-      };
-
-      let config = {
-        type: 'horizontalBar',
-        data: data,
-        options: {
-          responsive: true,
-          legend: false,
-            scales: {
-              xAxes: [{
-                gridLines: {
-                  display: false, // hide x-axis line
-                  drawBorder: true // hide zero grid line
-                }, // setting x-axis grid
-                ticks: {
-                  display: true // hide x-axis value
-                }
-              }],
-              yAxes: [{
-                gridLines: {
-                  display: true, // hide y-axis line
-                  drawBorder: false // hide zero grid line
-                },
-                scaleLabel: {
-                  display: true // show label name
-                },
-                ticks: {
-                   display: true, // show y value text
-                   mirror: true, // inside position (value name)
-                   labelOffset: -15, // text positon distance
-                   fontSize: 13,
-                   padding: 0,
-                   fontColor: "#222",
-                   fontFamliy: "verdana"
-                },
-                barPercentage: 0.3 // bar thickness
-               }]
-            }
-        }
-      };
-
-      $('#progress-bar1 .progress-bar').val('23%');
-      $('#progress-bar1 .progress-bar').css({'width':'23%'});
-      console.log(data);
-      //element.barPercentage = data;
-      // new Chart(
-      //   document.getElementById('progress-bar1').getContext('2d'),
-      //   config
-      // );
+      console.log('Finalval', finalVal);
+      console.log('Final Type', typeof finalVal);
+      //$('#progress-bar1').prop('aria-valuenow', 40);
+      $('#progress-bar1')
+        .attr('aria-valuenow', 40)
+        .css('width', 40);
     },
     error: function(jqXHR, textStatus, errorThrown) {
       alert('error ' + textStatus + ' ' + errorThrown);
@@ -450,24 +383,26 @@ function getSATMidpointResults(filterValue) {
         options: {
           responsive: true,
           legend: false,
-            scales: {
-                xAxes: [{
-
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'YEAR',
-                        fontSize: 16
-                    }
-                }],
-                yAxes: [{
-
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'SAT',
-                        fontSize: 16
-                    }
-                }]
-            }
+          scales: {
+            xAxes: [
+              {
+                scaleLabel: {
+                  display: true,
+                  labelString: 'YEAR',
+                  fontSize: 16
+                }
+              }
+            ],
+            yAxes: [
+              {
+                scaleLabel: {
+                  display: true,
+                  labelString: 'SAT',
+                  fontSize: 16
+                }
+              }
+            ]
+          }
         }
       };
       new Chart(
@@ -536,24 +471,26 @@ function getGradDebtProjection(filterValue) {
         options: {
           responsive: true,
           legend: false,
-            scales: {
-                xAxes: [{
-
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'YEAR',
-                        fontSize: 16
-                    }
-                }],
-                yAxes: [{
-
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'DEBT',
-                        fontSize: 16
-                    }
-                }]
-            }
+          scales: {
+            xAxes: [
+              {
+                scaleLabel: {
+                  display: true,
+                  labelString: 'YEAR',
+                  fontSize: 16
+                }
+              }
+            ],
+            yAxes: [
+              {
+                scaleLabel: {
+                  display: true,
+                  labelString: 'DEBT',
+                  fontSize: 16
+                }
+              }
+            ]
+          }
         }
       };
       new Chart(
@@ -622,24 +559,26 @@ function getEarningResults(filterValue) {
         options: {
           responsive: true,
           legend: false,
-            scales: {
-                xAxes: [{
-
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'YEAR',
-                        fontSize: 16
-                    }
-                }],
-                yAxes: [{
-
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Mean Earnings',
-                        fontSize: 16
-                    }
-                }]
-            }
+          scales: {
+            xAxes: [
+              {
+                scaleLabel: {
+                  display: true,
+                  labelString: 'YEAR',
+                  fontSize: 16
+                }
+              }
+            ],
+            yAxes: [
+              {
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Mean Earnings',
+                  fontSize: 16
+                }
+              }
+            ]
+          }
         }
       };
       new Chart(
@@ -864,24 +803,22 @@ function getChartJs(type) {
   return config;
 }
 
-
 function getRetention(filterValue) {
-    // get the rangeResults
-    $.ajax({
-        url: 'recentdash/retentionrate',
-        dataType: 'json',
+  // get the rangeResults
+  $.ajax({
+    url: 'recentdash/retentionrate',
+    dataType: 'json',
 
-        success: function(results) {
-            let retention = results
-                .filter(
-                    result => result['INSTNM'].toLowerCase() === filterValue.toLowerCase()
-                );
-            var ret_value = retention[0]['RET_FT4'] * 100 ;
-            console.log("Ret value", ret_value);
-            document.getElementById('ret').innerHTML = ret_value;
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            alert('error ' + textStatus + ' ' + errorThrown);
-        }
-    });
+    success: function(results) {
+      let retention = results.filter(
+        result => result['INSTNM'].toLowerCase() === filterValue.toLowerCase()
+      );
+      var ret_value = retention[0]['RET_FT4'] * 100;
+      console.log('Ret value', ret_value);
+      document.getElementById('ret').innerHTML = ret_value;
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      alert('error ' + textStatus + ' ' + errorThrown);
+    }
+  });
 }
