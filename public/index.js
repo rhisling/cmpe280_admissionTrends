@@ -98,6 +98,7 @@ $(function() {
     $('#line_chart3').empty();
     $('#bar_chart1').empty();
     $('#bar_chart2').empty();
+    getTuitionOutGraph(filterCriteriaByUniv);
 
     getSATMidpointResults(filterCriteriaByUniv);
     getGradDebtProjection(filterCriteriaByUniv);
@@ -292,9 +293,9 @@ function getTuitionOutGraph(filterValue) {
       console.log('Final Type', typeof finalVal);
       //$('#progress-bar1').prop('aria-valuenow', 40);
       $('#progressbar1')
-        .attr('aria-valuenow', 40)
-        .css('width', 40)
-        .text(40 + '%');
+        .attr('aria-valuenow', finalVal)
+        .css('width', finalVal)
+        .text(finalVal + '%');
     },
     error: function(jqXHR, textStatus, errorThrown) {
       alert('error ' + textStatus + ' ' + errorThrown);
