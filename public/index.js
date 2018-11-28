@@ -103,6 +103,8 @@ $(function() {
     getGradDebtProjection(filterCriteriaByUniv);
     getEarningResults(filterCriteriaByUniv);
     getDiversityResults(filterCriteriaByUniv);
+    getRetention(filterCriteriaByUniv);
+
   });
 
   drawGraphForSATAVG();
@@ -110,10 +112,14 @@ $(function() {
   getGradDebtProjection(filterCriteriaByUniv);
   getEarningResults(filterCriteriaByUniv);
   getDiversityResults(filterCriteriaByUniv);
-  /* new Chart(
-    document.getElementById('bar_chart1').getContext('2d'),
-    getChartJs('bar')
-  ); */
+  getTuitionOutGraph(filterCriteriaByUniv);
+  getRetention(filterCriteriaByUniv);
+
+
+    /* new Chart(
+      document.getElementById('bar_chart1').getContext('2d'),
+      getChartJs('bar')
+    ); */
 });
 
 function drawGraphForSATAVG() {
@@ -257,6 +263,104 @@ function drawGraphForSATAVG() {
       new Chart(document.getElementById('bar_chart1').getContext('2d'), config);
 
       console.log('labels:', labels);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      alert('error ' + textStatus + ' ' + errorThrown);
+    }
+  });
+}
+function getTuitionOutGraph(filterValue) {
+  // get the earningsResults
+  $.ajax({
+    url: 'index/tuition-out',
+    dataType: 'json',
+
+    success: function(results) {
+      //$("#test").append(data);
+      // d=JSON.stringify(data)
+      let datas = [];
+      results
+        .filter(
+          result => result['INSTNM'].toLowerCase() === filterValue.toLowerCase()
+        )
+        .forEach(result => {
+          let tempObj = {};
+          tempObj['tuition'] = parseInt(result['TUITIONFEE_OUT']);
+         // tempObj['year'] = result['YEAR'];
+          datas.push(tempObj);
+        });
+      console.log('Processed earning results:', JSON.stringify(datas));
+
+
+      let dataset = [];
+      let labels = [];
+      datas.forEach(data => {
+        //labels.push(data['year']);
+        dataset.push(data['tuition']);
+      });
+
+      let data = {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Amount in USD',
+            data: dataset,
+            borderColor: 'rgba(0, 188, 212, 0.75)',
+            backgroundColor: 'rgba(0, 188, 212, 0.3)',
+            pointBorderColor: 'rgba(0, 188, 212, 0)',
+            pointBackgroundColor: 'rgba(0, 188, 212, 0.9)',
+            pointBorderWidth: 1
+          }
+        ]
+      };
+
+      let config = {
+        type: 'horizontalBar',
+        data: data,
+        options: {
+          responsive: true,
+          legend: false,
+            scales: {
+              xAxes: [{
+                gridLines: {
+                  display: false, // hide x-axis line
+                  drawBorder: true // hide zero grid line
+                }, // setting x-axis grid
+                ticks: {
+                  display: true // hide x-axis value
+                }
+              }],
+              yAxes: [{
+                gridLines: {
+                  display: true, // hide y-axis line
+                  drawBorder: false // hide zero grid line
+                },
+                scaleLabel: {
+                  display: true // show label name
+                },
+                ticks: {
+                   display: true, // show y value text
+                   mirror: true, // inside position (value name)
+                   labelOffset: -15, // text positon distance
+                   fontSize: 13,
+                   padding: 0,
+                   fontColor: "#222",
+                   fontFamliy: "verdana"
+                },
+                barPercentage: 0.3 // bar thickness
+               }]
+            }
+        }
+      };
+
+      $('#progress-bar1 .progress-bar').text(23 + '%');
+      $('#progress-bar1 .progress-bar').css({'width':23+'%'});
+      console.log(data);
+      //element.barPercentage = data;
+      // new Chart(
+      //   document.getElementById('progress-bar1').getContext('2d'),
+      //   config
+      // );
     },
     error: function(jqXHR, textStatus, errorThrown) {
       alert('error ' + textStatus + ' ' + errorThrown);
@@ -758,4 +862,26 @@ function getChartJs(type) {
   }
 
   return config;
+}
+
+
+function getRetention(filterValue) {
+    // get the rangeResults
+    $.ajax({
+        url: 'recentdash/retentionrate',
+        dataType: 'json',
+
+        success: function(results) {
+            let retention = results
+                .filter(
+                    result => result['INSTNM'].toLowerCase() === filterValue.toLowerCase()
+                );
+            var ret_value = retention[0]['RET_FT4'] * 100 ;
+            console.log("Ret value", ret_value);
+            document.getElementById('ret').innerHTML = ret_value;
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert('error ' + textStatus + ' ' + errorThrown);
+        }
+    });
 }
