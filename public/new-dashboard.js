@@ -176,7 +176,7 @@ function drawGraphForSATAVG() {
                 scaleLabel: {
                   display: true,
                   labelString: 'YEAR',
-                  fontSize: 16
+                  fontSize: 14
                 }
               }
             ],
@@ -184,8 +184,8 @@ function drawGraphForSATAVG() {
               {
                 scaleLabel: {
                   display: true,
-                  labelString: 'AVG_SAT',
-                  fontSize: 16
+                  labelString: 'AVG SAT',
+                  fontSize: 14
                 }
               }
             ]
@@ -251,8 +251,8 @@ function getAdmitRate() {
               {
                 scaleLabel: {
                   display: true,
-                  labelString: 'YEAR',
-                  fontSize: 16
+                  labelString: 'ADMIT RATE',
+                  fontSize: 14
                 }
               }
             ],
@@ -260,8 +260,8 @@ function getAdmitRate() {
               {
                 scaleLabel: {
                   display: true,
-                  labelString: 'SAT',
-                  fontSize: 16
+                  labelString: 'UNIVERSITY',
+                  fontSize: 14
                 }
               }
             ]
@@ -323,8 +323,8 @@ function getRetentionRate() {
               {
                 scaleLabel: {
                   display: true,
-                  labelString: 'YEAR',
-                  fontSize: 16
+                  labelString: 'UNIVERSITY',
+                  fontSize: 14
                 }
               }
             ],
@@ -332,8 +332,8 @@ function getRetentionRate() {
               {
                 scaleLabel: {
                   display: true,
-                  labelString: 'DEBT',
-                  fontSize: 16
+                  labelString: 'RETENTION',
+                  fontSize: 14
                 }
               }
             ]
@@ -396,8 +396,8 @@ function getGPAScore() {
               {
                 scaleLabel: {
                   display: true,
-                  labelString: 'YEAR',
-                  fontSize: 16
+                  labelString: 'GPA SCORE',
+                  fontSize: 14
                 }
               }
             ],
@@ -405,8 +405,8 @@ function getGPAScore() {
               {
                 scaleLabel: {
                   display: true,
-                  labelString: 'Mean Earnings',
-                  fontSize: 16
+                  labelString: 'UNIVERSITY',
+                  fontSize: 14
                 }
               }
             ]
