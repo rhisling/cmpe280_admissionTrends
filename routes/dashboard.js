@@ -27,4 +27,9 @@ router.get('/recentdash/admitrate', dashboardController.getAdmitrate);
 router.get('/recentdash/retentionrate', dashboardController.getRetentionRate);
 router.get('/recentdash/gpa', dashboardController.getGPA);
 
+/**
+ * For page
+ */
+router.get('/new-dashboard', dashboardController.getNewDashboard);
+
 module.exports = router;
