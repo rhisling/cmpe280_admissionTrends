@@ -1,19 +1,18 @@
-"use strict";
-var realtime = "on";
+'use strict';
+var realtime = 'on';
 var r;
 
 function initSparkline() {
-  $(".sparkline").each(function() {
+  $('.sparkline').each(function() {
     var $this = $(this);
-    $this.sparkline("html", $this.data());
+    $this.sparkline('html', $this.data());
   });
 }
 
-("use strict");
+('use strict');
 $(function() {
-  $("#btnGpaSat").on("click", function() {
+  $('#btnGpaSat').on('click', function() {
     getSATMidpointResults1();
-
   });
 });
 
@@ -21,21 +20,21 @@ $(function() {
 
 function getSATMidpointResults1() {
   // get the rangeResults
-    document.getElementById("graph").style.display = "block";
+  document.getElementById('graph').style.display = 'block';
 
   $.ajax({
-    url: "/getUserScoreStats",
-    dataType: "json",
+    url: '/getUserScoreStats',
+    dataType: 'json',
 
     success: function(results) {
       //$("#test").append(data);
       // d=JSON.stringify(data)
       r = results;
-      console.log("in getSATMidpointResults", r);
-      var sat1 = parseFloat(document.getElementById("SAT").value);
-      var gpa1 = parseFloat(document.getElementById("GPA").value);
-        console.log("sat",gpa);
-      console.log("sat",typeof gpa);
+      console.log('in getSATMidpointResults', r);
+      var sat1 = parseFloat(document.getElementById('SAT').value);
+      var gpa1 = parseFloat(document.getElementById('GPA').value);
+      console.log('sat', gpa);
+      console.log('sat', typeof gpa);
 
       //console.log("data",results);
       var list = [];
@@ -45,231 +44,242 @@ function getSATMidpointResults1() {
       var temp = [];
       for (var i = 0; i < results.length; i++) {
         var dict = {};
-        dict["University"] = results[i]["INSTNM"];
-        label.push(results[i]["INSTNM"]);
+        dict['University'] = results[i]['INSTNM'];
+        label.push(results[i]['INSTNM']);
         var l = [];
         var d = {
-          y: parseFloat(results[i]["SAT_AVG"]),
-          x: parseFloat(results[i]["GPA_Val"])
+          y: parseFloat(results[i]['SAT_AVG']),
+          x: parseFloat(results[i]['GPA_Val'])
         };
-        sat.push(parseFloat(results[i]["SAT_AVG"]));
-        gpa.push(parseFloat(results[i]["GPA_Val"]));
+        sat.push(parseFloat(results[i]['SAT_AVG']));
+        gpa.push(parseFloat(results[i]['GPA_Val']));
 
         l.push(d);
         temp.push(d);
-        dict["data"] = l;
+        dict['data'] = l;
         list.push(dict);
       }
 
-      let univ= [];
+      let univ = [];
       let coords = [];
-      list.forEach((e)=>{
-          univ.push(e['University']);
-          coords.push(... e['data']);
-
+      list.forEach(e => {
+        univ.push(e['University']);
+        coords.push(...e['data']);
       });
 
-      console.log("univ list",JSON.stringify(univ));
-        console.log("Coords",JSON.stringify(coords));
+      console.log('univ list', JSON.stringify(univ));
+      console.log('Coords', JSON.stringify(coords));
       let data = {
-        datasets:[{
-            label:univ[0],
-            data: [{
+        datasets: [
+          {
+            label: univ[0],
+            data: [
+              {
                 x: coords[0]['x'],
                 y: coords[0]['y']
-            },
-
+              }
             ],
             backgroundColor: 'rgba(243, 67, 54, 1.00)',
-            pointBackgroundColor: 'rgba(243, 67, 54, 1.00)',
-        },
-            {
-                label: univ[1],
-                data: [
-                    {
-                        x: coords[1]['x'],
-                        y: coords[1]['y']
-                    }
-                ],
-                backgroundColor: 'rgba(243, 67, 54, 1.00)',
-                pointBackgroundColor: 'rgba(243, 67, 54, 1.00)',
-            },
-            {
-                label: univ[2],
-                data: [
-                    {
-                        x: coords[2]['x'],
-                        y: coords[2]['y']
-                    }
-                ],backgroundColor: 'rgba(243, 67, 54, 1.00)',
-                pointBackgroundColor: 'rgba(243, 67, 54, 1.00)',
-            },
-            {
-                label: univ[3],
-                data: [
-                    {
-                        x: coords[3]['x'],
-                        y: coords[3]['y']
-                    }
-                ],
-                backgroundColor: 'rgba(243, 67, 54, 1.00)',
-                pointBackgroundColor: 'rgba(243, 67, 54, 1.00)',
-            },{
-                label: univ[4],
-                data: [
-                    {
-                        x: coords[4]['x'],
-                        y: coords[4]['y']
-                    }
-                ],
-                backgroundColor: 'rgba(243, 67, 54, 1.00)',
-                pointBackgroundColor: 'rgba(243, 67, 54, 1.00)',
-            },{
-                label: univ[5],
-                data: [
-                    {
-                        x: coords[5]['x'],
-                        y: coords[5]['y']
-                    }
-                ],
-                backgroundColor: 'rgba(243, 67, 54, 1.00)',
-                pointBackgroundColor: 'rgba(243, 67, 54, 1.00)'
-            },{
-                label: univ[6],
-                data: [
-                    {
-                        x: coords[6]['x'],
-                        y: coords[6]['y']
-                    }
-                ],
-                backgroundColor: 'rgba(243, 67, 54, 1.00)',
-                pointBackgroundColor: 'rgba(243, 67, 54, 1.00)'
-            },{
-                label: univ[7],
-                data: [
-                    {
-                        x: coords[7]['x'],
-                        y: coords[7]['y']
-                    }
-                ],
-                backgroundColor: 'rgba(243, 67, 54, 1.00)',
-                pointBackgroundColor: 'rgba(243, 67, 54, 1.00)',
-            },{
-                label: univ[8],
-                data: [
-                    {
-                        x: coords[8]['x'],
-                        y: coords[8]['y']
-                    }
-                ],
-                backgroundColor: 'rgba(243, 67, 54, 1.00)',
-                pointBackgroundColor: 'rgba(243, 67, 54, 1.00)',
-            },
-            {
-                label: "Your Score",
-                data: [
-                    {
-                        x: gpa1,
-                        y: sat1
-                    }
-                ],
-                backgroundColor: 'rgba(77, 175, 80, 1.00)',
-                pointBackgroundColor: 'rgba(77, 175, 80, 1.00)',
-            }
-
-
+            pointBackgroundColor: 'rgba(243, 67, 54, 1.00)'
+          },
+          {
+            label: univ[1],
+            data: [
+              {
+                x: coords[1]['x'],
+                y: coords[1]['y']
+              }
+            ],
+            backgroundColor: 'rgba(243, 67, 54, 1.00)',
+            pointBackgroundColor: 'rgba(243, 67, 54, 1.00)'
+          },
+          {
+            label: univ[2],
+            data: [
+              {
+                x: coords[2]['x'],
+                y: coords[2]['y']
+              }
+            ],
+            backgroundColor: 'rgba(243, 67, 54, 1.00)',
+            pointBackgroundColor: 'rgba(243, 67, 54, 1.00)'
+          },
+          {
+            label: univ[3],
+            data: [
+              {
+                x: coords[3]['x'],
+                y: coords[3]['y']
+              }
+            ],
+            backgroundColor: 'rgba(243, 67, 54, 1.00)',
+            pointBackgroundColor: 'rgba(243, 67, 54, 1.00)'
+          },
+          {
+            label: univ[4],
+            data: [
+              {
+                x: coords[4]['x'],
+                y: coords[4]['y']
+              }
+            ],
+            backgroundColor: 'rgba(243, 67, 54, 1.00)',
+            pointBackgroundColor: 'rgba(243, 67, 54, 1.00)'
+          },
+          {
+            label: univ[5],
+            data: [
+              {
+                x: coords[5]['x'],
+                y: coords[5]['y']
+              }
+            ],
+            backgroundColor: 'rgba(243, 67, 54, 1.00)',
+            pointBackgroundColor: 'rgba(243, 67, 54, 1.00)'
+          },
+          {
+            label: univ[6],
+            data: [
+              {
+                x: coords[6]['x'],
+                y: coords[6]['y']
+              }
+            ],
+            backgroundColor: 'rgba(243, 67, 54, 1.00)',
+            pointBackgroundColor: 'rgba(243, 67, 54, 1.00)'
+          },
+          {
+            label: univ[7],
+            data: [
+              {
+                x: coords[7]['x'],
+                y: coords[7]['y']
+              }
+            ],
+            backgroundColor: 'rgba(243, 67, 54, 1.00)',
+            pointBackgroundColor: 'rgba(243, 67, 54, 1.00)'
+          },
+          {
+            label: univ[8],
+            data: [
+              {
+                x: coords[8]['x'],
+                y: coords[8]['y']
+              }
+            ],
+            backgroundColor: 'rgba(243, 67, 54, 1.00)',
+            pointBackgroundColor: 'rgba(243, 67, 54, 1.00)'
+          },
+          {
+            label: 'Your Score',
+            data: [
+              {
+                x: gpa1,
+                y: sat1
+              }
+            ],
+            backgroundColor: 'rgba(77, 175, 80, 1.00)',
+            pointBackgroundColor: 'rgba(77, 175, 80, 1.00)'
+          }
         ]
       };
 
       let config = {
-        type: "scatter",
+        type: 'scatter',
         data: data,
         options: {
           responsive: true,
 
-
-            title: {
+          title: {
+            display: true
+          },
+          legend: {
+            display: false
+          },
+          tooltips: {
+            callbacks: {
+              title: function(tooltipItems, data) {
+                return data.datasets[tooltipItems[0].datasetIndex].label;
+              },
+              label: function(tooltipItem, data) {
+                return (
+                  'SAT: ' +
+                  tooltipItem.yLabel
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, '') +
+                  ' ' +
+                  'GPA: ' +
+                  tooltipItem.xLabel
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, '')
+                );
+              }
+            }
+          },
+          scales: {
+            yAxes: [
+              {
                 display: true,
-
-            },
-            legend: {
-                display: false,
-            },
-            tooltips: {
-                callbacks: {
-                    title: function(tooltipItems, data) {
-                        return data.datasets[tooltipItems[0].datasetIndex].label;
-                    },
-                    label: function(tooltipItem, data) {
-                        return "SAT: "+tooltipItem.yLabel.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "")+" "+"GPA: "+tooltipItem.xLabel.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "")
-
-                    }
+                scaleLabel: {
+                  display: true,
+                  labelString: 'SAT',
+                  fontSize: 16
                 }
-            },
-            scales: {
-                yAxes: [{
-                    display: true,
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'SAT',
-                        fontSize: 16
-                    }
-                }],
-                xAxes: [{
-                    type: 'linear',
-                    position: 'bottom',
-                    display: true,
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'GPA',
-                        fontSize: 16
-                    },
-                    gridLines: {
-                        display: true
-                    }
-                }]
-            },
+              }
+            ],
+            xAxes: [
+              {
+                type: 'linear',
+                position: 'bottom',
+                display: true,
+                scaleLabel: {
+                  display: true,
+                  labelString: 'GPA',
+                  fontSize: 16
+                },
+                gridLines: {
+                  display: true
+                }
+              }
+            ]
+          }
         }
       };
       new Chart(
-        document.getElementById("line_chart1").getContext("2d"),
+        document.getElementById('line_chart1').getContext('2d'),
         config
       );
-        console.log("r is", r);
-        let universities = getGpaSatData();
-        console.log(universities);
-         if(universities.length===0){
-             $("#univ-tbody").append(
-                 "<tr><td> Sorry we cannot recommend any universities for your score</td></tr>"
-             );
-         }
-        universities.forEach(university => {
-            $("#univ-tbody").append(
-                "<tr><td>" + university + '</td></tr>'
-            );
-        });
-
+      console.log('r is', r);
+      let universities = getGpaSatData();
+      console.log(universities);
+      $('#univ-tbody').empty();
+      if (universities.length === 0) {
+        $('#univ-tbody').append(
+          '<tr><td> Sorry we cannot recommend any universities for your score</td></tr>'
+        );
+      }
+      universities.forEach(university => {
+        $('#univ-tbody').append('<tr><td>' + university + '</td></tr>');
+      });
     },
     error: function(jqXHR, textStatus, errorThrown) {
-      alert("error " + textStatus + " " + errorThrown);
+      alert('error ' + textStatus + ' ' + errorThrown);
     }
   });
 }
 
 function getGpaSatData() {
-  document.getElementById("graph").style.display = "block";
-  var sat = document.getElementById("SAT").value;
-  var gpa = document.getElementById("GPA").value;
+  document.getElementById('graph').style.display = 'block';
+  var sat = document.getElementById('SAT').value;
+  var gpa = document.getElementById('GPA').value;
   var university = [];
-  console.log("in getGpaSatData()", r);
+  console.log('in getGpaSatData()', r);
 
   //console.log("results in the getGpaSatData()", results);
   for (var i = 0; i < r.length; i++) {
-    if (r[i]["GPA_Val"] <= gpa && r[i]["SAT_AVG"] <= sat) {
-      university.push(r[i]["INSTNM"]);
+    if (r[i]['GPA_Val'] <= gpa && r[i]['SAT_AVG'] <= sat) {
+      university.push(r[i]['INSTNM']);
     }
   }
   return university;
-
 }
-
