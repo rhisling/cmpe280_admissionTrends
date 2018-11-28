@@ -21,4 +21,16 @@ router.get('/index/grad', dashboardController.getgradResults);
 router.get('/index/diversity', dashboardController.getdiversityResults);
 
 router.get('/index/tuition-out', dashboardController.getTuitionOut);
+/**
+ * recently added routes
+ */
+router.get('/recentdash/admitrate', dashboardController.getAdmitrate);
+router.get('/recentdash/retentionrate', dashboardController.getRetentionRate);
+router.get('/recentdash/gpa', dashboardController.getGPA);
+
+/**
+ * For page
+ */
+router.get('/new-dashboard', dashboardController.getNewDashboard);
+
 module.exports = router;
