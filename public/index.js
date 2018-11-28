@@ -282,20 +282,16 @@ function getTuitionOutGraph(filterValue) {
         .forEach(result => {
           let tempObj = {};
           tempObj['tuition'] = parseInt(result['TUITIONFEE_OUT']);
-          tempObj['year'] = result['YEAR'];
+         // tempObj['year'] = result['YEAR'];
           datas.push(tempObj);
         });
       console.log('Processed earning results:', JSON.stringify(datas));
 
-      // for chronological ordering
-      datas.sort((a, b) =>
-        a['year'] > b['year'] ? 1 : b['year'] > a['year'] ? -1 : 0
-      );
 
       let dataset = [];
       let labels = [];
       datas.forEach(data => {
-        labels.push(data['year']);
+        //labels.push(data['year']);
         dataset.push(data['tuition']);
       });
 
@@ -315,35 +311,49 @@ function getTuitionOutGraph(filterValue) {
       };
 
       let config = {
-        type: 'line',
+        type: 'horizontalBar',
         data: data,
         options: {
           responsive: true,
           legend: false,
             scales: {
-                xAxes: [{
-
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'YEAR',
-                        fontSize: 16
-                    }
-                }],
-                yAxes: [{
-
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Out of State Tuition',
-                        fontSize: 16
-                    }
-                }]
+              xAxes: [{
+                gridLines: {
+                  display: false, // hide x-axis line
+                  drawBorder: true // hide zero grid line
+                }, // setting x-axis grid
+                ticks: {
+                  display: true // hide x-axis value
+                }
+              }],
+              yAxes: [{
+                gridLines: {
+                  display: true, // hide y-axis line
+                  drawBorder: false // hide zero grid line
+                },
+                scaleLabel: {
+                  display: true // show label name
+                },
+                ticks: {
+                   display: true, // show y value text
+                   mirror: true, // inside position (value name)
+                   labelOffset: -15, // text positon distance
+                   fontSize: 13,
+                   padding: 0,
+                   fontColor: "#222",
+                   fontFamliy: "verdana"
+                },
+                barPercentage: 0.3 // bar thickness
+               }]
             }
         }
       };
-      new Chart(
-        document.getElementById('progress-bar1').getContext('2d'),
-        config
-      );
+      $('#progress-bar1 .aria-valuenow').text(data);
+      //element.barPercentage = data;
+      // new Chart(
+      //   document.getElementById('progress-bar1').getContext('2d'),
+      //   config
+      // );
     },
     error: function(jqXHR, textStatus, errorThrown) {
       alert('error ' + textStatus + ' ' + errorThrown);
