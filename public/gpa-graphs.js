@@ -269,17 +269,21 @@ function getSATMidpointResults1() {
 }
 
 function getGpaSatData() {
-  document.getElementById('graph').style.display = 'block';
-  var sat = document.getElementById('SAT').value;
-  var gpa = document.getElementById('GPA').value;
-  var university = [];
-  console.log('in getGpaSatData()', r);
+    document.getElementById("graph").style.display = "block";
+    var sat = parseFloat(document.getElementById("SAT").value);
+    var gpa = parseFloat(document.getElementById("GPA").value);
+    var university = [];
+    //console.log("in getGpaSatData()", r);
 
-  //console.log("results in the getGpaSatData()", results);
-  for (var i = 0; i < r.length; i++) {
-    if (r[i]['GPA_Val'] <= gpa && r[i]['SAT_AVG'] <= sat) {
-      university.push(r[i]['INSTNM']);
+    //console.log("results in the getGpaSatData()", results);
+    for (var i = 0; i < r.length; i++) {
+        //console.log("univ",r[i]["INSTNM"],r[i]["GPA_Val"],r[i]["SAT_AVG"],gpa,sat);
+        //console.log("check",r[i]["INSTNM"],typeof sat)
+        if (parseFloat(r[i]["GPA_Val"]) <= gpa && parseFloat(r[i]["SAT_AVG"]) <= sat) {
+            //console.log("univ",r[i]["INSTNM"]);
+            university.push(r[i]["INSTNM"]);
+        }
     }
-  }
-  return university;
+    return university;
+
 }
