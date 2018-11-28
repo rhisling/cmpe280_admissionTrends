@@ -294,7 +294,7 @@ function getTuitionOutGraph(filterValue) {
       //$('#progress-bar1').prop('aria-valuenow', 40);
       $('#progressbar1')
         .attr('aria-valuenow', finalVal)
-        .css('width', finalVal)
+        .css('width', finalVal + '%')
         .text(finalVal + '%');
     },
     error: function(jqXHR, textStatus, errorThrown) {
