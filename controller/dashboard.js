@@ -35,7 +35,17 @@ module.exports.getTuition = (req, res) => {
     //console.log("tuitionResults in ",JSON.stringify(tuitionResults));
   });
 };
-
+module.exports.getTuitionOut = (req, res) => {
+  var tuitionResults = [];
+  Ustats.find({}, { INSTNM: 1, TUITIONFEE_OUT: 1, YEAR: 1 }).exec(function(
+    err,
+    results
+  ) {
+    tuitionOutResults = results;
+    res.send(JSON.stringify(tuitionOutResults));
+    //console.log("tuitionResults in ",JSON.stringify(tuitionResults));
+  });
+};
 //2.drop-down-menu (pick university) vs. SAT 25, 50, 75, 100 ranges,
 
 module.exports.getRangeResults = (req, res) => {

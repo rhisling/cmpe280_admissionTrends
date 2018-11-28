@@ -110,6 +110,8 @@ $(function() {
   getGradDebtProjection(filterCriteriaByUniv);
   getEarningResults(filterCriteriaByUniv);
   getDiversityResults(filterCriteriaByUniv);
+  getTuitionOutGraph(filterCriteriaByUniv);
+
   /* new Chart(
     document.getElementById('bar_chart1').getContext('2d'),
     getChartJs('bar')
@@ -257,6 +259,91 @@ function drawGraphForSATAVG() {
       new Chart(document.getElementById('bar_chart1').getContext('2d'), config);
 
       console.log('labels:', labels);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      alert('error ' + textStatus + ' ' + errorThrown);
+    }
+  });
+}
+function getTuitionOutGraph(filterValue) {
+  // get the earningsResults
+  $.ajax({
+    url: 'index/tuition-out',
+    dataType: 'json',
+
+    success: function(results) {
+      //$("#test").append(data);
+      // d=JSON.stringify(data)
+      let datas = [];
+      results
+        .filter(
+          result => result['INSTNM'].toLowerCase() === filterValue.toLowerCase()
+        )
+        .forEach(result => {
+          let tempObj = {};
+          tempObj['tuition'] = parseInt(result['TUITIONFEE_OUT']);
+          tempObj['year'] = result['YEAR'];
+          datas.push(tempObj);
+        });
+      console.log('Processed earning results:', JSON.stringify(datas));
+
+      // for chronological ordering
+      datas.sort((a, b) =>
+        a['year'] > b['year'] ? 1 : b['year'] > a['year'] ? -1 : 0
+      );
+
+      let dataset = [];
+      let labels = [];
+      datas.forEach(data => {
+        labels.push(data['year']);
+        dataset.push(data['tuition']);
+      });
+
+      let data = {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Amount in USD',
+            data: dataset,
+            borderColor: 'rgba(0, 188, 212, 0.75)',
+            backgroundColor: 'rgba(0, 188, 212, 0.3)',
+            pointBorderColor: 'rgba(0, 188, 212, 0)',
+            pointBackgroundColor: 'rgba(0, 188, 212, 0.9)',
+            pointBorderWidth: 1
+          }
+        ]
+      };
+
+      let config = {
+        type: 'line',
+        data: data,
+        options: {
+          responsive: true,
+          legend: false,
+            scales: {
+                xAxes: [{
+
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'YEAR',
+                        fontSize: 16
+                    }
+                }],
+                yAxes: [{
+
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Out of State Tuition',
+                        fontSize: 16
+                    }
+                }]
+            }
+        }
+      };
+      new Chart(
+        document.getElementById('progress-bar1').getContext('2d'),
+        config
+      );
     },
     error: function(jqXHR, textStatus, errorThrown) {
       alert('error ' + textStatus + ' ' + errorThrown);

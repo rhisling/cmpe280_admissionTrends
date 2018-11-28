@@ -19,4 +19,6 @@ router.get('/index/earnings', dashboardController.getearningsResults);
 router.get('/index/grad', dashboardController.getgradResults);
 
 router.get('/index/diversity', dashboardController.getdiversityResults);
+
+router.get('/index/tuition-out', dashboardController.getTuitionOut);
 module.exports = router;
