@@ -348,7 +348,10 @@ function getTuitionOutGraph(filterValue) {
             }
         }
       };
-      $('#progress-bar1 .aria-valuenow').text(data);
+
+      $('#progress-bar1 .progress-bar').text(23 + '%');
+      $('#progress-bar1 .progress-bar').css({'width':23+'%'});
+      console.log(data);
       //element.barPercentage = data;
       // new Chart(
       //   document.getElementById('progress-bar1').getContext('2d'),
