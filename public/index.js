@@ -291,9 +291,10 @@ function getTuitionOutGraph(filterValue) {
       console.log('Finalval', finalVal);
       console.log('Final Type', typeof finalVal);
       //$('#progress-bar1').prop('aria-valuenow', 40);
-      $('#progress-bar1')
+      $('#progressbar1')
         .attr('aria-valuenow', 40)
-        .css('width', 40);
+        .css('width', 40)
+        .text(40 + '%');
     },
     error: function(jqXHR, textStatus, errorThrown) {
       alert('error ' + textStatus + ' ' + errorThrown);
