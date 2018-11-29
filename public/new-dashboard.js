@@ -117,48 +117,44 @@ function drawGraphForSATAVG() {
           {
             label: 'UCB',
             data: ucbData,
-            backgroundColor: '#dd5e89'
+            backgroundColor: 'rgba(92, 184, 93, 0.70)'
           },
           {
             label: 'UCD',
             data: ucdData,
-            backgroundColor: '#f7bb97'
+            backgroundColor: 'rgba(217, 150, 148, 1.00)'
           },
           {
             label: 'UCI',
             data: uciData,
-            backgroundColor: '#c6ca97'
+            backgroundColor: 'rgba(140, 94, 221, 0.70)'
           },
           {
             label: 'UCLA',
             data: uclaData,
-            backgroundColor: '#d6ae57'
+            backgroundColor: 'rgba(141, 211, 199, 0.70)'
           },
           {
             label: 'UCR',
             data: ucrData,
-            backgroundColor: '#a56b34'
+            backgroundColor: 'rgba(190, 185, 218, 0.70)'
           },
           {
             label: 'UCSD',
             data: ucsdData,
-            backgroundColor: '#fb65a8'
+            backgroundColor: 'rgba(251, 128, 114, 0.70)'
           },
           {
             label: 'UCSC',
             data: ucscData,
-            backgroundColor: '#a4b678'
+            backgroundColor: 'rgba(129, 177, 211, 0.70)'
           },
           {
             label: 'UCSB',
             data: ucsbData,
-            backgroundColor: '#dd5e89'
+            backgroundColor: 'rgba(253, 180, 98, 0.70)'
           },
-          {
-            label: 'UCM',
-            data: ucmData,
-            backgroundColor: '#b5c567'
-          }
+          { label: 'UCM', data: ucmData, backgroundColor: '#A497AD' }
         ]
       };
 

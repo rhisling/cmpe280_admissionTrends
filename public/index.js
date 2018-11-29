@@ -707,28 +707,48 @@ function getDiversityResults(filterValue) {
           {
             label: 'Two Or More',
             data: twoOrMore,
-            backgroundColor: 'rgba(41, 43, 44, 0.75)'
+            backgroundColor: 'rgba(92, 184, 93, 0.70)'
           },
           {
             label: 'American Indian',
             data: americanIndian,
-            backgroundColor: '#5BC0DD'
+            backgroundColor: 'rgba(217, 150, 148, 1.00)'
           },
-          { label: 'Asian', data: asian, backgroundColor: '#5CB85D' },
-          { label: 'Black', data: black, backgroundColor: '#0076D8' },
-          { label: 'Hispanic', data: hisp, backgroundColor: '#545B62' },
+          {
+            label: 'Asian',
+            data: asian,
+            backgroundColor: 'rgba(142, 159, 195, 1.00)'
+          },
+          {
+            label: 'Black',
+            data: black,
+            backgroundColor: 'rgba(141, 211, 199, 0.70)'
+          },
+          {
+            label: 'Hispanic',
+            data: hisp,
+            backgroundColor: 'rgba(190, 185, 218, 0.70)'
+          },
           {
             label: 'Native Hawaiian',
             data: nativeHawaiian,
-            backgroundColor: '#D9534F'
+            backgroundColor: 'rgba(251, 128, 114, 0.70)'
           },
           {
             label: 'Non Resident Alien',
             data: nonResidentAlien,
-            backgroundColor: '#EFAD4E'
+            backgroundColor: 'rgba(129, 177, 211, 0.70)'
           },
-          { label: 'Unknown', data: unknown, backgroundColor: '#8C5EDD' },
-          { label: 'white', data: white, backgroundColor: '#C87000' }
+          {
+            label: 'Unknown',
+            data: unknown,
+            backgroundColor: 'rgba(253, 180, 98, 0.70)'
+          },
+          {
+            label: 'white',
+            data: white,
+            backgroundColor: 'rgba(166, 164, 163, 1.00)'
+          }
         ]
       };
 
