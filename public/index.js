@@ -101,7 +101,7 @@ $(function() {
     $('#bar_chart2').empty();
     $('#donut_chart').empty();
 
-    getTuitionOutGraph(filterCriteriaByUniv);
+      getTuitionOutGraph(filterCriteriaByUniv);
     getTuitionInGraph(filterCriteriaByUniv);
 
     getSATMidpointResults(filterCriteriaByUniv);
@@ -114,7 +114,10 @@ $(function() {
     getExpenditure(filterCriteriaByUniv);
   });
 
-  drawGraphForSATAVG();
+
+
+
+    drawGraphForSATAVG();
   getSATMidpointResults(filterCriteriaByUniv);
   getGradDebtProjection(filterCriteriaByUniv);
   getEarningResults(filterCriteriaByUniv);
@@ -124,11 +127,9 @@ $(function() {
   getRetentionGraph(filterCriteriaByUniv);
   getLoanGraph(filterCriteriaByUniv);
   getGender(filterCriteriaByUniv);
-  getExpenditure(filterCriteriaByUniv);
+    getExpenditure(filterCriteriaByUniv);
 
-  /* new Chart(
-
-  /* new Chart(
+    /* new Chart(
         document.getElementById('bar_chart1').getContext('2d'),
         getChartJs('bar')
       ); */
@@ -289,7 +290,7 @@ function getTuitionOutGraph(filterValue) {
     dataType: 'json',
 
     success: function(results) {
-      console.log('Tuition Out Graph', JSON.stringify(results));
+      console.log( 'Tuition Out Graph', JSON.stringify(results));
       let tuitionFeeOut;
       results
         .filter(
@@ -305,11 +306,11 @@ function getTuitionOutGraph(filterValue) {
       console.log('Finalval', finalVal);
       console.log('Final Type', typeof finalVal);
       //$('#progress-bar1').prop('aria-valuenow', 40);
-      $('#outState').text('$' + tuitionFeeOut);
+      $('#outState').text('$'+tuitionFeeOut);
       $('#progressbar1')
         .attr('aria-valuenow', finalVal)
-        .css('width', finalVal + '%')
-        .text(Math.round(finalVal * 100) / 100 + 'k'); //%
+        .css('width', finalVal + '%')  
+        .text(Math.round(finalVal * 100) / 100 +'k');//%
     },
     error: function(jqXHR, textStatus, errorThrown) {
       alert('error ' + textStatus + ' ' + errorThrown);
@@ -339,11 +340,11 @@ function getTuitionInGraph(filterValue) {
       console.log('Finalval', finalVal);
       console.log('Final Type', typeof finalVal);
       //$('#progress-bar1').prop('aria-valuenow', 40);
-      $('#inState').text('$' + tuitionFeeIn);
+      $('#inState').text('$'+tuitionFeeIn);
       $('#progressbar2')
         .attr('aria-valuenow', finalVal)
-        .css('width', finalVal + '%')
-        .text(Math.round(finalVal * 100) / 100 + 'k'); //%
+        .css('width', finalVal + '%')  
+        .text(Math.round(finalVal * 100) / 100 +'k');//%
     },
     error: function(jqXHR, textStatus, errorThrown) {
       alert('error ' + textStatus + ' ' + errorThrown);
@@ -866,11 +867,11 @@ function getRetentionGraph(filterValue) {
       console.log('Retention rate value', ret_value);
       //document.getElementById('ret').innerHTML = ret_value;
 
-      $('#ret').text(Math.round(ret_value * 100) / 100 + '%');
+      $('#ret').text(Math.round(ret_value * 100) / 100+'%');
       $('#progressbar3')
         .attr('aria-valuenow', ret_value)
-        .css('width', ret_value + '%')
-        .text(Math.round(ret_value * 100) / 100 + '%'); //%
+        .css('width', ret_value + '%')  
+        .text(Math.round(ret_value * 100) / 100 +'%');//%
     },
     error: function(jqXHR, textStatus, errorThrown) {
       alert('error ' + textStatus + ' ' + errorThrown);
@@ -892,11 +893,11 @@ function getLoanGraph(filterValue) {
       console.log('Loan value', loan_value);
       //document.getElementById('ret').innerHTML = ret_value;
 
-      $('#loan').text(Math.round(loan_value * 100) / 100 + '%');
+      $('#loan').text(Math.round(loan_value * 100) / 100+'%');
       $('#progressbar4')
         .attr('aria-valuenow', loan_value)
-        .css('width', loan_value + '%')
-        .text(Math.round(loan_value * 100) / 100 + '%'); //%
+        .css('width', loan_value + '%')  
+        .text(Math.round(loan_value * 100) / 100 +'%');//%
     },
     error: function(jqXHR, textStatus, errorThrown) {
       alert('error ' + textStatus + ' ' + errorThrown);
@@ -904,112 +905,116 @@ function getLoanGraph(filterValue) {
   });
 }
 function getGender(filterValue) {
-  // get the rangeResults
-  $.ajax({
-    url: 'index/gender',
-    dataType: 'json',
+    // get the rangeResults
+    $.ajax({
+        url: 'index/gender',
+        dataType: 'json',
 
-    success: function(results) {
-      let datas = [];
-      results
-        .filter(
-          result => result['INSTNM'].toLowerCase() === filterValue.toLowerCase()
-        )
-        .forEach(result => {
-          let tempObj = {};
-          tempObj['men'] = (parseFloat(result['UGDS_MEN']) * 100).toFixed(1);
-          tempObj['women'] = (parseFloat(result['UGDS_WOMEN']) * 100).toFixed(
-            1
-          );
-          datas.push(tempObj);
-        });
-      var json_datas = JSON.stringify(datas);
-      //console.log('Processed received Gender data', json_datas);
-      new Chart(document.getElementById('donut_chart'), {
-        type: 'doughnut',
-        data: {
-          labels: ['Men', 'Women'],
-          datasets: [
-            {
-              label: 'Gender Distribution',
-              backgroundColor: ['#3e95cd', '#8e5ea2'],
-              data: [datas[0]['men'], datas[0]['women']]
-            }
-          ]
+        success: function(results) {
+            let datas = [];
+            results
+                .filter(
+                    result => result['INSTNM'].toLowerCase() === filterValue.toLowerCase()
+                )
+                .forEach(result => {
+                    let tempObj = {};
+                    tempObj['men'] = (parseFloat(result['UGDS_MEN']) * 100).toFixed(1);
+                    tempObj['women'] = (parseFloat(result['UGDS_WOMEN']) * 100).toFixed(1);
+                    datas.push(tempObj);
+                });
+            var json_datas = JSON.stringify(datas);
+            //console.log('Processed received Gender data', json_datas);
+            new Chart(document.getElementById("donut_chart"), {
+                type: 'doughnut',
+                data: {
+                    labels: ["Men","Women"],
+                    datasets: [
+                        {
+                            label: "Gender Distribution",
+                            backgroundColor: ["#3e95cd", "#8e5ea2"],
+                            data: [datas[0]['men'],datas[0]['women']]
+                        }
+                    ]
+                }
+            });
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert('error ' + textStatus + ' ' + errorThrown);
         }
-      });
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-      alert('error ' + textStatus + ' ' + errorThrown);
-    }
-  });
+    });
 }
 
 function getExpenditure(filterValue) {
-  $.ajax({
-    url: 'index/expenditure',
-    dataType: 'json',
+    $.ajax({
+        url: 'index/expenditure',
+        dataType: 'json',
 
-    success: function(results) {
-      let datas = [];
-      let labels = [];
-      let in_exp = [];
-      //
-      results
-        .filter(
-          result => result['INSTNM'].toLowerCase() === filterValue.toLowerCase()
-        )
-        .forEach(result => {
-          labels.push(parseFloat(result['YEAR']));
-          in_exp.push(parseFloat(result['IN_EXPENDITURE']));
-        });
+        success: function(results) {
+            let datas = [];
+            let labels = [];
+            let in_exp = [];
+            //
+            results
+                .filter(
+                    result => result['INSTNM'].toLowerCase() === filterValue.toLowerCase()
+                )
+                .forEach(result => {
+                    labels.push(parseFloat(result['YEAR']));
+                    in_exp.push(parseFloat(result['IN_EXPENDITURE']));
+                });
 
-      let data = {
-        labels: ['2017', '2016', '2015', '2014', '2013'],
-        datasets: [
-          {
-            label: 'Expenditure',
-            data: in_exp,
-            backgroundColor: '#8de7a1'
-          }
-        ]
-      };
+            let data = {
+                labels: [
+                    '2017',
+                    '2016',
+                    '2015',
+                    '2014',
+                    '2013'
+                ],
+                datasets: [
+                    {
+                        label: 'Expenditure',
+                        data: in_exp,
+                        backgroundColor: '#8de7a1'
+                    }
+                ]
+            };
 
-      let config = {
-        type: 'horizontalBar',
-        data: data,
-        options: {
-          responsive: true,
-          legend: false,
-          scales: {
-            xAxes: [
-              {
-                scaleLabel: {
-                  display: true,
-                  labelString: 'EXPENDITURE ($US)',
-                  fontSize: 14
+            let config = {
+                type: 'horizontalBar',
+                data: data,
+                options: {
+                    responsive: true,
+                    legend: false,
+                    scales: {
+                        xAxes: [
+                            {
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'EXPENDITURE ($US)',
+                                    fontSize: 14
+                                }
+                            }
+                        ],
+                        yAxes: [
+                            {
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'YEAR',
+                                    fontSize: 14
+                                }
+                            }
+                        ]
+                    }
                 }
-              }
-            ],
-            yAxes: [
-              {
-                scaleLabel: {
-                  display: true,
-                  labelString: 'YEAR',
-                  fontSize: 14
-                }
-              }
-            ]
-          }
+            };
+            new Chart(
+                document.getElementById('line_chart4').getContext('2d'),
+                config
+            );
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert('error ' + textStatus + ' ' + errorThrown);
         }
-      };
-      new Chart(
-        document.getElementById('line_chart4').getContext('2d'),
-        config
-      );
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-      alert('error ' + textStatus + ' ' + errorThrown);
-    }
-  });
+    });
 }
