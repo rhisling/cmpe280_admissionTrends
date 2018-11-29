@@ -195,6 +195,20 @@ module.exports.getGPA = (req, res) => {
   });
 };
 
+
+module.exports.getGender = (req, res) => {
+    var genderResults = [];
+    var obj = JSON.parse('{ "YEAR":"2017"}');
+    Ustats.find(obj, {
+        INSTNM: 1,
+        UGDS_MEN: 1,
+        UGDS_WOMEN: 1
+    }).exec(function(err, results) {
+        genderResults = results;
+        console.log('genderResults', genderResults);
+        res.send(JSON.stringify(genderResults));
+    });
+};
 /**
  * For rendering page
  */

@@ -28,6 +28,7 @@ router.get('/index/retentionrate', dashboardController.getRetentionRate);
 
 router.get('/index/loan', dashboardController.getLoan);
 
+router.get('/index/gender', dashboardController.getGender);
 
 /**
  * recently added routes
