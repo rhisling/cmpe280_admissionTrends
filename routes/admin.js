@@ -1,6 +1,7 @@
 const express = require('express');
 
 const adminController = require('../controller/admin');
+const mainController = require('../controller/main');
 const router = express.Router();
 
 router.get('/admin', adminController.showAdminPage);
@@ -15,6 +16,6 @@ router.get('/admin/find-entry-univ/', adminController.findEntry); // Show - read
 //router.post('/admin/find-entry/', adminController.findEntry); // Show - read a user - GET
 router.post('/admin/delete-entry/', adminController.deleteEntry); //Delete a user - DELETE / POST
 router.post('/admin/update-entry/', adminController.updateEntry); // Update a user - PUT / POST
-
+router.get('/admin/logout', mainController.logout);
 //router.post('/login', AuthController.login_user);
 module.exports = router;
