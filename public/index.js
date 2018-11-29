@@ -931,7 +931,7 @@ function getGender(filterValue) {
                     datasets: [
                         {
                             label: "Gender Distribution",
-                            backgroundColor: ["#3e95cd", "#8e5ea2"],
+                            backgroundColor: ["#3e95cd", "#ffdb58"],
                             data: [datas[0]['men'],datas[0]['women']]
                         }
                     ]
