@@ -98,7 +98,9 @@ $(function() {
     $('#line_chart3').empty();
     $('#bar_chart1').empty();
     $('#bar_chart2').empty();
-    getTuitionOutGraph(filterCriteriaByUniv);
+    $('#donut_chart').empty();
+
+      getTuitionOutGraph(filterCriteriaByUniv);
     getTuitionInGraph(filterCriteriaByUniv);
 
     getSATMidpointResults(filterCriteriaByUniv);
@@ -107,8 +109,11 @@ $(function() {
     getDiversityResults(filterCriteriaByUniv);
     getRetentionGraph(filterCriteriaByUniv)  });
     getLoanGraph(filterCriteriaByUniv);
+    getGender(filterCriteriaByUniv);
 
-  drawGraphForSATAVG();
+
+
+    drawGraphForSATAVG();
   getSATMidpointResults(filterCriteriaByUniv);
   getGradDebtProjection(filterCriteriaByUniv);
   getEarningResults(filterCriteriaByUniv);
@@ -117,11 +122,13 @@ $(function() {
   getTuitionInGraph(filterCriteriaByUniv);
   getRetentionGraph(filterCriteriaByUniv);
   getLoanGraph(filterCriteriaByUniv);
+  getGender(filterCriteriaByUniv);
 
-  /* new Chart(
-      document.getElementById('bar_chart1').getContext('2d'),
-      getChartJs('bar')
-    ); */
+
+    /* new Chart(
+        document.getElementById('bar_chart1').getContext('2d'),
+        getChartJs('bar')
+      ); */
 });
 
 function drawGraphForSATAVG() {
@@ -892,4 +899,49 @@ function getLoanGraph(filterValue) {
       alert('error ' + textStatus + ' ' + errorThrown);
     }
   });
+}
+function getGender(filterValue) {
+    // get the rangeResults
+    $.ajax({
+        url: 'index/gender',
+        dataType: 'json',
+
+        success: function(results) {
+            let datas = [];
+            results
+                .filter(
+                    result => result['INSTNM'].toLowerCase() === filterValue.toLowerCase()
+                )
+                .forEach(result => {
+                    let tempObj = {};
+                    tempObj['men'] = (parseFloat(result['UGDS_MEN']) * 100).toFixed(1);
+                    tempObj['women'] = (parseFloat(result['UGDS_WOMEN']) * 100).toFixed(1);
+                    datas.push(tempObj);
+                });
+            var json_datas = JSON.stringify(datas);
+            //console.log('Processed received Gender data', json_datas);
+            new Chart(document.getElementById("donut_chart"), {
+                type: 'doughnut',
+                data: {
+                    labels: ["Men","Women"],
+                    datasets: [
+                        {
+                            label: "Gender Distribution",
+                            backgroundColor: ["#3e95cd", "#8e5ea2"],
+                            data: [datas[0]['men'],datas[0]['women']]
+                        }
+                    ]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: 'Gender Distribution'
+                    }
+                }
+            });
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert('error ' + textStatus + ' ' + errorThrown);
+        }
+    });
 }
