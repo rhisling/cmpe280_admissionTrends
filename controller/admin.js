@@ -53,9 +53,10 @@ module.exports.addEntry = (req, res) => {
 module.exports.findEntry = (req, res) => {
   const user = req.session.user || req.user;
   const photo = req.user.photo || false;
+  //console.log("univ is",req);
   Ustats.find(req.query)
     .then(results => {
-      console.log('Results: ' + results);
+      //console.log('Results: ' + results);
       console.log('Going to render1');
       res.render('showAllData', {
         isAuthenticated: req.user.name === 'admin',
