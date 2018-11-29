@@ -41,8 +41,19 @@ module.exports.getTuitionOut = (req, res) => {
     err,
     results
   ) {
-    tuitionOutResults = results;
-    res.send(JSON.stringify(tuitionOutResults));
+    tuitionResults = results;
+    res.send(JSON.stringify(tuitionResults));
+    //console.log("tuitionResults in ",JSON.stringify(tuitionResults));
+  });
+};
+module.exports.getTuitionIn = (req, res) => {
+  var tuitionResults = [];
+  Ustats.find({}, { INSTNM: 1, TUITIONFEE_IN: 1, YEAR: 1 }).exec(function(
+    err,
+    results
+  ) {
+    tuitionResults = results;
+    res.send(JSON.stringify(tuitionResults));
     //console.log("tuitionResults in ",JSON.stringify(tuitionResults));
   });
 };

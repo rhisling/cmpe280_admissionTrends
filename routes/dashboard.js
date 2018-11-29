@@ -21,12 +21,19 @@ router.get('/index/grad', dashboardController.getgradResults);
 router.get('/index/diversity', dashboardController.getdiversityResults);
 
 router.get('/index/tuition-out', dashboardController.getTuitionOut);
+
+router.get('/index/tuition-in', dashboardController.getTuitionIn);
+
+router.get('/index/retentionrate', dashboardController.getRetentionRate);
+
+
 /**
  * recently added routes
  */
 router.get('/recentdash/admitrate', dashboardController.getAdmitrate);
-router.get('/recentdash/retentionrate', dashboardController.getRetentionRate);
 router.get('/recentdash/gpa', dashboardController.getGPA);
+router.get('/recentdash/retentionrate', dashboardController.getRetentionRate);
+
 
 /**
  * For page

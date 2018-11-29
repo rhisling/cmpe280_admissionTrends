@@ -99,13 +99,13 @@ $(function() {
     $('#bar_chart1').empty();
     $('#bar_chart2').empty();
     getTuitionOutGraph(filterCriteriaByUniv);
+    getTuitionInGraph(filterCriteriaByUniv);
 
     getSATMidpointResults(filterCriteriaByUniv);
     getGradDebtProjection(filterCriteriaByUniv);
     getEarningResults(filterCriteriaByUniv);
     getDiversityResults(filterCriteriaByUniv);
-    getRetention(filterCriteriaByUniv);
-  });
+    getRetentionGraph(filterCriteriaByUniv)  });
 
   drawGraphForSATAVG();
   getSATMidpointResults(filterCriteriaByUniv);
@@ -113,8 +113,8 @@ $(function() {
   getEarningResults(filterCriteriaByUniv);
   getDiversityResults(filterCriteriaByUniv);
   getTuitionOutGraph(filterCriteriaByUniv);
-  getRetention(filterCriteriaByUniv);
-
+  getTuitionInGraph(filterCriteriaByUniv);
+  getRetentionGraph(filterCriteriaByUniv);
   /* new Chart(
       document.getElementById('bar_chart1').getContext('2d'),
       getChartJs('bar')
@@ -276,7 +276,7 @@ function getTuitionOutGraph(filterValue) {
     dataType: 'json',
 
     success: function(results) {
-      console.log('In Tuition Out Graph', JSON.stringify(results));
+      console.log( 'Tuition Out Graph', JSON.stringify(results));
       let tuitionFeeOut;
       results
         .filter(
@@ -292,17 +292,51 @@ function getTuitionOutGraph(filterValue) {
       console.log('Finalval', finalVal);
       console.log('Final Type', typeof finalVal);
       //$('#progress-bar1').prop('aria-valuenow', 40);
+      $('#outState').text('$'+tuitionFeeOut);
       $('#progressbar1')
         .attr('aria-valuenow', finalVal)
-        .css('width', finalVal + '%')
-        .text(finalVal + '%');
+        .css('width', finalVal + '%')  
+        .text(Math.round(finalVal * 100) / 100 +'k');//%
     },
     error: function(jqXHR, textStatus, errorThrown) {
       alert('error ' + textStatus + ' ' + errorThrown);
     }
   });
 }
+function getTuitionInGraph(filterValue) {
+  // get the earningsResults
+  $.ajax({
+    url: 'index/tuition-in',
+    dataType: 'json',
 
+    success: function(results) {
+      console.log('In State Tuition Graph', JSON.stringify(results));
+      let tuitionFeeIn;
+      results
+        .filter(
+          result => result['INSTNM'].toLowerCase() === filterValue.toLowerCase()
+        )
+        .filter(result => result['YEAR'] === '2017')
+        .forEach(result => {
+          tuitionFeeIn = result['TUITIONFEE_IN'];
+        });
+      console.log('Processed earning results:', JSON.stringify(tuitionFeeIn));
+      let finalVal = (parseFloat(tuitionFeeIn) / 100000) * 100;
+
+      console.log('Finalval', finalVal);
+      console.log('Final Type', typeof finalVal);
+      //$('#progress-bar1').prop('aria-valuenow', 40);
+      $('#inState').text('$'+tuitionFeeIn);
+      $('#progressbar2')
+        .attr('aria-valuenow', finalVal)
+        .css('width', finalVal + '%')  
+        .text(Math.round(finalVal * 100) / 100 +'k');//%
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      alert('error ' + textStatus + ' ' + errorThrown);
+    }
+  });
+}
 function getSATMidpointResults(filterValue) {
   // get the rangeResults
   $.ajax({
@@ -805,10 +839,10 @@ function getChartJs(type) {
   return config;
 }
 
-function getRetention(filterValue) {
+function getRetentionGraph(filterValue) {
   // get the rangeResults
   $.ajax({
-    url: 'recentdash/retentionrate',
+    url: 'index/retentionrate',
     dataType: 'json',
 
     success: function(results) {
@@ -816,8 +850,14 @@ function getRetention(filterValue) {
         result => result['INSTNM'].toLowerCase() === filterValue.toLowerCase()
       );
       var ret_value = retention[0]['RET_FT4'] * 100;
-      console.log('Ret value', ret_value);
-      document.getElementById('ret').innerHTML = ret_value;
+      console.log('Retention rate value', ret_value);
+      //document.getElementById('ret').innerHTML = ret_value;
+
+      $('#ret').text(ret_value+'%');
+      $('#progressbar3')
+        .attr('aria-valuenow', ret_value)
+        .css('width', ret_value + '%')  
+        .text(Math.round(ret_value * 100) / 100 +'%');//%
     },
     error: function(jqXHR, textStatus, errorThrown) {
       alert('error ' + textStatus + ' ' + errorThrown);
