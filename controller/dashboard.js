@@ -169,6 +169,19 @@ module.exports.getRetentionRate = (req, res) => {
   });
 };
 
+module.exports.getLoan = (req, res) => {
+  var loanResults = [];
+  var obj = JSON.parse('{ "YEAR":"2017"}');
+  Ustats.find(obj, {
+    INSTNM: 1,
+    PCTFLOAN: 1
+  }).exec(function(err, results) {
+    loanResults = results;
+    console.log('loanResults', loanResults);
+    res.send(JSON.stringify(loanResults));
+  });
+};
+
 module.exports.getGPA = (req, res) => {
   var gpaResults = [];
   var obj = JSON.parse('{ "YEAR":"2017"}');

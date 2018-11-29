@@ -106,6 +106,7 @@ $(function() {
     getEarningResults(filterCriteriaByUniv);
     getDiversityResults(filterCriteriaByUniv);
     getRetentionGraph(filterCriteriaByUniv)  });
+    getLoanGraph(filterCriteriaByUniv);
 
   drawGraphForSATAVG();
   getSATMidpointResults(filterCriteriaByUniv);
@@ -115,6 +116,8 @@ $(function() {
   getTuitionOutGraph(filterCriteriaByUniv);
   getTuitionInGraph(filterCriteriaByUniv);
   getRetentionGraph(filterCriteriaByUniv);
+  getLoanGraph(filterCriteriaByUniv);
+
   /* new Chart(
       document.getElementById('bar_chart1').getContext('2d'),
       getChartJs('bar')
@@ -858,6 +861,32 @@ function getRetentionGraph(filterValue) {
         .attr('aria-valuenow', ret_value)
         .css('width', ret_value + '%')  
         .text(Math.round(ret_value * 100) / 100 +'%');//%
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      alert('error ' + textStatus + ' ' + errorThrown);
+    }
+  });
+}
+
+function getLoanGraph(filterValue) {
+  // get the rangeResults
+  $.ajax({
+    url: 'index/loan',
+    dataType: 'json',
+
+    success: function(results) {
+      let loan = results.filter(
+        result => result['INSTNM'].toLowerCase() === filterValue.toLowerCase()
+      );
+      var loan_value = loan[0]['PCTFLOAN'] * 100;
+      console.log('Retention rate value', loan_value);
+      //document.getElementById('ret').innerHTML = ret_value;
+
+      $('#loan').text(loan_value+'%');
+      $('#progressbar4')
+        .attr('aria-valuenow', loan_value)
+        .css('width', loan_value + '%')  
+        .text(Math.round(loan_value * 100) / 100 +'%');//%
     },
     error: function(jqXHR, textStatus, errorThrown) {
       alert('error ' + textStatus + ' ' + errorThrown);

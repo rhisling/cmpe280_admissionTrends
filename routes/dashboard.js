@@ -26,6 +26,8 @@ router.get('/index/tuition-in', dashboardController.getTuitionIn);
 
 router.get('/index/retentionrate', dashboardController.getRetentionRate);
 
+router.get('/index/loan', dashboardController.getLoan);
+
 
 /**
  * recently added routes
