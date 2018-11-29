@@ -211,10 +211,10 @@ module.exports.getGender = (req, res) => {
 /**
  * For rendering page
  */
-module.exports.getNewDashboard = (req, res) => {
+module.exports.getUnivOverview = (req, res) => {
   const user = req.session.user || req.user;
   const photo = req.user.photo || false;
-  res.render('new-dashboard', {
+  res.render('dashboard', {
     isAuthenticated: req.user.name == 'admin',
     user: capitalize(user.name).split(' ')[0],
     message: false,

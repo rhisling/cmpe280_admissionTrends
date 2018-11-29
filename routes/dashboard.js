@@ -41,6 +41,6 @@ router.get('/recentdash/retentionrate', dashboardController.getRetentionRate);
 /**
  * For page
  */
-router.get('/new-dashboard', dashboardController.getNewDashboard);
+router.get('/univ-overview', dashboardController.getUnivOverview);
 
 module.exports = router;
