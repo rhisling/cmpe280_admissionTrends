@@ -991,7 +991,7 @@ function getExpenditure(filterValue) {
                             {
                                 scaleLabel: {
                                     display: true,
-                                    labelString: 'EXPENDITURE',
+                                    labelString: 'EXPENDITURE ($US)',
                                     fontSize: 14
                                 }
                             }
