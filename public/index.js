@@ -107,9 +107,11 @@ $(function() {
     getGradDebtProjection(filterCriteriaByUniv);
     getEarningResults(filterCriteriaByUniv);
     getDiversityResults(filterCriteriaByUniv);
-    getRetentionGraph(filterCriteriaByUniv)  });
+    getRetentionGraph(filterCriteriaByUniv)  
     getLoanGraph(filterCriteriaByUniv);
     getGender(filterCriteriaByUniv);
+  });
+
 
 
 
@@ -863,7 +865,7 @@ function getRetentionGraph(filterValue) {
       console.log('Retention rate value', ret_value);
       //document.getElementById('ret').innerHTML = ret_value;
 
-      $('#ret').text(ret_value+'%');
+      $('#ret').text(Math.round(ret_value * 100) / 100+'%');
       $('#progressbar3')
         .attr('aria-valuenow', ret_value)
         .css('width', ret_value + '%')  
@@ -886,10 +888,10 @@ function getLoanGraph(filterValue) {
         result => result['INSTNM'].toLowerCase() === filterValue.toLowerCase()
       );
       var loan_value = loan[0]['PCTFLOAN'] * 100;
-      console.log('Retention rate value', loan_value);
+      console.log('Loan value', loan_value);
       //document.getElementById('ret').innerHTML = ret_value;
 
-      $('#loan').text(loan_value+'%');
+      $('#loan').text(Math.round(loan_value * 100) / 100+'%');
       $('#progressbar4')
         .attr('aria-valuenow', loan_value)
         .css('width', loan_value + '%')  
@@ -931,12 +933,6 @@ function getGender(filterValue) {
                             data: [datas[0]['men'],datas[0]['women']]
                         }
                     ]
-                },
-                options: {
-                    title: {
-                        display: true,
-                        text: 'Gender Distribution'
-                    }
                 }
             });
         },
