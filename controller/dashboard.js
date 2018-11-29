@@ -3,7 +3,7 @@ var alldata = [0, 0, 0, 0, 0];
 module.exports.showDashboard = (req, res) => {
   const user = req.session.user || req.user;
   const photo = req.user.photo || false;
-  res.render('dashboard', {
+  res.render('new-dashboard', {
     isAuthenticated: req.user.name == 'admin',
     user: capitalize(user.name).split(' ')[0],
     message: false,
@@ -195,19 +195,18 @@ module.exports.getGPA = (req, res) => {
   });
 };
 
-
 module.exports.getGender = (req, res) => {
-    var genderResults = [];
-    var obj = JSON.parse('{ "YEAR":"2017"}');
-    Ustats.find(obj, {
-        INSTNM: 1,
-        UGDS_MEN: 1,
-        UGDS_WOMEN: 1
-    }).exec(function(err, results) {
-        genderResults = results;
-        console.log('genderResults', genderResults);
-        res.send(JSON.stringify(genderResults));
-    });
+  var genderResults = [];
+  var obj = JSON.parse('{ "YEAR":"2017"}');
+  Ustats.find(obj, {
+    INSTNM: 1,
+    UGDS_MEN: 1,
+    UGDS_WOMEN: 1
+  }).exec(function(err, results) {
+    genderResults = results;
+    console.log('genderResults', genderResults);
+    res.send(JSON.stringify(genderResults));
+  });
 };
 /**
  * For rendering page

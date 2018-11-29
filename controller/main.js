@@ -7,7 +7,7 @@ const root = (req, res) => {
   if (req.session.user || req.user) {
     const user = req.session.user || req.user;
     const photo = req.user.photo || false;
-    res.render('dashboard', {
+    res.render('new-dashboard', {
       isAuthenticated: user.name == 'admin',
       user: capitalize(user.name).split(' ')[0],
       message: false,
