@@ -96,6 +96,7 @@ $(function() {
     $('#line_chart1').empty();
     $('#line_chart2').empty();
     $('#line_chart3').empty();
+    $('#line_chart4').empty();
     $('#bar_chart1').empty();
     $('#bar_chart2').empty();
     $('#donut_chart').empty();
@@ -107,9 +108,10 @@ $(function() {
     getGradDebtProjection(filterCriteriaByUniv);
     getEarningResults(filterCriteriaByUniv);
     getDiversityResults(filterCriteriaByUniv);
-    getRetentionGraph(filterCriteriaByUniv)  
+    getRetentionGraph(filterCriteriaByUniv);
     getLoanGraph(filterCriteriaByUniv);
     getGender(filterCriteriaByUniv);
+    getExpenditure(filterCriteriaByUniv);
   });
 
 
@@ -125,7 +127,7 @@ $(function() {
   getRetentionGraph(filterCriteriaByUniv);
   getLoanGraph(filterCriteriaByUniv);
   getGender(filterCriteriaByUniv);
-
+    getExpenditure(filterCriteriaByUniv);
 
     /* new Chart(
         document.getElementById('bar_chart1').getContext('2d'),
@@ -935,6 +937,81 @@ function getGender(filterValue) {
                     ]
                 }
             });
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert('error ' + textStatus + ' ' + errorThrown);
+        }
+    });
+}
+
+function getExpenditure(filterValue) {
+    $.ajax({
+        url: 'index/expenditure',
+        dataType: 'json',
+
+        success: function(results) {
+            let datas = [];
+            let labels = [];
+            let in_exp = [];
+            //
+            results
+                .filter(
+                    result => result['INSTNM'].toLowerCase() === filterValue.toLowerCase()
+                )
+                .forEach(result => {
+                    labels.push(parseFloat(result['YEAR']));
+                    in_exp.push(parseFloat(result['IN_EXPENDITURE']));
+                });
+
+            let data = {
+                labels: [
+                    '2017',
+                    '2016',
+                    '2015',
+                    '2014',
+                    '2013'
+                ],
+                datasets: [
+                    {
+                        label: 'Expenditure',
+                        data: in_exp,
+                        backgroundColor: '#8de7a1'
+                    }
+                ]
+            };
+
+            let config = {
+                type: 'horizontalBar',
+                data: data,
+                options: {
+                    responsive: true,
+                    legend: false,
+                    scales: {
+                        xAxes: [
+                            {
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'EXPENDITURE',
+                                    fontSize: 14
+                                }
+                            }
+                        ],
+                        yAxes: [
+                            {
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'YEAR',
+                                    fontSize: 14
+                                }
+                            }
+                        ]
+                    }
+                }
+            };
+            new Chart(
+                document.getElementById('line_chart4').getContext('2d'),
+                config
+            );
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert('error ' + textStatus + ' ' + errorThrown);

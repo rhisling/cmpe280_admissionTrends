@@ -30,6 +30,8 @@ router.get('/index/loan', dashboardController.getLoan);
 
 router.get('/index/gender', dashboardController.getGender);
 
+router.get('/index/expenditure', dashboardController.getExpenditure);
+
 /**
  * recently added routes
  */

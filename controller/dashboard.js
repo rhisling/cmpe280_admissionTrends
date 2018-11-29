@@ -208,6 +208,19 @@ module.exports.getGender = (req, res) => {
     res.send(JSON.stringify(genderResults));
   });
 };
+module.exports.getExpenditure = (req, res) => {
+    var expResults = [];
+    Ustats.find({}, { INSTNM: 1, IN_EXPENDITURE: 1, YEAR: 1 }).exec(function(
+        err,
+        results
+    ) {
+        expResults = results;
+        res.send(JSON.stringify(expResults));
+        alldata[3] = expResults;
+        //console.log("in controller exp", expResults);
+    });
+};
+
 /**
  * For rendering page
  */
