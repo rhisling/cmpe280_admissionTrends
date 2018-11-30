@@ -213,6 +213,12 @@ function getAdmitRate() {
       let labels = [];
       let admitRates = [];
 
+      // for chronological ordering
+      results.sort((a, b) =>
+        a['ADM_RATE'] > b['ADM_RATE'] ? -1 : b['year'] > a['year'] ? 1 : 0
+      );
+
+      console.log('Results after sorting:' + JSON.stringify(results));
       results.forEach(result => {
         labels.push(result['INSTNM']);
         admitRates.push(result['ADM_RATE']);
@@ -286,6 +292,11 @@ function getRetentionRate() {
 
     success: function(results) {
       console.log('In RetentionRate:', JSON.stringify(results));
+
+      results.sort((a, b) =>
+        a['RET_FT4'] > b['RET_FT4'] ? -1 : b['RET_FT4'] > a['RET_FT4'] ? 1 : 0
+      );
+
       let retentionRates = [];
       results.forEach(result => {
         retentionRates.push(result['RET_FT4']);
@@ -362,6 +373,10 @@ function getGPAScore() {
 
     success: function(results) {
       console.log('In GPA Score:', JSON.stringify(results));
+
+      results.sort((a, b) =>
+        a['GPA_Val'] > b['GPA_Val'] ? -1 : b['GPA_Val'] > a['GPA_Val'] ? 1 : 0
+      );
       let gpaScores = [];
       results.forEach(result => {
         gpaScores.push(result['GPA_Val']);
