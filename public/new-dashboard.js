@@ -248,6 +248,7 @@ function getAdmitRate() {
           scales: {
             xAxes: [
               {
+                ticks: { beginAtZero: true },
                 scaleLabel: {
                   display: true,
                   labelString: 'ADMIT RATE',
@@ -257,9 +258,6 @@ function getAdmitRate() {
             ],
             yAxes: [
               {
-                ticks: {
-                  beginAtZero: true
-                },
                 scaleLabel: {
                   display: true,
                   labelString: 'UNIVERSITY',
@@ -399,6 +397,9 @@ function getGPAScore() {
           scales: {
             xAxes: [
               {
+                ticks: {
+                  beginAtZero: true
+                },
                 scaleLabel: {
                   display: true,
                   labelString: 'GPA SCORE',
@@ -408,9 +409,6 @@ function getGPAScore() {
             ],
             yAxes: [
               {
-                ticks: {
-                  beginAtZero: true
-                },
                 scaleLabel: {
                   display: true,
                   labelString: 'UNIVERSITY',
