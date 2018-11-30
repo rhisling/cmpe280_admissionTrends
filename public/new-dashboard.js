@@ -178,6 +178,9 @@ function drawGraphForSATAVG() {
             ],
             yAxes: [
               {
+                ticks: {
+                  beginAtZero: true
+                },
                 scaleLabel: {
                   display: true,
                   labelString: 'AVG SAT',
@@ -254,6 +257,9 @@ function getAdmitRate() {
             ],
             yAxes: [
               {
+                ticks: {
+                  beginAtZero: true
+                },
                 scaleLabel: {
                   display: true,
                   labelString: 'UNIVERSITY',
@@ -326,6 +332,9 @@ function getRetentionRate() {
             ],
             yAxes: [
               {
+                ticks: {
+                  beginAtZero: true
+                },
                 scaleLabel: {
                   display: true,
                   labelString: 'RETENTION',
@@ -399,6 +408,9 @@ function getGPAScore() {
             ],
             yAxes: [
               {
+                ticks: {
+                  beginAtZero: true
+                },
                 scaleLabel: {
                   display: true,
                   labelString: 'UNIVERSITY',
