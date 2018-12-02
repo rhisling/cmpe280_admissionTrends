@@ -215,7 +215,11 @@ function getAdmitRate() {
 
       // for chronological ordering
       results.sort((a, b) =>
-        a['ADM_RATE'] > b['ADM_RATE'] ? -1 : b['year'] > a['year'] ? 1 : 0
+        a['ADM_RATE'] > b['ADM_RATE']
+          ? -1
+          : b['ADM_RATE'] > a['ADM_RATE']
+          ? 1
+          : 0
       );
 
       console.log('Results after sorting:' + JSON.stringify(results));
@@ -225,23 +229,37 @@ function getAdmitRate() {
       });
 
       let data = {
-        labels: [
-          'UCB',
-          'UCD',
-          'UCI',
-          'UCLA',
-          'UCR',
-          'UCSD',
-          'UCSB',
-          'UCSC',
-          'UCM'
-        ],
+        labels: ['2017'],
         datasets: [
+          { label: 'UCB', data: [admitRates[0]], backgroundColor: ['#e16d8c'] },
+          { label: 'UCD', data: [admitRates[1]], backgroundColor: ['#e4778d'] },
+          { label: 'UCI', data: [admitRates[2]], backgroundColor: ['#e7808f'] },
           {
-            label: '2017',
-            data: admitRates,
-            backgroundColor: '#F0AFC3'
-          }
+            label: 'UCLA',
+            data: [admitRates[3]],
+            backgroundColor: ['#e98a90']
+          },
+          {
+            label: 'UCR',
+            data: [admitRates[4]],
+            backgroundColor: ['#ec9291']
+          },
+          {
+            label: 'UCSD',
+            data: [admitRates[5]],
+            backgroundColor: ['#ee9d93']
+          },
+          {
+            label: 'UCSB',
+            data: [admitRates[6]],
+            backgroundColor: ['#f1a594']
+          },
+          {
+            label: 'UCSC',
+            data: [admitRates[7]],
+            backgroundColor: ['#f3ae95']
+          },
+          { label: 'UCM', data: [admitRates[8]], backgroundColor: ['#f5b796'] }
         ]
       };
 
@@ -250,14 +268,20 @@ function getAdmitRate() {
         data: data,
         options: {
           responsive: true,
-          legend: false,
+          legend: {
+            display: true,
+            position: 'bottom',
+            labels: {
+              fontColor: '#000080'
+            }
+          },
           scales: {
             xAxes: [
               {
                 ticks: { beginAtZero: true },
                 scaleLabel: {
                   display: true,
-                  labelString: 'ADMIT RATE',
+                  labelString: 'Admit Rate',
                   fontSize: 14
                 }
               }
@@ -266,7 +290,7 @@ function getAdmitRate() {
               {
                 scaleLabel: {
                   display: true,
-                  labelString: 'UNIVERSITY',
+                  labelString: 'Year',
                   fontSize: 14
                 }
               }
@@ -303,22 +327,52 @@ function getRetentionRate() {
       });
 
       let data = {
-        labels: [
-          'UCB',
-          'UCD',
-          'UCI',
-          'UCLA',
-          'UCR',
-          'UCSD',
-          'UCSB',
-          'UCSC',
-          'UCM'
-        ],
+        labels: ['2017'],
         datasets: [
           {
-            label: '2017',
-            data: retentionRates,
-            backgroundColor: '#80D6E5'
+            label: 'UCB',
+            data: [retentionRates[0]],
+            backgroundColor: ['#e16d8c']
+          },
+          {
+            label: 'UCD',
+            data: [retentionRates[1]],
+            backgroundColor: ['#e4778d']
+          },
+          {
+            label: 'UCI',
+            data: [retentionRates[2]],
+            backgroundColor: ['#e7808f']
+          },
+          {
+            label: 'UCLA',
+            data: [retentionRates[3]],
+            backgroundColor: ['#e98a90']
+          },
+          {
+            label: 'UCR',
+            data: [retentionRates[4]],
+            backgroundColor: ['#ec9291']
+          },
+          {
+            label: 'UCSD',
+            data: [retentionRates[5]],
+            backgroundColor: ['#ee9d93']
+          },
+          {
+            label: 'UCSB',
+            data: [retentionRates[6]],
+            backgroundColor: ['#f1a594']
+          },
+          {
+            label: 'UCSC',
+            data: [retentionRates[7]],
+            backgroundColor: ['#f3ae95']
+          },
+          {
+            label: 'UCM',
+            data: [retentionRates[8]],
+            backgroundColor: ['#f5b796']
           }
         ]
       };
@@ -328,13 +382,19 @@ function getRetentionRate() {
         data: data,
         options: {
           responsive: true,
-          legend: false,
+          legend: {
+            display: true,
+            position: 'bottom',
+            labels: {
+              fontColor: '#000080'
+            }
+          },
           scales: {
             xAxes: [
               {
                 scaleLabel: {
                   display: true,
-                  labelString: 'UNIVERSITY',
+                  labelString: 'Year',
                   fontSize: 14
                 }
               }
@@ -383,23 +443,17 @@ function getGPAScore() {
       });
 
       let data = {
-        labels: [
-          'UCB',
-          'UCD',
-          'UCI',
-          'UCLA',
-          'UCR',
-          'UCSD',
-          'UCSB',
-          'UCSC',
-          'UCM'
-        ],
+        labels: ['2017'],
         datasets: [
-          {
-            label: '2017',
-            data: gpaScores,
-            backgroundColor: '#BAC89A'
-          }
+          { label: 'UCB', data: [gpaScores[0]], backgroundColor: ['#e16d8c'] },
+          { label: 'UCD', data: [gpaScores[1]], backgroundColor: ['#e4778d'] },
+          { label: 'UCI', data: [gpaScores[2]], backgroundColor: ['#e7808f'] },
+          { label: 'UCLA', data: [gpaScores[3]], backgroundColor: ['#e98a90'] },
+          { label: 'UCR', data: [gpaScores[4]], backgroundColor: ['#ec9291'] },
+          { label: 'UCSD', data: [gpaScores[5]], backgroundColor: ['#ee9d93'] },
+          { label: 'UCSB', data: [gpaScores[6]], backgroundColor: ['#f1a594'] },
+          { label: 'UCSC', data: [gpaScores[7]], backgroundColor: ['#f3ae95'] },
+          { label: 'UCM', data: [gpaScores[8]], backgroundColor: ['#f5b796'] }
         ]
       };
 
@@ -408,7 +462,13 @@ function getGPAScore() {
         data: data,
         options: {
           responsive: true,
-          legend: false,
+          legend: {
+            display: true,
+            position: 'bottom',
+            labels: {
+              fontColor: '#000080'
+            }
+          },
           scales: {
             xAxes: [
               {
@@ -426,7 +486,7 @@ function getGPAScore() {
               {
                 scaleLabel: {
                   display: true,
-                  labelString: 'UNIVERSITY',
+                  labelString: 'Year',
                   fontSize: 14
                 }
               }
