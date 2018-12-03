@@ -60,101 +60,74 @@ function drawGraphForSATAVG() {
     url: 'index/sat',
     dataType: 'json',
     success: function(results) {
-      //console.log('results:' + JSON.stringify(results));
+      console.log('Before sorting sat results:' + JSON.stringify(results));
+      results = results
+        .filter(result => result['YEAR'] === '2017')
+        .sort((a, b) => {
+          if (parseInt(a['SAT_AVG']) > parseInt(b['SAT_AVG'])) return -1;
+          else if (parseInt(b['SAT_AVG']) > parseInt(a['SAT_AVG'])) return 1;
+          else return 0;
+        });
+
+      console.log('After sorting sat results:' + JSON.stringify(results));
+
       let datas = [];
+      let labels = [];
       results.forEach(result => {
-        if (
-          datas.length > 0 &&
-          datas.filter(data => data.year === result['YEAR']).length > 0
-        ) {
-          name = result['INSTNM'];
-          datas.forEach((data, index) => {
-            if (data.year === result['YEAR']) {
-              data[name] = parseInt(result['SAT_AVG']);
-            }
-          });
-        } else {
-          name = result['INSTNM'];
-          let tempObj = {};
-          tempObj['year'] = result['YEAR'];
-          tempObj[name] = parseInt(result['SAT_AVG']);
-          datas.push(tempObj);
-        }
+        labels.push(result['INSTNM']);
+        datas.push(result['SAT_AVG']);
       });
-      datas = datas.filter(data => data.year);
       console.log('Processed data range lists:' + JSON.stringify(datas));
       // for chronological ordering
-      datas.sort((a, b) =>
-        a['year'] > b['year'] ? 1 : b['year'] > a['year'] ? -1 : 0
-      );
-      let labels = [];
-      let ucbData = [];
-      let ucdData = [];
-      let uciData = [];
-      let uclaData = [];
-      let ucrData = [];
-      let ucsdData = [];
-      let ucsbData = [];
-      let ucscData = [];
-      let ucmData = [];
-
-      datas.forEach(data => {
-        labels.push(data['year']);
-        ucbData.push(data['University of California-Berkeley']);
-        ucdData.push(data['University of California-Davis']);
-        uciData.push(data['University of California-Irvine']);
-        uclaData.push(data['University of California-Los Angeles']);
-        ucrData.push(data['University of California-Riverside']);
-        ucsdData.push(data['University of California-San Diego']);
-        ucsbData.push(data['University of California-Santa Barbara']);
-        ucscData.push(data['University of California-Santa Cruz']);
-        ucmData.push(data['University of California-Merced']);
-      });
 
       let data = {
-        labels: labels,
+        labels: ['2017'],
         datasets: [
           {
-            label: 'UCB',
-            data: ucbData,
-            backgroundColor: 'rgba(92, 184, 93, 0.70)'
+            label: getShortName(labels[0]),
+            data: [datas[0]],
+            backgroundColor: ['#e16d8c']
           },
           {
-            label: 'UCD',
-            data: ucdData,
-            backgroundColor: 'rgba(217, 150, 148, 1.00)'
+            label: getShortName(labels[1]),
+            data: [datas[1]],
+            backgroundColor: ['#e4778d']
           },
           {
-            label: 'UCI',
-            data: uciData,
-            backgroundColor: 'rgba(140, 94, 221, 0.70)'
+            label: getShortName(labels[2]),
+            data: [datas[2]],
+            backgroundColor: ['#e7808f']
           },
           {
-            label: 'UCLA',
-            data: uclaData,
-            backgroundColor: 'rgba(141, 211, 199, 0.70)'
+            label: getShortName(labels[3]),
+            data: [datas[3]],
+            backgroundColor: ['#e98a90']
           },
           {
-            label: 'UCR',
-            data: ucrData,
-            backgroundColor: 'rgba(190, 185, 218, 0.70)'
+            label: getShortName(labels[4]),
+            data: [datas[4]],
+            backgroundColor: ['#ec9291']
           },
           {
-            label: 'UCSD',
-            data: ucsdData,
-            backgroundColor: 'rgba(251, 128, 114, 0.70)'
+            label: getShortName(labels[5]),
+            data: [datas[5]],
+            backgroundColor: ['#ee9d93']
           },
           {
-            label: 'UCSC',
-            data: ucscData,
-            backgroundColor: 'rgba(129, 177, 211, 0.70)'
+            label: getShortName(labels[6]),
+            data: [datas[6]],
+            backgroundColor: ['#f1a594']
           },
           {
-            label: 'UCSB',
-            data: ucsbData,
-            backgroundColor: 'rgba(253, 180, 98, 0.70)'
+            label: getShortName(labels[7]),
+            data: [datas[7]],
+            backgroundColor: ['#f3ae95']
           },
-          { label: 'UCM', data: ucmData, backgroundColor: '#A497AD' }
+          {
+            label: getShortName(labels[8]),
+            data: [datas[8]],
+            backgroundColor: ['#f5b796']
+          }
         ]
       };
 
@@ -164,7 +137,11 @@ function drawGraphForSATAVG() {
         options: {
           responsive: true,
           legend: {
-            display: false
+            display: true,
+            position: 'bottom',
+            labels: {
+              fontColor: '#000080'
+            }
           },
           scales: {
             xAxes: [
@@ -231,35 +208,51 @@ function getAdmitRate() {
       let data = {
         labels: ['2017'],
         datasets: [
-          { label: 'UCB', data: [admitRates[0]], backgroundColor: ['#e16d8c'] },
-          { label: 'UCD', data: [admitRates[1]], backgroundColor: ['#e4778d'] },
-          { label: 'UCI', data: [admitRates[2]], backgroundColor: ['#e7808f'] },
           {
-            label: 'UCLA',
+            label: getShortName(labels[0]),
+            data: [admitRates[0]],
+            backgroundColor: ['#e16d8c']
+          },
+          {
+            label: getShortName(labels[1]),
+            data: [admitRates[1]],
+            backgroundColor: ['#e4778d']
+          },
+          {
+            label: getShortName(labels[2]),
+            data: [admitRates[2]],
+            backgroundColor: ['#e7808f']
+          },
+          {
+            label: getShortName(labels[3]),
             data: [admitRates[3]],
             backgroundColor: ['#e98a90']
           },
           {
-            label: 'UCR',
+            label: getShortName(labels[4]),
             data: [admitRates[4]],
             backgroundColor: ['#ec9291']
           },
           {
-            label: 'UCSD',
+            label: getShortName(labels[5]),
             data: [admitRates[5]],
             backgroundColor: ['#ee9d93']
           },
           {
-            label: 'UCSB',
+            label: getShortName(labels[6]),
             data: [admitRates[6]],
             backgroundColor: ['#f1a594']
           },
           {
-            label: 'UCSC',
+            label: getShortName(labels[7]),
             data: [admitRates[7]],
             backgroundColor: ['#f3ae95']
           },
-          { label: 'UCM', data: [admitRates[8]], backgroundColor: ['#f5b796'] }
+          {
+            label: getShortName(labels[8]),
+            data: [admitRates[8]],
+            backgroundColor: ['#f5b796']
+          }
         ]
       };
 
@@ -322,55 +315,57 @@ function getRetentionRate() {
       );
 
       let retentionRates = [];
+      let labels = [];
       results.forEach(result => {
         retentionRates.push(result['RET_FT4']);
+        labels.push(result['INSTNM']);
       });
 
       let data = {
         labels: ['2017'],
         datasets: [
           {
-            label: 'UCB',
+            label: getShortName(labels[0]),
             data: [retentionRates[0]],
             backgroundColor: ['#e16d8c']
           },
           {
-            label: 'UCD',
+            label: getShortName(labels[1]),
             data: [retentionRates[1]],
             backgroundColor: ['#e4778d']
           },
           {
-            label: 'UCI',
+            label: getShortName(labels[2]),
             data: [retentionRates[2]],
             backgroundColor: ['#e7808f']
           },
           {
-            label: 'UCLA',
+            label: getShortName(labels[3]),
             data: [retentionRates[3]],
             backgroundColor: ['#e98a90']
           },
           {
-            label: 'UCR',
+            label: getShortName(labels[4]),
             data: [retentionRates[4]],
             backgroundColor: ['#ec9291']
           },
           {
-            label: 'UCSD',
+            label: getShortName(labels[5]),
             data: [retentionRates[5]],
             backgroundColor: ['#ee9d93']
           },
           {
-            label: 'UCSB',
+            label: getShortName(labels[6]),
             data: [retentionRates[6]],
             backgroundColor: ['#f1a594']
           },
           {
-            label: 'UCSC',
+            label: getShortName(labels[7]),
             data: [retentionRates[7]],
             backgroundColor: ['#f3ae95']
           },
           {
-            label: 'UCM',
+            label: getShortName(labels[8]),
             data: [retentionRates[8]],
             backgroundColor: ['#f5b796']
           }
@@ -438,22 +433,60 @@ function getGPAScore() {
         a['GPA_Val'] > b['GPA_Val'] ? -1 : b['GPA_Val'] > a['GPA_Val'] ? 1 : 0
       );
       let gpaScores = [];
+      let labels = [];
       results.forEach(result => {
+        labels.push(result['INSTNM']);
         gpaScores.push(result['GPA_Val']);
       });
 
       let data = {
         labels: ['2017'],
         datasets: [
-          { label: 'UCB', data: [gpaScores[0]], backgroundColor: ['#e16d8c'] },
-          { label: 'UCD', data: [gpaScores[1]], backgroundColor: ['#e4778d'] },
-          { label: 'UCI', data: [gpaScores[2]], backgroundColor: ['#e7808f'] },
-          { label: 'UCLA', data: [gpaScores[3]], backgroundColor: ['#e98a90'] },
-          { label: 'UCR', data: [gpaScores[4]], backgroundColor: ['#ec9291'] },
-          { label: 'UCSD', data: [gpaScores[5]], backgroundColor: ['#ee9d93'] },
-          { label: 'UCSB', data: [gpaScores[6]], backgroundColor: ['#f1a594'] },
-          { label: 'UCSC', data: [gpaScores[7]], backgroundColor: ['#f3ae95'] },
-          { label: 'UCM', data: [gpaScores[8]], backgroundColor: ['#f5b796'] }
+          {
+            label: getShortName(labels[0]),
+            data: [gpaScores[0]],
+            backgroundColor: ['#e16d8c']
+          },
+          {
+            label: getShortName(labels[1]),
+            data: [gpaScores[1]],
+            backgroundColor: ['#e4778d']
+          },
+          {
+            label: getShortName(labels[2]),
+            data: [gpaScores[2]],
+            backgroundColor: ['#e7808f']
+          },
+          {
+            label: getShortName(labels[3]),
+            data: [gpaScores[3]],
+            backgroundColor: ['#e98a90']
+          },
+          {
+            label: getShortName(labels[4]),
+            data: [gpaScores[4]],
+            backgroundColor: ['#ec9291']
+          },
+          {
+            label: getShortName(labels[5]),
+            data: [gpaScores[5]],
+            backgroundColor: ['#ee9d93']
+          },
+          {
+            label: getShortName(labels[6]),
+            data: [gpaScores[6]],
+            backgroundColor: ['#f1a594']
+          },
+          {
+            label: getShortName(labels[7]),
+            data: [gpaScores[7]],
+            backgroundColor: ['#f3ae95']
+          },
+          {
+            label: getShortName(labels[8]),
+            data: [gpaScores[8]],
+            backgroundColor: ['#f5b796']
+          }
         ]
       };
 
@@ -714,4 +747,27 @@ function getChartJs(type) {
   }
 
   return config;
+}
+
+function getShortName(uName) {
+  switch (uName) {
+    case 'University of California-Berkeley':
+      return 'UCB';
+    case 'University of California-Davis':
+      return 'UCB';
+    case 'University of California-Irvine':
+      return 'UCI';
+    case 'University of California-Los Angeles':
+      return 'UCLA';
+    case 'University of California-Riverside':
+      return 'UCR';
+    case 'University of California-San Diego':
+      return 'UCSD';
+    case 'University of California-Santa Barbara':
+      return 'UCSB';
+    case 'University of California-Santa Cruz':
+      return 'UCSC';
+    case 'University of California-Merced':
+      return 'UCM';
+  }
 }
