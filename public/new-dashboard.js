@@ -140,7 +140,7 @@ function drawGraphForSATAVG() {
             display: true,
             position: 'bottom',
             labels: {
-              fontColor: '#000080'
+              fontColor: '#000000'
             }
           },
           scales: {
@@ -265,7 +265,7 @@ function getAdmitRate() {
             display: true,
             position: 'bottom',
             labels: {
-              fontColor: '#000080'
+              fontColor: '#000000'
             }
           },
           scales: {
@@ -381,7 +381,7 @@ function getRetentionRate() {
             display: true,
             position: 'bottom',
             labels: {
-              fontColor: '#000080'
+              fontColor: '#000000'
             }
           },
           scales: {
@@ -499,7 +499,7 @@ function getGPAScore() {
             display: true,
             position: 'bottom',
             labels: {
-              fontColor: '#000080'
+              fontColor: '#000000'
             }
           },
           scales: {
