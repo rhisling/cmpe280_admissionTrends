@@ -93,13 +93,37 @@ $(function() {
     console.log(filterCriteriaByUniv);
     //When drop down is changed, call the 4 methods again
     //$('#morris-area-chart').empty();
-    $('#line_chart1').empty();
-    $('#line_chart2').empty();
-    $('#line_chart3').empty();
-    $('#line_chart4').empty();
-    $('#bar_chart1').empty();
-    $('#bar_chart2').empty();
-    $('#donut_chart').empty();
+    // $('#line_chart1').empty();
+    // $('#line_chart2').empty();
+    // $('#line_chart3').empty();
+    // $('#line_chart4').empty();
+    // $('#bar_chart1').empty();
+    // $('#bar_chart2').empty();
+    // $('#donut_chart').empty();
+    $('#line1').empty();
+    $('#line1').append('<canvas id="line_chart1" height="100"></canvas>');
+
+    $('#line2').empty();
+    $('#line2').append('<canvas id="line_chart2" height="100"></canvas>');
+
+    $('#line3').empty();
+    $('#line3').append('<canvas id="line_chart3" height="100"></canvas>');
+
+    $('#line4').empty();
+    $('#line4').append('<canvas id="line_chart4" height="100"></canvas>');
+
+    $('#bar2').empty();
+    $('#bar2').append('<canvas id="bar_chart2" height="100"></canvas>');
+
+    $('#donut').empty();
+    $('#donut').append('<canvas id="donut_chart" height="100"></canvas>');
+
+    // clearCanvas('line_chart1');
+    // clearCanvas('line_chart2');
+    // clearCanvas('line_chart3');
+    // clearCanvas('line_chart4');
+    // clearCanvas('bar_chart2');
+    // clearCanvas('donut_chart');
 
     getTuitionOutGraph(filterCriteriaByUniv);
     getTuitionInGraph(filterCriteriaByUniv);
@@ -113,6 +137,13 @@ $(function() {
     getGender(filterCriteriaByUniv);
     getExpenditure(filterCriteriaByUniv);
   });
+
+  // clearCanvas('line_chart1');
+  // clearCanvas('line_chart2');
+  // clearCanvas('line_chart3');
+  // clearCanvas('line_chart4');
+  // clearCanvas('bar_chart2');
+  // clearCanvas('donut_chart');
 
   drawGraphForSATAVG();
   getSATMidpointResults(filterCriteriaByUniv);
@@ -699,6 +730,10 @@ function getDiversityResults(filterValue) {
         white.push(data['white']);
       });
 
+      results.sort((a, b) =>
+        a['GPA_Val'] > b['GPA_Val'] ? -1 : b['GPA_Val'] > a['GPA_Val'] ? 1 : 0
+      );
+
       let data = {
         labels: labels,
         datasets: [
@@ -1027,4 +1062,11 @@ function getExpenditure(filterValue) {
       alert('error ' + textStatus + ' ' + errorThrown);
     }
   });
+}
+
+function clearCanvas(canvas) {
+  console.log('Whta', document.getElementById(canvas));
+  let context = document.getElementById(canvas).getContext('2d');
+
+  context.clearRect(0, 0, canvas.width, canvas.height);
 }
