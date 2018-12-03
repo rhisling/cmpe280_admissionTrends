@@ -74,13 +74,13 @@ function drawGraphForSATAVG() {
       let datas = [];
       let labels = [];
       results.forEach(result => {
-        labels.push(result['INSTNM']);
+        labels.push(getShortName(result['INSTNM']));
         datas.push(result['SAT_AVG']);
       });
       console.log('Processed data range lists:' + JSON.stringify(datas));
       // for chronological ordering
 
-      let data = {
+      /*   let data = {
         labels: ['2017'],
         datasets: [
           {
@@ -130,6 +130,28 @@ function drawGraphForSATAVG() {
           }
         ]
       };
+ */
+
+      let data = {
+        labels: labels,
+        datasets: [
+          {
+            label: '2017',
+            data: datas,
+            backgroundColor: [
+              '#e16d8c',
+              '#e4778d',
+              '#e7808f',
+              '#e98a90',
+              '#ec9291',
+              '#ee9d93',
+              '#f1a594',
+              '#f3ae95',
+              '#f5b796'
+            ]
+          }
+        ]
+      };
 
       let config = {
         type: 'bar',
@@ -137,7 +159,7 @@ function drawGraphForSATAVG() {
         options: {
           responsive: true,
           legend: {
-            display: true,
+            display: false,
             position: 'bottom',
             labels: {
               fontColor: '#000000'
@@ -146,6 +168,7 @@ function drawGraphForSATAVG() {
           scales: {
             xAxes: [
               {
+                barPercentage: 0.6,
                 scaleLabel: {
                   display: true,
                   labelString: 'YEAR',
@@ -160,7 +183,7 @@ function drawGraphForSATAVG() {
                 },
                 scaleLabel: {
                   display: true,
-                  labelString: 'AVG SAT',
+                  labelString: 'Avg SAT (out of 1600)',
                   fontSize: 14
                 }
               }
@@ -201,89 +224,67 @@ function getAdmitRate() {
 
       console.log('Results after sorting:' + JSON.stringify(results));
       results.forEach(result => {
-        labels.push(result['INSTNM']);
-        admitRates.push(result['ADM_RATE']);
+        labels.push(getShortName(result['INSTNM']));
+        admitRates.push(parseFloat(result['ADM_RATE']));
       });
 
+      console.log('lablesss:', labels);
+      console.log('Datass:', admitRates);
       let data = {
-        labels: ['2017'],
+        labels: labels,
         datasets: [
           {
-            label: getShortName(labels[0]),
-            data: [admitRates[0]],
-            backgroundColor: ['#e16d8c']
-          },
-          {
-            label: getShortName(labels[1]),
-            data: [admitRates[1]],
-            backgroundColor: ['#e4778d']
-          },
-          {
-            label: getShortName(labels[2]),
-            data: [admitRates[2]],
-            backgroundColor: ['#e7808f']
-          },
-          {
-            label: getShortName(labels[3]),
-            data: [admitRates[3]],
-            backgroundColor: ['#e98a90']
-          },
-          {
-            label: getShortName(labels[4]),
-            data: [admitRates[4]],
-            backgroundColor: ['#ec9291']
-          },
-          {
-            label: getShortName(labels[5]),
-            data: [admitRates[5]],
-            backgroundColor: ['#ee9d93']
-          },
-          {
-            label: getShortName(labels[6]),
-            data: [admitRates[6]],
-            backgroundColor: ['#f1a594']
-          },
-          {
-            label: getShortName(labels[7]),
-            data: [admitRates[7]],
-            backgroundColor: ['#f3ae95']
-          },
-          {
-            label: getShortName(labels[8]),
-            data: [admitRates[8]],
-            backgroundColor: ['#f5b796']
+            label: '2017',
+            data: admitRates,
+            backgroundColor: [
+              '#e16d8c',
+              '#e4778d',
+              '#e7808f',
+              '#e98a90',
+              '#ec9291',
+              '#ee9d93',
+              '#f1a594',
+              '#f3ae95',
+              '#f5b796'
+            ]
           }
         ]
       };
 
       let config = {
-        type: 'horizontalBar',
+        type: 'bar',
         data: data,
         options: {
+          title: {
+            display: true,
+            text: 'Admit Rate for 2017'
+          },
           responsive: true,
           legend: {
-            display: true,
+            display: false,
             position: 'bottom',
-            labels: {
-              fontColor: '#000000'
-            }
+            labels: { fontColor: '#000000' }
           },
           scales: {
             xAxes: [
               {
+                barPercentage: 0.6,
                 ticks: { beginAtZero: true },
                 scaleLabel: {
                   display: true,
-                  labelString: 'Admit Rate',
+                  labelString: 'Universities',
                   fontSize: 14
                 }
               }
             ],
             yAxes: [
               {
+                ticks: { beginAtZero: true },
+                barPercentage: 0.9,
+                maxBarThickness: 150,
                 scaleLabel: {
                   display: true,
-                  labelString: 'Year',
+                  labelString: 'Admit rate (%)',
                   fontSize: 14
                 }
               }
@@ -318,56 +319,77 @@ function getRetentionRate() {
       let labels = [];
       results.forEach(result => {
         retentionRates.push(result['RET_FT4']);
-        labels.push(result['INSTNM']);
+        labels.push(getShortName(result['INSTNM']));
       });
 
+      // let data = {
+      //   labels: ['2017'],
+      //   datasets: [
+      //     {
+      //       label: getShortName(labels[0]),
+      //       data: [retentionRates[0]],
+      //       backgroundColor: ['#e16d8c']
+      //     },
+      //     {
+      //       label: getShortName(labels[1]),
+      //       data: [retentionRates[1]],
+      //       backgroundColor: ['#e4778d']
+      //     },
+      //     {
+      //       label: getShortName(labels[2]),
+      //       data: [retentionRates[2]],
+      //       backgroundColor: ['#e7808f']
+      //     },
+      //     {
+      //       label: getShortName(labels[3]),
+      //       data: [retentionRates[3]],
+      //       backgroundColor: ['#e98a90']
+      //     },
+      //     {
+      //       label: getShortName(labels[4]),
+      //       data: [retentionRates[4]],
+      //       backgroundColor: ['#ec9291']
+      //     },
+      //     {
+      //       label: getShortName(labels[5]),
+      //       data: [retentionRates[5]],
+      //       backgroundColor: ['#ee9d93']
+      //     },
+      //     {
+      //       label: getShortName(labels[6]),
+      //       data: [retentionRates[6]],
+      //       backgroundColor: ['#f1a594']
+      //     },
+      //     {
+      //       label: getShortName(labels[7]),
+      //       data: [retentionRates[7]],
+      //       backgroundColor: ['#f3ae95']
+      //     },
+      //     {
+      //       label: getShortName(labels[8]),
+      //       data: [retentionRates[8]],
+      //       backgroundColor: ['#f5b796']
+      //     }
+      //   ]
+      // };
+
       let data = {
-        labels: ['2017'],
+        labels: labels,
         datasets: [
           {
-            label: getShortName(labels[0]),
-            data: [retentionRates[0]],
-            backgroundColor: ['#e16d8c']
-          },
-          {
-            label: getShortName(labels[1]),
-            data: [retentionRates[1]],
-            backgroundColor: ['#e4778d']
-          },
-          {
-            label: getShortName(labels[2]),
-            data: [retentionRates[2]],
-            backgroundColor: ['#e7808f']
-          },
-          {
-            label: getShortName(labels[3]),
-            data: [retentionRates[3]],
-            backgroundColor: ['#e98a90']
-          },
-          {
-            label: getShortName(labels[4]),
-            data: [retentionRates[4]],
-            backgroundColor: ['#ec9291']
-          },
-          {
-            label: getShortName(labels[5]),
-            data: [retentionRates[5]],
-            backgroundColor: ['#ee9d93']
-          },
-          {
-            label: getShortName(labels[6]),
-            data: [retentionRates[6]],
-            backgroundColor: ['#f1a594']
-          },
-          {
-            label: getShortName(labels[7]),
-            data: [retentionRates[7]],
-            backgroundColor: ['#f3ae95']
-          },
-          {
-            label: getShortName(labels[8]),
-            data: [retentionRates[8]],
-            backgroundColor: ['#f5b796']
+            label: '2017',
+            data: retentionRates,
+            backgroundColor: [
+              '#e16d8c',
+              '#e4778d',
+              '#e7808f',
+              '#e98a90',
+              '#ec9291',
+              '#ee9d93',
+              '#f1a594',
+              '#f3ae95',
+              '#f5b796'
+            ]
           }
         ]
       };
@@ -376,32 +398,30 @@ function getRetentionRate() {
         type: 'bar',
         data: data,
         options: {
+          title: { display: false, text: 'Retention Rate' },
           responsive: true,
           legend: {
-            display: true,
+            display: false,
             position: 'bottom',
-            labels: {
-              fontColor: '#000000'
-            }
+            labels: { fontColor: '#000000' }
           },
           scales: {
             xAxes: [
               {
+                barPercentage: 0.6,
                 scaleLabel: {
                   display: true,
-                  labelString: 'Year',
+                  labelString: 'Universities',
                   fontSize: 14
                 }
               }
             ],
             yAxes: [
               {
-                ticks: {
-                  beginAtZero: true
-                },
+                ticks: { beginAtZero: true },
                 scaleLabel: {
                   display: true,
-                  labelString: 'RETENTION',
+                  labelString: 'Retention Rate (%)',
                   fontSize: 14
                 }
               }
@@ -435,91 +455,110 @@ function getGPAScore() {
       let gpaScores = [];
       let labels = [];
       results.forEach(result => {
-        labels.push(result['INSTNM']);
+        labels.push(getShortName(result['INSTNM']));
         gpaScores.push(result['GPA_Val']);
       });
 
+      // let data = {
+      //   labels: ['2017'],
+      //   datasets: [
+      //     {
+      //       label: getShortName(labels[0]),
+      //       data: [gpaScores[0]],
+      //       backgroundColor: ['#e16d8c']
+      //     },
+      //     {
+      //       label: getShortName(labels[1]),
+      //       data: [gpaScores[1]],
+      //       backgroundColor: ['#e4778d']
+      //     },
+      //     {
+      //       label: getShortName(labels[2]),
+      //       data: [gpaScores[2]],
+      //       backgroundColor: ['#e7808f']
+      //     },
+      //     {
+      //       label: getShortName(labels[3]),
+      //       data: [gpaScores[3]],
+      //       backgroundColor: ['#e98a90']
+      //     },
+      //     {
+      //       label: getShortName(labels[4]),
+      //       data: [gpaScores[4]],
+      //       backgroundColor: ['#ec9291']
+      //     },
+      //     {
+      //       label: getShortName(labels[5]),
+      //       data: [gpaScores[5]],
+      //       backgroundColor: ['#ee9d93']
+      //     },
+      //     {
+      //       label: getShortName(labels[6]),
+      //       data: [gpaScores[6]],
+      //       backgroundColor: ['#f1a594']
+      //     },
+      //     {
+      //       label: getShortName(labels[7]),
+      //       data: [gpaScores[7]],
+      //       backgroundColor: ['#f3ae95']
+      //     },
+      //     {
+      //       label: getShortName(labels[8]),
+      //       data: [gpaScores[8]],
+      //       backgroundColor: ['#f5b796']
+      //     }
+      //   ]
+      // };
+
       let data = {
-        labels: ['2017'],
+        labels: labels,
         datasets: [
           {
-            label: getShortName(labels[0]),
-            data: [gpaScores[0]],
-            backgroundColor: ['#e16d8c']
-          },
-          {
-            label: getShortName(labels[1]),
-            data: [gpaScores[1]],
-            backgroundColor: ['#e4778d']
-          },
-          {
-            label: getShortName(labels[2]),
-            data: [gpaScores[2]],
-            backgroundColor: ['#e7808f']
-          },
-          {
-            label: getShortName(labels[3]),
-            data: [gpaScores[3]],
-            backgroundColor: ['#e98a90']
-          },
-          {
-            label: getShortName(labels[4]),
-            data: [gpaScores[4]],
-            backgroundColor: ['#ec9291']
-          },
-          {
-            label: getShortName(labels[5]),
-            data: [gpaScores[5]],
-            backgroundColor: ['#ee9d93']
-          },
-          {
-            label: getShortName(labels[6]),
-            data: [gpaScores[6]],
-            backgroundColor: ['#f1a594']
-          },
-          {
-            label: getShortName(labels[7]),
-            data: [gpaScores[7]],
-            backgroundColor: ['#f3ae95']
-          },
-          {
-            label: getShortName(labels[8]),
-            data: [gpaScores[8]],
-            backgroundColor: ['#f5b796']
+            label: '2017',
+            data: gpaScores,
+            backgroundColor: [
+              '#e16d8c',
+              '#e4778d',
+              '#e7808f',
+              '#e98a90',
+              '#ec9291',
+              '#ee9d93',
+              '#f1a594',
+              '#f3ae95',
+              '#f5b796'
+            ]
           }
         ]
       };
 
       let config = {
-        type: 'horizontalBar',
+        type: 'bar',
         data: data,
         options: {
           responsive: true,
           legend: {
-            display: true,
+            display: false,
             position: 'bottom',
-            labels: {
-              fontColor: '#000000'
-            }
+            labels: { fontColor: '#000000' }
           },
           scales: {
             xAxes: [
               {
-                ticks: {
-                  beginAtZero: true
-                },
+                barPercentage: 0.6,
+                ticks: { beginAtZero: true },
                 scaleLabel: {
                   display: true,
-                  labelString: 'GPA SCORE',
+                  labelString: 'Universities ',
                   fontSize: 14
                 }
               }
             ],
             yAxes: [
               {
+                ticks: { beginAtZero: true },
                 scaleLabel: {
                   display: true,
-                  labelString: 'Year',
+                  labelString: 'GPA Score (Out of 4)',
                   fontSize: 14
                 }
               }
@@ -754,7 +793,7 @@ function getShortName(uName) {
     case 'University of California-Berkeley':
       return 'UCB';
     case 'University of California-Davis':
-      return 'UCB';
+      return 'UCD';
     case 'University of California-Irvine':
       return 'UCI';
     case 'University of California-Los Angeles':
