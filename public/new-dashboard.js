@@ -172,7 +172,7 @@ function drawGraphForSATAVG() {
                 scaleLabel: {
                   display: true,
                   labelString: 'YEAR',
-                  fontSize: 14
+                  fontSize: 12
                 }
               }
             ],
@@ -184,7 +184,7 @@ function drawGraphForSATAVG() {
                 scaleLabel: {
                   display: true,
                   labelString: 'Avg SAT (out of 1600)',
-                  fontSize: 14
+                  fontSize: 10
                 }
               }
             ]
@@ -225,7 +225,7 @@ function getAdmitRate() {
       console.log('Results after sorting:' + JSON.stringify(results));
       results.forEach(result => {
         labels.push(getShortName(result['INSTNM']));
-        admitRates.push(parseFloat(result['ADM_RATE']));
+        admitRates.push((parseFloat(result['ADM_RATE'])*100).toFixed(2));
       });
 
       console.log('lablesss:', labels);
@@ -257,7 +257,7 @@ function getAdmitRate() {
         options: {
           title: {
             display: true,
-            text: 'Admit Rate for 2017'
+            //text: 'Admit Rate for 2017'
           },
           responsive: true,
           legend: {
@@ -273,7 +273,7 @@ function getAdmitRate() {
                 scaleLabel: {
                   display: true,
                   labelString: 'Universities',
-                  fontSize: 14
+                  fontSize: 12
                 }
               }
             ],
@@ -285,7 +285,7 @@ function getAdmitRate() {
                 scaleLabel: {
                   display: true,
                   labelString: 'Admit rate (%)',
-                  fontSize: 14
+                  fontSize: 12
                 }
               }
             ]
@@ -422,7 +422,7 @@ function getRetentionRate() {
                 scaleLabel: {
                   display: true,
                   labelString: 'Retention Rate (%)',
-                  fontSize: 14
+                  fontSize: 12
                 }
               }
             ]
@@ -559,7 +559,7 @@ function getGPAScore() {
                 scaleLabel: {
                   display: true,
                   labelString: 'GPA Score (Out of 4)',
-                  fontSize: 14
+                  fontSize: 10
                 }
               }
             ]
