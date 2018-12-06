@@ -333,145 +333,145 @@ function getAdmitRate() {
   });
 }
 
-function getRetentionRate() {
-  $.ajax({
-    url: '/recentdash/retentionrate',
-    dataType: 'json',
-
-    success: function(results) {
-      console.log('In RetentionRate:', JSON.stringify(results));
-
-      results.sort((a, b) =>
-        a['RET_FT4'] > b['RET_FT4'] ? -1 : b['RET_FT4'] > a['RET_FT4'] ? 1 : 0
-      );
-
-      let retentionRates = [];
-      let labels = [];
-      results.forEach(result => {
-        retentionRates.push(result['RET_FT4']);
-        labels.push(getShortName(result['INSTNM']));
-      });
-
-      // let data = {
-      //   labels: ['2017'],
-      //   datasets: [
-      //     {
-      //       label: getShortName(labels[0]),
-      //       data: [retentionRates[0]],
-      //       backgroundColor: ['#e16d8c']
-      //     },
-      //     {
-      //       label: getShortName(labels[1]),
-      //       data: [retentionRates[1]],
-      //       backgroundColor: ['#e4778d']
-      //     },
-      //     {
-      //       label: getShortName(labels[2]),
-      //       data: [retentionRates[2]],
-      //       backgroundColor: ['#e7808f']
-      //     },
-      //     {
-      //       label: getShortName(labels[3]),
-      //       data: [retentionRates[3]],
-      //       backgroundColor: ['#e98a90']
-      //     },
-      //     {
-      //       label: getShortName(labels[4]),
-      //       data: [retentionRates[4]],
-      //       backgroundColor: ['#ec9291']
-      //     },
-      //     {
-      //       label: getShortName(labels[5]),
-      //       data: [retentionRates[5]],
-      //       backgroundColor: ['#ee9d93']
-      //     },
-      //     {
-      //       label: getShortName(labels[6]),
-      //       data: [retentionRates[6]],
-      //       backgroundColor: ['#f1a594']
-      //     },
-      //     {
-      //       label: getShortName(labels[7]),
-      //       data: [retentionRates[7]],
-      //       backgroundColor: ['#f3ae95']
-      //     },
-      //     {
-      //       label: getShortName(labels[8]),
-      //       data: [retentionRates[8]],
-      //       backgroundColor: ['#f5b796']
-      //     }
-      //   ]
-      // };
-
-      let data = {
-        labels: labels,
-        datasets: [
-          {
-            label: '2017',
-            data: retentionRates,
-            backgroundColor: [
-              '#e16d8c',
-              '#e4778d',
-              '#e7808f',
-              '#e98a90',
-              '#ec9291',
-              '#ee9d93',
-              '#f1a594',
-              '#f3ae95',
-              '#f5b796'
-            ]
-          }
-        ]
-      };
-
-      let config = {
-        type: 'bar',
-        data: data,
-        options: {
-          title: { display: false, text: 'Retention Rate' },
-          responsive: true,
-          legend: {
-            display: false,
-            position: 'bottom',
-            labels: { fontColor: '#000000' }
-          },
-          scales: {
-            xAxes: [
-              {
-                gridLines: {
-                  display: false
-                },
-                barPercentage: 0.6,
-                scaleLabel: {
-                  display: true,
-                  labelString: 'Universities',
-                  fontSize: 14
-                }
-              }
-            ],
-            yAxes: [
-              {
-                ticks: { beginAtZero: true },
-                scaleLabel: {
-                  display: true,
-                  labelString: 'Retention Rate (%)',
-                  fontSize: 12
-                }
-              }
-            ]
-          }
-        }
-      };
-      new Chart(
-        document.getElementById('line_chart2').getContext('2d'),
-        config
-      );
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-      alert('error ' + textStatus + ' ' + errorThrown);
-    }
-  });
-}
+// function getRetentionRate() {
+//   $.ajax({
+//     url: '/recentdash/retentionrate',
+//     dataType: 'json',
+//
+//     success: function(results) {
+//       console.log('In RetentionRate:', JSON.stringify(results));
+//
+//       results.sort((a, b) =>
+//         a['RET_FT4'] > b['RET_FT4'] ? -1 : b['RET_FT4'] > a['RET_FT4'] ? 1 : 0
+//       );
+//
+//       let retentionRates = [];
+//       let labels = [];
+//       results.forEach(result => {
+//         retentionRates.push(result['RET_FT4']);
+//         labels.push(getShortName(result['INSTNM']));
+//       });
+//
+//       // let data = {
+//       //   labels: ['2017'],
+//       //   datasets: [
+//       //     {
+//       //       label: getShortName(labels[0]),
+//       //       data: [retentionRates[0]],
+//       //       backgroundColor: ['#e16d8c']
+//       //     },
+//       //     {
+//       //       label: getShortName(labels[1]),
+//       //       data: [retentionRates[1]],
+//       //       backgroundColor: ['#e4778d']
+//       //     },
+//       //     {
+//       //       label: getShortName(labels[2]),
+//       //       data: [retentionRates[2]],
+//       //       backgroundColor: ['#e7808f']
+//       //     },
+//       //     {
+//       //       label: getShortName(labels[3]),
+//       //       data: [retentionRates[3]],
+//       //       backgroundColor: ['#e98a90']
+//       //     },
+//       //     {
+//       //       label: getShortName(labels[4]),
+//       //       data: [retentionRates[4]],
+//       //       backgroundColor: ['#ec9291']
+//       //     },
+//       //     {
+//       //       label: getShortName(labels[5]),
+//       //       data: [retentionRates[5]],
+//       //       backgroundColor: ['#ee9d93']
+//       //     },
+//       //     {
+//       //       label: getShortName(labels[6]),
+//       //       data: [retentionRates[6]],
+//       //       backgroundColor: ['#f1a594']
+//       //     },
+//       //     {
+//       //       label: getShortName(labels[7]),
+//       //       data: [retentionRates[7]],
+//       //       backgroundColor: ['#f3ae95']
+//       //     },
+//       //     {
+//       //       label: getShortName(labels[8]),
+//       //       data: [retentionRates[8]],
+//       //       backgroundColor: ['#f5b796']
+//       //     }
+//       //   ]
+//       // };
+//
+//       let data = {
+//         labels: labels,
+//         datasets: [
+//           {
+//             label: '2017',
+//             data: retentionRates,
+//             backgroundColor: [
+//               '#e16d8c',
+//               '#e4778d',
+//               '#e7808f',
+//               '#e98a90',
+//               '#ec9291',
+//               '#ee9d93',
+//               '#f1a594',
+//               '#f3ae95',
+//               '#f5b796'
+//             ]
+//           }
+//         ]
+//       };
+//
+//       let config = {
+//         type: 'bar',
+//         data: data,
+//         options: {
+//           title: { display: false, text: 'Retention Rate' },
+//           responsive: true,
+//           legend: {
+//             display: false,
+//             position: 'bottom',
+//             labels: { fontColor: '#000000' }
+//           },
+//           scales: {
+//             xAxes: [
+//               {
+//                 gridLines : {
+//                   display : false
+//                 },
+//                 barPercentage: 0.6,
+//                 scaleLabel: {
+//                   display: true,
+//                   labelString: 'Universities',
+//                   fontSize: 14
+//                 }
+//               }
+//             ],
+//             yAxes: [
+//               {
+//                 ticks: { beginAtZero: true },
+//                 scaleLabel: {
+//                   display: true,
+//                   labelString: 'Retention Rate (%)',
+//                   fontSize: 12
+//                 }
+//               }
+//             ]
+//           }
+//         }
+//       };
+//       new Chart(
+//         document.getElementById('line_chart2').getContext('2d'),
+//         config
+//       );
+//     },
+//     error: function(jqXHR, textStatus, errorThrown) {
+//       alert('error ' + textStatus + ' ' + errorThrown);
+//     }
+//   });
+// }
 
 // function getGPAScore() {
 //   // get the earningsResults
@@ -945,6 +945,93 @@ function getGPAScore() {
       };
 
       var myGpaChart = Chart.Bar(canvas, {
+        data: data,
+        options: option
+      });
+    }
+  });
+}
+
+function getRetentionRate() {
+  // get the earningsResults
+  $.ajax({
+    url: '/recentdash/retentionrate',
+    dataType: 'json',
+
+    success: function(results) {
+      console.log('In RetentionRate:', JSON.stringify(results));
+
+      results.sort((a, b) =>
+        a['RET_FT4'] > b['RET_FT4'] ? -1 : b['RET_FT4'] > a['RET_FT4'] ? 1 : 0
+      );
+      let retentionScores = [];
+      let labels = [];
+      let retDiff = [];
+      results.forEach(result => {
+        labels.push(getShortName(result['INSTNM']));
+        retentionScores.push(result['RET_FT4']);
+      });
+      console.log('Retention scores sorted ', retentionScores);
+      let lowMiddle = Math.floor((retentionScores.length - 1) / 2);
+      let highMiddle = Math.ceil((retentionScores.length - 1) / 2);
+      let median =
+        (parseFloat(retentionScores[lowMiddle]) +
+          parseFloat(retentionScores[highMiddle])) /
+        2;
+      console.log(median);
+      retentionScores.forEach(result => {
+        retDiff.push(((parseFloat(result) - median) * 100).toFixed(2));
+      });
+      console.log('retention diff ', retDiff);
+
+      var canvas = document.getElementById('myRetentionChart');
+      var data = {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Relative University Retention',
+            backgroundColor: '#f2a571',
+            borderColor: '#f2721b',
+            borderWidth: 2,
+            hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+            hoverBorderColor: 'rgba(255,99,132,1)',
+            data: retDiff,
+            retScores: retentionScores
+          }
+        ]
+      };
+      var option = {
+        scales: {
+          yAxes: [
+            {
+              stacked: true,
+              gridLines: {
+                display: true,
+                color: 'rgba(255,99,132,0.2)'
+              },
+              scaleLabel: {
+                display: true,
+                labelString: '% difference wrt Median',
+                fontSize: 14
+              }
+            }
+          ],
+          xAxes: [
+            {
+              gridLines: {
+                display: false
+              },
+              scaleLabel: {
+                display: true,
+                labelString: 'Universities',
+                fontSize: 14
+              }
+            }
+          ]
+        }
+      };
+
+      var myRetentionChart = Chart.Bar(canvas, {
         data: data,
         options: option
       });
