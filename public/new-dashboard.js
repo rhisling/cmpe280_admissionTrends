@@ -263,8 +263,8 @@ function getAdmitRate() {
               '#f0e68c'
             ],
             borderColor: [
-              '#556B2F',
-              '#556B2F',
+              '#006400',
+              '#006400',
               '#8ca43e',
               '#9cae4b',
               '#adba58',
