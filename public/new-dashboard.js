@@ -168,6 +168,9 @@ function drawGraphForSATAVG() {
           scales: {
             xAxes: [
               {
+                gridLines : {
+                  display : false
+                },
                 barPercentage: 0.6,
                 scaleLabel: {
                   display: true,
@@ -268,6 +271,9 @@ function getAdmitRate() {
           scales: {
             xAxes: [
               {
+                gridLines : {
+                  display : false
+                },
                 barPercentage: 0.6,
                 ticks: { beginAtZero: true },
                 scaleLabel: {
@@ -408,6 +414,9 @@ function getRetentionRate() {
           scales: {
             xAxes: [
               {
+                gridLines : {
+                  display : false
+                },
                 barPercentage: 0.6,
                 scaleLabel: {
                   display: true,
@@ -544,6 +553,9 @@ function getGPAScore() {
           scales: {
             xAxes: [
               {
+                gridLines : {
+                  display : false
+                },
                 barPercentage: 0.6,
                 ticks: { beginAtZero: true },
                 scaleLabel: {

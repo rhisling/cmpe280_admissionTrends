@@ -274,6 +274,9 @@ function drawGraphForSATAVG() {
           scales: {
             xAxes: [
               {
+                gridLines : {
+                  display : false
+                },
                 scaleLabel: {
                   display: true,
                   labelString: 'YEAR',
@@ -463,6 +466,9 @@ function getSATMidpointResults(filterValue) {
           scales: {
             xAxes: [
               {
+                gridLines : {
+                  display : false
+                },
                 scaleLabel: {
                   display: true,
                   labelString: 'YEAR',
@@ -551,6 +557,9 @@ function getGradDebtProjection(filterValue) {
           scales: {
             xAxes: [
               {
+                gridLines : {
+                  display : false
+                },
                 scaleLabel: {
                   display: true,
                   labelString: 'YEAR',
@@ -639,6 +648,9 @@ function getEarningResults(filterValue) {
           scales: {
             xAxes: [
               {
+                gridLines : {
+                  display : false
+                },
                 scaleLabel: {
                   display: true,
                   labelString: 'YEAR',
@@ -1042,6 +1054,9 @@ function getExpenditure(filterValue) {
           scales: {
             xAxes: [
               {
+                gridLines : {
+                  display : false
+                },
                 ticks: {
                   beginAtZero: true
                 },
