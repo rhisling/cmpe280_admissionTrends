@@ -274,8 +274,9 @@ function drawGraphForSATAVG() {
           scales: {
             xAxes: [
               {
-                gridLines : {
-                  display : false
+                stacked: true,
+                gridLines: {
+                  display: false
                 },
                 scaleLabel: {
                   display: true,
@@ -286,6 +287,7 @@ function drawGraphForSATAVG() {
             ],
             yAxes: [
               {
+                stacked: true,
                 scaleLabel: {
                   display: true,
                   labelString: 'AVG_SAT',
@@ -466,8 +468,8 @@ function getSATMidpointResults(filterValue) {
           scales: {
             xAxes: [
               {
-                gridLines : {
-                  display : false
+                gridLines: {
+                  display: false
                 },
                 scaleLabel: {
                   display: true,
@@ -557,8 +559,8 @@ function getGradDebtProjection(filterValue) {
           scales: {
             xAxes: [
               {
-                gridLines : {
-                  display : false
+                gridLines: {
+                  display: false
                 },
                 scaleLabel: {
                   display: true,
@@ -648,8 +650,8 @@ function getEarningResults(filterValue) {
           scales: {
             xAxes: [
               {
-                gridLines : {
-                  display : false
+                gridLines: {
+                  display: false
                 },
                 scaleLabel: {
                   display: true,
@@ -800,6 +802,18 @@ function getDiversityResults(filterValue) {
         type: 'bar',
         data: data,
         options: {
+          scales: {
+            xAxes: [
+              {
+                stacked: true
+              }
+            ],
+            yAxes: [
+              {
+                stacked: true
+              }
+            ]
+          },
           responsive: true,
           legend: false
         }
@@ -852,7 +866,19 @@ function getChartJs(type) {
       },
       options: {
         responsive: true,
-        legend: false
+        legend: false,
+        scales: {
+          xAxes: [
+            {
+              stacked: true
+            }
+          ],
+          yAxes: [
+            {
+              stacked: true
+            }
+          ]
+        }
       }
     };
   } else if (type === 'bar') {
@@ -1054,8 +1080,8 @@ function getExpenditure(filterValue) {
           scales: {
             xAxes: [
               {
-                gridLines : {
-                  display : false
+                gridLines: {
+                  display: false
                 },
                 ticks: {
                   beginAtZero: true

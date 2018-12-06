@@ -168,8 +168,8 @@ function drawGraphForSATAVG() {
           scales: {
             xAxes: [
               {
-                gridLines : {
-                  display : false
+                gridLines: {
+                  display: false
                 },
                 barPercentage: 0.6,
                 scaleLabel: {
@@ -228,7 +228,7 @@ function getAdmitRate() {
       console.log('Results after sorting:' + JSON.stringify(results));
       results.forEach(result => {
         labels.push(getShortName(result['INSTNM']));
-        admitRates.push((parseFloat(result['ADM_RATE'])*100).toFixed(2));
+        admitRates.push((parseFloat(result['ADM_RATE']) * 100).toFixed(2));
       });
 
       console.log('lablesss:', labels);
@@ -240,16 +240,28 @@ function getAdmitRate() {
             label: '2017',
             data: admitRates,
             backgroundColor: [
-              '#e16d8c',
-              '#e4778d',
-              '#e7808f',
-              '#e98a90',
-              '#ec9291',
-              '#ee9d93',
-              '#f1a594',
-              '#f3ae95',
-              '#f5b796'
-            ]
+              '#6b8e23',
+              '#7b9939',
+              '#8ba64e',
+              '#9cb261',
+              '#acbe76',
+              '#bcca8a',
+              '#ccd79e',
+              '#dde4b3',
+              '#edf0c8'
+            ],
+            borderColor: [
+              '#006400',
+              '#006400',
+              '#8ba64e',
+              '#9cb261',
+              '#acbe76',
+              '#bcca8a',
+              '#ccd79e',
+              '#dde4b3',
+              '#edf0c8'
+            ],
+            borderWidth: 3
           }
         ]
       };
@@ -259,7 +271,7 @@ function getAdmitRate() {
         data: data,
         options: {
           title: {
-            display: true,
+            display: true
             //text: 'Admit Rate for 2017'
           },
           responsive: true,
@@ -271,8 +283,8 @@ function getAdmitRate() {
           scales: {
             xAxes: [
               {
-                gridLines : {
-                  display : false
+                gridLines: {
+                  display: false
                 },
                 barPercentage: 0.6,
                 ticks: { beginAtZero: true },
@@ -285,6 +297,9 @@ function getAdmitRate() {
             ],
             yAxes: [
               {
+                gridLines: {
+                  drawBorder: true
+                },
                 ticks: { beginAtZero: true },
                 barPercentage: 0.9,
                 maxBarThickness: 150,
@@ -414,8 +429,8 @@ function getRetentionRate() {
           scales: {
             xAxes: [
               {
-                gridLines : {
-                  display : false
+                gridLines: {
+                  display: false
                 },
                 barPercentage: 0.6,
                 scaleLabel: {
@@ -824,105 +839,109 @@ function getShortName(uName) {
 }
 
 function getGPAScore() {
-    // get the earningsResults
-    $.ajax({
-        url: '/recentdash/gpa',
-        dataType: 'json',
+  // get the earningsResults
+  $.ajax({
+    url: '/recentdash/gpa',
+    dataType: 'json',
 
-        success: function (results) {
-            console.log('In GPA Score:', JSON.stringify(results));
+    success: function(results) {
+      console.log('In GPA Score:', JSON.stringify(results));
 
-            results.sort((a, b) =>
-                a['GPA_Val'] > b['GPA_Val'] ? -1 : b['GPA_Val'] > a['GPA_Val'] ? 1 : 0
-            );
-            let gpaScores = [];
-            let labels = [];
-            let gpaDiff = [];
-            results.forEach(result => {
-                labels.push(getShortName(result['INSTNM']));
-                gpaScores.push(result['GPA_Val']);
+      results.sort((a, b) =>
+        a['GPA_Val'] > b['GPA_Val'] ? -1 : b['GPA_Val'] > a['GPA_Val'] ? 1 : 0
+      );
+      let gpaScores = [];
+      let labels = [];
+      let gpaDiff = [];
+      results.forEach(result => {
+        labels.push(getShortName(result['INSTNM']));
+        gpaScores.push(result['GPA_Val']);
+      });
+      console.log('Gpa scores sorted ', gpaScores);
+      let lowMiddle = Math.floor((gpaScores.length - 1) / 2);
+      let highMiddle = Math.ceil((gpaScores.length - 1) / 2);
+      let median =
+        (parseFloat(gpaScores[lowMiddle]) + parseFloat(gpaScores[highMiddle])) /
+        2;
+      console.log(median);
+      gpaScores.forEach(result => {
+        gpaDiff.push((parseFloat(result) - median).toFixed(2));
+      });
+      console.log('gpa diff ', gpaDiff);
+
+      var canvas = document.getElementById('myGpaChart');
+      var data = {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Relative University GPA',
+            backgroundColor: 'rgba(255,99,132,0.2)',
+            borderColor: 'rgba(255,99,132,1)',
+            borderWidth: 2,
+            hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+            hoverBorderColor: 'rgba(255,99,132,1)',
+            data: gpaDiff,
+            gpaScores: gpaScores
+          }
+        ]
+      };
+      var option = {
+        scales: {
+          yAxes: [
+            {
+              stacked: true,
+              gridLines: {
+                display: true,
+                color: 'rgba(255,99,132,0.2)'
+              },
+              scaleLabel: {
+                display: true,
+                labelString: 'Relative GPA',
+                fontSize: 14
+              }
+            }
+          ],
+          xAxes: [
+            {
+              gridLines: {
+                display: false
+              },
+              scaleLabel: {
+                display: true,
+                labelString: 'Universities',
+                fontSize: 14
+              }
+            }
+          ]
+        },
+        animation: {
+          duration: 1,
+          onComplete: function() {
+            var chartInstance = this.chart,
+              ctx = chartInstance.ctx;
+            ctx.textAlign = 'center';
+            ctx.fillStyle = 'rgba(0, 0, 0, 1)';
+            ctx.textBaseline = 'bottom';
+
+            this.data.datasets.forEach(function(dataset, i) {
+              var meta = chartInstance.controller.getDatasetMeta(i);
+              meta.data.forEach(function(bar, index) {
+                var data = dataset.data[index];
+                ctx.fillText(
+                  parseFloat(data) + median,
+                  bar._model.x,
+                  bar._model.y - 5
+                );
+              });
             });
-            console.log("Gpa scores sorted ", gpaScores);
-            let lowMiddle = Math.floor( (gpaScores.length - 1) / 2);
-            let highMiddle = Math.ceil( (gpaScores.length - 1) / 2);
-            let median = ( parseFloat(gpaScores[lowMiddle]) + parseFloat(gpaScores[highMiddle])) / 2;
-            console.log(median);
-            gpaScores.forEach(result => {
-                gpaDiff.push((parseFloat(result)- median).toFixed(2));
-            });
-            console.log("gpa diff ", gpaDiff);
-
-
-            var canvas = document.getElementById('myGpaChart');
-            var data = {
-                labels: labels,
-                datasets: [
-                    {
-                        label: "Relative University GPA",
-                        backgroundColor: "rgba(255,99,132,0.2)",
-                        borderColor: "rgba(255,99,132,1)",
-                        borderWidth: 2,
-                        hoverBackgroundColor: "rgba(255,99,132,0.4)",
-                        hoverBorderColor: "rgba(255,99,132,1)",
-                        data: gpaDiff,
-                        gpaScores: gpaScores
-
-                    }
-                ]
-            };
-            var option = {
-                scales: {
-                    yAxes: [{
-                        stacked: true,
-                        gridLines: {
-                            display: true,
-                            color: "rgba(255,99,132,0.2)"
-                        },
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Relative GPA',
-                            fontSize: 14
-                        }
-                    }],
-                    xAxes: [{
-                        gridLines: {
-                            display: false
-                        },
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Universities',
-                            fontSize: 14
-                        }
-                    }]
-                },
-                animation: {
-                    duration: 1,
-                    onComplete: function () {
-                        var chartInstance = this.chart,
-                            ctx = chartInstance.ctx;
-                        ctx.textAlign = 'center';
-                        ctx.fillStyle = "rgba(0, 0, 0, 1)";
-                        ctx.textBaseline = 'bottom';
-
-                        this.data.datasets.forEach(function (dataset, i) {
-                            var meta = chartInstance.controller.getDatasetMeta(i);
-                            meta.data.forEach(function (bar, index) {
-                                var data = dataset.data[index];
-                                ctx.fillText(parseFloat(data)+ median, bar._model.x, bar._model.y - 5);
-
-                            });
-                        });
-                    }
-                }
-            };
-
-            var myGpaChart = Chart.Bar(canvas,{
-                data:data,
-                options:option
-            });
-
-
+          }
         }
+      };
 
-    })
+      var myGpaChart = Chart.Bar(canvas, {
+        data: data,
+        options: option
+      });
+    }
+  });
 }
