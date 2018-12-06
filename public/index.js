@@ -424,20 +424,20 @@ function getSATMidpointResults(filterValue) {
             label: 'Critical Reading',
             fill: false,
             data: satvrmid,
-            borderColor: 'rgba(225, 109, 140, 1.00)',
-            backgroundColor: 'rgba(225, 109, 140, 0.5)',
-            pointBorderColor: 'rgba(225, 109, 140, 0)',
-            pointBackgroundColor: 'rgba(225, 109, 140, 0.9)',
+            borderColor: 'rgba(2, 128, 128, 1.00)',
+            backgroundColor: 'rgba(2, 128, 128, 0.5)',
+            pointBorderColor: 'rgba(2, 128, 128, 0)',
+            pointBackgroundColor: 'rgba(2, 128, 128, 0.9)',
             pointBorderWidth: 1
           },
           {
             label: 'Math',
             fill: false,
             data: satmtmid,
-            borderColor: 'rgba(164, 42, 41, 1.00)',
-            backgroundColor: 'rgba(164, 42, 41, 0.5)',
-            pointBorderColor: 'rgba(164, 42, 41, 0)',
-            pointBackgroundColor: 'rgba(164, 42, 41, 0.9)',
+            borderColor: 'rgba(155, 205, 49, 1.00)',
+            backgroundColor: 'rgba(155, 205, 49, 0.5)',
+            pointBorderColor: 'rgba(155, 205, 49, 0)',
+            pointBackgroundColor: 'rgba(155, 205, 49, 0.9)',
             pointBorderWidth: 1
           },
           {
@@ -541,10 +541,10 @@ function getGradDebtProjection(filterValue) {
           {
             label: 'debt in USD',
             data: dataset,
-            borderColor: 'rgba(255, 109, 140, 0.75)',
-            backgroundColor: 'RGBA(225, 109, 140, 0.3)',
-            pointBorderColor: 'rgba(255, 109, 140, 0)',
-            pointBackgroundColor: 'rgba(255, 109, 140, 0.9)',
+            borderColor: 'rgba(66, 105, 225, 0.75)',
+            backgroundColor: 'rgba(66, 105, 225, 0.3)',
+            pointBorderColor: 'rgba(66, 105, 225, 0)',
+            pointBackgroundColor: 'rgba(66, 105, 225, 0.9)',
             pointBorderWidth: 1
           }
         ]
@@ -632,10 +632,10 @@ function getEarningResults(filterValue) {
           {
             label: 'Amount in USD',
             data: dataset,
-            borderColor: 'rgba(255, 109, 140, 0.75)',
-            backgroundColor: 'RGBA(225, 109, 140, 0.3)',
-            pointBorderColor: 'rgba(255, 109, 140, 0)',
-            pointBackgroundColor: 'rgba(255, 109, 140, 0.9)',
+            borderColor: 'rgba(66, 105, 225, 0.75)',
+            backgroundColor: 'rgba(66, 105, 225, 0.3)',
+            pointBorderColor: 'rgba(66, 105, 225, 0)',
+            pointBackgroundColor: 'rgba(66, 105, 225, 0.9)',
             pointBorderWidth: 1
           }
         ]
@@ -1002,7 +1002,7 @@ function getGender(filterValue) {
           datasets: [
             {
               label: 'Gender Distribution',
-              backgroundColor: ['#e16d8c', '#f5b796'],
+              backgroundColor: ['#20B2AA', '#FF8C00'],
               data: [datas[0]['men'], datas[0]['women']]
             }
           ]
@@ -1057,11 +1057,11 @@ function getExpenditure(filterValue) {
             label: 'Expenditure',
             data: in_exp,
             backgroundColor: [
-              '#e06b8b',
-              '#e67f8e',
-              '#eb9191',
-              '#f0a494',
-              '#f5b596'
+              '#6a5acd',
+              '#8d7cd9',
+              '#ab9de4',
+              '#c9c2ef',
+              '#e6e6fa'
             ]
           }
         ]
