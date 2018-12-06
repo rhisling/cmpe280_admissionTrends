@@ -136,19 +136,32 @@ function drawGraphForSATAVG() {
         labels: labels,
         datasets: [
           {
+
             label: '2017',
             data: datas,
-            backgroundColor: [
-              '#e16d8c',
-              '#e4778d',
-              '#e7808f',
-              '#e98a90',
-              '#ec9291',
-              '#ee9d93',
-              '#f1a594',
-              '#f3ae95',
-              '#f5b796'
-            ]
+              borderWidth: 4,
+              backgroundColor: [
+                '#0000b2',
+                '#3232ff',
+                '#4c4cff',
+                '#6666ff',
+                '#7f7fff',
+                '#9999ff',
+                '#b2b2ff',
+                '#ccccff',
+                '#e5e5ff'
+            ],
+              borderColor: [
+                  '#48D1CC',//'#000000',//'#0000b2',
+                  '#48D1CC',//'#3232ff',
+                  '#4c4cff',
+                  '#6666ff',
+                  '#7f7fff',
+                  '#9999ff',
+                  '#b2b2ff',
+                  '#ccccff',
+                  '#e5e5ff'
+              ],
           }
         ]
       };
@@ -168,8 +181,8 @@ function drawGraphForSATAVG() {
           scales: {
             xAxes: [
               {
-                gridLines: {
-                  display: false
+                gridLines : {
+                  display : false
                 },
                 barPercentage: 0.6,
                 scaleLabel: {
@@ -228,7 +241,7 @@ function getAdmitRate() {
       console.log('Results after sorting:' + JSON.stringify(results));
       results.forEach(result => {
         labels.push(getShortName(result['INSTNM']));
-        admitRates.push((parseFloat(result['ADM_RATE']) * 100).toFixed(2));
+        admitRates.push((parseFloat(result['ADM_RATE'])*100).toFixed(2));
       });
 
       console.log('lablesss:', labels);
@@ -240,28 +253,16 @@ function getAdmitRate() {
             label: '2017',
             data: admitRates,
             backgroundColor: [
-              '#6b8e23',
-              '#7b9939',
-              '#8ba64e',
-              '#9cb261',
-              '#acbe76',
-              '#bcca8a',
-              '#ccd79e',
-              '#dde4b3',
-              '#edf0c8'
-            ],
-            borderColor: [
-              '#006400',
-              '#006400',
-              '#8ba64e',
-              '#9cb261',
-              '#acbe76',
-              '#bcca8a',
-              '#ccd79e',
-              '#dde4b3',
-              '#edf0c8'
-            ],
-            borderWidth: 3
+              '#e16d8c',
+              '#e4778d',
+              '#e7808f',
+              '#e98a90',
+              '#ec9291',
+              '#ee9d93',
+              '#f1a594',
+              '#f3ae95',
+              '#f5b796'
+            ]
           }
         ]
       };
@@ -271,7 +272,7 @@ function getAdmitRate() {
         data: data,
         options: {
           title: {
-            display: true
+            display: true,
             //text: 'Admit Rate for 2017'
           },
           responsive: true,
@@ -283,8 +284,8 @@ function getAdmitRate() {
           scales: {
             xAxes: [
               {
-                gridLines: {
-                  display: false
+                gridLines : {
+                  display : false
                 },
                 barPercentage: 0.6,
                 ticks: { beginAtZero: true },
@@ -297,9 +298,6 @@ function getAdmitRate() {
             ],
             yAxes: [
               {
-                gridLines: {
-                  drawBorder: true
-                },
                 ticks: { beginAtZero: true },
                 barPercentage: 0.9,
                 maxBarThickness: 150,
@@ -429,8 +427,8 @@ function getRetentionRate() {
           scales: {
             xAxes: [
               {
-                gridLines: {
-                  display: false
+                gridLines : {
+                  display : false
                 },
                 barPercentage: 0.6,
                 scaleLabel: {
@@ -923,25 +921,26 @@ function getGPAScore() {
             ctx.fillStyle = 'rgba(0, 0, 0, 1)';
             ctx.textBaseline = 'bottom';
 
-            this.data.datasets.forEach(function(dataset, i) {
-              var meta = chartInstance.controller.getDatasetMeta(i);
-              meta.data.forEach(function(bar, index) {
-                var data = dataset.data[index];
-                ctx.fillText(
-                  parseFloat(data) + median,
-                  bar._model.x,
-                  bar._model.y - 5
-                );
-              });
-            });
-          }
-        }
-      };
+                        this.data.datasets.forEach(function (dataset, i) {
+                            var meta = chartInstance.controller.getDatasetMeta(i);
+                            meta.data.forEach(function (bar, index) {
+                                var data = dataset.data[index];
+                                // ctx.fillText(("Actual GPA:" + parseFloat(data)+ median), bar._model.x, bar._model.y - 5);
+                                //ctx.fillText(parseFloat(data), bar._model.x, bar._model.y - 5);
 
-      var myGpaChart = Chart.Bar(canvas, {
-        data: data,
-        options: option
-      });
-    }
-  });
+                            });
+                        });
+                    }
+                }
+            };
+
+            var myGpaChart = Chart.Bar(canvas,{
+                data:data,
+                options:option
+            });
+
+
+        }
+
+    })
 }
