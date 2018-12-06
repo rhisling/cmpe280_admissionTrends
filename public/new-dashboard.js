@@ -136,19 +136,32 @@ function drawGraphForSATAVG() {
         labels: labels,
         datasets: [
           {
+
             label: '2017',
             data: datas,
-            backgroundColor: [
-              '#e16d8c',
-              '#e4778d',
-              '#e7808f',
-              '#e98a90',
-              '#ec9291',
-              '#ee9d93',
-              '#f1a594',
-              '#f3ae95',
-              '#f5b796'
-            ]
+              borderWidth: 4,
+              backgroundColor: [
+                '#0000b2',
+                '#3232ff',
+                '#4c4cff',
+                '#6666ff',
+                '#7f7fff',
+                '#9999ff',
+                '#b2b2ff',
+                '#ccccff',
+                '#e5e5ff'
+            ],
+              borderColor: [
+                  '#48D1CC',//'#000000',//'#0000b2',
+                  '#48D1CC',//'#3232ff',
+                  '#4c4cff',
+                  '#6666ff',
+                  '#7f7fff',
+                  '#9999ff',
+                  '#b2b2ff',
+                  '#ccccff',
+                  '#e5e5ff'
+              ],
           }
         ]
       };
@@ -908,7 +921,8 @@ function getGPAScore() {
                             var meta = chartInstance.controller.getDatasetMeta(i);
                             meta.data.forEach(function (bar, index) {
                                 var data = dataset.data[index];
-                                ctx.fillText(parseFloat(data)+ median, bar._model.x, bar._model.y - 5);
+                                // ctx.fillText(("Actual GPA:" + parseFloat(data)+ median), bar._model.x, bar._model.y - 5);
+                                //ctx.fillText(parseFloat(data), bar._model.x, bar._model.y - 5);
 
                             });
                         });
