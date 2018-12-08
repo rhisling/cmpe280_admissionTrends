@@ -84,6 +84,7 @@ const signupPost = (req, res) => {
 
 const logout = (req, res) => {
   console.log('Logged out:' + req.user);
+  req.logout();
   req.session.destroy(err => {
     console.log(err);
     res.set(
