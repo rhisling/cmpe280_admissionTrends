@@ -29,6 +29,7 @@ app.set('views', 'views');
 app.use(express.json()); // to support JSON-encoded bodies
 app.use(express.urlencoded({ extended: true })); // to support URL-encoded bodies
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/admin', express.static(path.join(__dirname, 'public')));
 app.use(
   session({
     secret: 'bigcatfish',
