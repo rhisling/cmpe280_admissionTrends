@@ -1011,7 +1011,7 @@ function getRetentionRate() {
               },
               scaleLabel: {
                 display: true,
-                labelString: 'Relative retention rate',
+                labelString: 'Relative Retention Rate',
                 fontSize: 14
               }
             }
