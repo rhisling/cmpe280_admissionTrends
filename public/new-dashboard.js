@@ -186,7 +186,7 @@ function drawGraphForSATAVG() {
                 barPercentage: 0.6,
                 scaleLabel: {
                   display: true,
-                  labelString: 'YEAR',
+                  labelString: 'Universities',
                   fontSize: 12
                 }
               }
@@ -1011,7 +1011,7 @@ function getRetentionRate() {
               },
               scaleLabel: {
                 display: true,
-                labelString: '% difference wrt Median',
+                labelString: 'Relative retention rate',
                 fontSize: 14
               }
             }
