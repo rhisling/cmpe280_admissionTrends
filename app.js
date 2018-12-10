@@ -5,7 +5,7 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const passport = require('passport');
 
-const key = require('./config/mongodb-key');
+const key = require('./config/keys');
 
 const routes = require('./routes/routes');
 const adminRoutes = require('./routes/admin');
@@ -16,7 +16,7 @@ const univRoutes = require('./routes/univRoutes');
 
 const app = express();
 const store = new MongoDBStore({
-  uri: key.mongodbUrl,
+  uri: key.mongoURI,
   collection: 'sessions'
 });
 
@@ -82,7 +82,7 @@ app.use(isLoggedIn, univRoutes);
 
 mongoose
   .connect(
-    key.mongodbUrl || 'mongodb://localhost:27017/AdmissionTrends',
+    key.mongoURI || 'mongodb://localhost:27017/AdmissionTrends',
     { useNewUrlParser: true }
   )
   .then(result => {
