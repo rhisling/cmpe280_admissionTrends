@@ -668,6 +668,25 @@ function getGradDebtProjection(filterValue) {
         document.getElementById('line_chart2').getContext('2d'),
         config
       );
+      let debt0=(((dataset[dataset.length-1] - dataset[0])/dataset[0]) *100).toFixed(2)
+        $('#explain-debt').empty();
+        if (debt0>0){
+
+
+            $('#explain-debt').append(
+                '<h4 style="font-style: italic; font-size: 15px; text-align: center;color: blue;">The debt increases by ' + debt0+ '% from 2013 to 2017</h4>'
+            );
+
+        }
+        else{
+
+
+            $('#explain-debt').append(
+                '<h4 style="font-style: italic; font-size: 15px; text-align: center;color: blue;">The debt decreases by ' + debt0 * -1+ '% from 2013 to 2017</h4>'
+            );
+
+        }
+
     },
     error: function(jqXHR, textStatus, errorThrown) {
       alert('error ' + textStatus + ' ' + errorThrown);
@@ -760,6 +779,24 @@ function getEarningResults(filterValue) {
         document.getElementById('line_chart3').getContext('2d'),
         config
       );
+        let debt0=(((dataset[dataset.length-1] - dataset[0])/dataset[0]) *100).toFixed(2)
+        $('#explain-earning').empty();
+        if (debt0>0){
+
+
+            $('#explain-earning').append(
+                '<h4 style="font-style: italic; font-size: 15px; text-align: center;color: blue;">The earnings increase by ' + debt0+ '% from 2013 to 2017</h4>'
+            );
+
+        }
+        else{
+
+
+            $('#explain-earning').append(
+                '<h4 style="font-style: italic; font-size: 15px; text-align: center;color: blue;">The earnings decrease by ' + debt0 * -1+ '% from 2013 to 2017</h4>'
+            );
+
+        }
     },
     error: function(jqXHR, textStatus, errorThrown) {
       alert('error ' + textStatus + ' ' + errorThrown);
@@ -1117,6 +1154,28 @@ function getGender(filterValue) {
           }
         }
       });
+
+
+
+        console.log("gender details ",parseFloat(datas[0]['men'])-parseFloat(datas[0]['women']));
+        $('#explain-gender').empty();
+        if (parseFloat(datas[0]['men'])>parseFloat(datas[0]['women'])){
+            let val=(parseFloat(datas[0]['men'])-parseFloat(datas[0]['women'])).toFixed(1);
+            console.log("val is",val);
+            $('#explain-gender').append(
+                '<h4 style="font-style: italic; font-size: 15px; text-align: center;color: blue;">Male students are ' + val+ '% more than Female students</h4>'
+            );
+
+        }
+        else{
+           let val=(parseFloat(datas[0]['women'])-parseFloat(datas[0]['men'])).toFixed(1)
+console.log("val is",val);
+            $('#explain-gender').append(
+                '<h4 style="font-style: italic; font-size: 15px; text-align: center;color: blue;">Female students are ' + val+ '% more than Male students</h4>'
+            );
+
+        }
+
     },
     error: function(jqXHR, textStatus, errorThrown) {
       alert('error ' + textStatus + ' ' + errorThrown);
@@ -1197,11 +1256,31 @@ function getExpenditure(filterValue) {
             ]
           }
         }
+
       };
       new Chart(
         document.getElementById('line_chart4').getContext('2d'),
         config
       );
+        let expenditure=(((in_exp[in_exp.length-1] - in_exp[0])/in_exp[0]) *100).toFixed(2)
+        console.log("expenditure in ",in_exp)
+        $('#explain-expenditure').empty();
+        if (expenditure<0){
+
+
+            $('#explain-expenditure').append(
+                '<h4 style="font-style: italic; font-size: 15px; text-align: center;color: blue;">The expenditure increases by ' + expenditure *-1+ '% from 2013 to 2017</h4>'
+            );
+
+        }
+        else{
+
+
+            $('#explain-expenditure').append(
+                '<h4 style="font-style: italic; font-size: 15px; text-align: center;color: blue;">The expenditure decreases by ' + expenditure+ '% from 2013 to 2017</h4>'
+            );
+
+        }
     },
     error: function(jqXHR, textStatus, errorThrown) {
       alert('error ' + textStatus + ' ' + errorThrown);
