@@ -35,6 +35,20 @@ module.exports.getTuition = (req, res) => {
     //console.log("tuitionResults in ",JSON.stringify(tuitionResults));
   });
 };
+
+module.exports.getAllTuition = (req, res) => {
+    var tuitionResults = [];
+    Ustats.find({YEAR:'2017'}, { INSTNM: 1, TUITIONFEE_IN: 1,TUITIONFEE_OUT: 1, YEAR: 1 }).exec(function(
+        err,
+        results
+    ) {
+        tuitionResults = results;
+        console.log("getAllTuition in ",JSON.stringify(tuitionResults));
+        res.send(JSON.stringify(tuitionResults));
+        //console.log("tuitionResults in ",JSON.stringify(tuitionResults));
+    });
+};
+
 module.exports.getTuitionOut = (req, res) => {
   var tuitionResults = [];
   Ustats.find({}, { INSTNM: 1, TUITIONFEE_OUT: 1, YEAR: 1 }).exec(function(

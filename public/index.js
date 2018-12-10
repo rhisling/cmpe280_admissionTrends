@@ -118,6 +118,7 @@ $(function() {
     $('#donut').empty();
     $('#donut').append('<canvas id="donut_chart" height="100"></canvas>');
 
+
     getTuitionOutGraph(filterCriteriaByUniv);
     getTuitionInGraph(filterCriteriaByUniv);
 
@@ -129,6 +130,7 @@ $(function() {
     getLoanGraph(filterCriteriaByUniv);
     getGender(filterCriteriaByUniv);
     getExpenditure(filterCriteriaByUniv);
+    getInOutStateFee(filterCriteriaByUniv);
   });
 
   // clearCanvas('line_chart1');
@@ -149,7 +151,7 @@ $(function() {
   getLoanGraph(filterCriteriaByUniv);
   getGender(filterCriteriaByUniv);
   getExpenditure(filterCriteriaByUniv);
-
+  getInOutStateFee(filterCriteriaByUniv);
   /* new Chart(
         document.getElementById('bar_chart1').getContext('2d'),
         getChartJs('bar')
@@ -308,7 +310,95 @@ function drawGraphForSATAVG() {
     }
   });
 }
+function getInOutStateFee(filterValue) {
+    // get the earningsResults
+    $.ajax({
+        url: 'index/alltuition',
+        dataType: 'json',
 
+        success: function(results) {
+            console.log('Tuition Out Graph', JSON.stringify(results));
+            let univtuitionFeeOut;
+            let univtuitionFeeIn;
+            let AllUnivDetails=results;
+            let tuitionFeeOut=[];
+            let tuitionFeeIn=[];
+            let univ;
+            results
+                .filter(
+                    result => result['INSTNM'].toLowerCase() === filterValue.toLowerCase()
+
+                )
+
+                .forEach(result => {
+                    univ=result['INSTNM']
+                    univtuitionFeeOut=result['TUITIONFEE_OUT'];
+                    univtuitionFeeIn=result['TUITIONFEE_IN'];
+                });
+
+            AllUnivDetails
+                .forEach(result=>{
+                    tuitionFeeOut.push(result['TUITIONFEE_OUT']);
+                    tuitionFeeIn.push(result['TUITIONFEE_IN']);
+
+                });
+            let lowMiddleIn = Math.floor((tuitionFeeIn.length - 1) / 2);
+            let highMiddleIn = Math.ceil((tuitionFeeIn.length - 1) / 2);
+            let medianIn =
+                (parseFloat(tuitionFeeIn[lowMiddleIn]) + parseFloat(tuitionFeeIn[highMiddleIn])) /
+                2;
+            console.log("medianIn in  getInOutStateFee",medianIn);
+
+            let lowMiddleOut = Math.floor((tuitionFeeOut.length - 1) / 2);
+            let highMiddleOut = Math.ceil((tuitionFeeOut.length - 1) / 2);
+            let medianOut =
+                (parseFloat(tuitionFeeOut[lowMiddleOut]) + parseFloat(tuitionFeeIn[highMiddleOut])) /
+                2;
+            console.log("medianOut in  getInOutStateFee",medianOut);
+            console.log("univtuitionFeeOut in  getInOutStateFee",univtuitionFeeOut);
+            console.log("univtuitionFeeIn in  getInOutStateFee",univtuitionFeeIn);
+            let univShort=getShortName(univ);
+            $('#univ-tbody').empty();
+            $('#univ-thead').empty();
+            $('#univ-thead').append(
+                '<tr style="background:linear-gradient(45deg, #dd5e89, #f7bb97);"><th></th><th style="text-align: center;">' + univShort + '&nbsp&nbsp</th><th style="text-align: center;">Median&nbsp&nbsp</th></tr>'
+            );
+            $('#univ-tbody').append(
+                '<tr><td>InTuition</td></td><td style="text-align: center;">&nbsp&nbsp' + univtuitionFeeIn + '</td><td style="text-align: center;">' +  medianIn+'</td></tr>'
+            );
+            $('#univ-tbody').append(
+                '<tr><td>OutTuition</td></td><td style="text-align: center;">' + univtuitionFeeOut + '</td><td style="text-align: center;">' + medianOut +'</td></tr>'
+            );
+
+
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert('error ' + textStatus + ' ' + errorThrown);
+        }
+    });
+}
+function getShortName(uName) {
+    switch (uName) {
+        case 'University of California-Berkeley':
+            return 'UCB';
+        case 'University of California-Davis':
+            return 'UCD';
+        case 'University of California-Irvine':
+            return 'UCI';
+        case 'University of California-Los Angeles':
+            return 'UCLA';
+        case 'University of California-Riverside':
+            return 'UCR';
+        case 'University of California-San Diego':
+            return 'UCSD';
+        case 'University of California-Santa Barbara':
+            return 'UCSB';
+        case 'University of California-Santa Cruz':
+            return 'UCSC';
+        case 'University of California-Merced':
+            return 'UCM';
+    }
+}
 function getTuitionOutGraph(filterValue) {
   // get the earningsResults
   $.ajax({
@@ -1098,6 +1188,7 @@ function getExpenditure(filterValue) {
         document.getElementById('line_chart4').getContext('2d'),
         config
       );
+
     },
     error: function(jqXHR, textStatus, errorThrown) {
       alert('error ' + textStatus + ' ' + errorThrown);

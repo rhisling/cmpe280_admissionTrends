@@ -10,6 +10,8 @@ router.get('/index', dashboardController.showDashboard);
 
 router.get('/index/tuition', dashboardController.getTuition);
 
+router.get('/index/alltuition', dashboardController.getAllTuition);
+
 router.get('/index/sat', dashboardController.getSatResults);
 
 router.get('/index/range', dashboardController.getRangeResults);
