@@ -52,7 +52,7 @@ passport.use(
   )
 );
 
-passport.use(
+/* passport.use(
   new FacebookStrategy(
     {
       clientID: keys.facebookClientID,
@@ -84,7 +84,7 @@ passport.use(
         .catch(err => console.log(err));
     }
   )
-);
+); */
 
 passport.use(
   new LocalStrategy(
