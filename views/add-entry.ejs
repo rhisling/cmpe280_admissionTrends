@@ -76,7 +76,13 @@
 						</ul>
 					</div>
 					<div class="body">
-                    <form action="/admin/add-entry" method="POST">
+                        <div class="alert alert-success col-md-6" role="alert" id="success-alert-add">
+                            <strong>Success!</strong> Added University.
+                        </div>
+                        <div class="alert alert-warning" role="alert" id="failure-alert-add">
+                            <strong>Failure!</strong> Could not delete.
+                        </div>
+                    
                         <div class="row clearfix">
                             <div class="col-lg-6 col-md-12">
                                 <div class="form-group">
@@ -123,10 +129,10 @@
                                 </div>
                             </div>
                             <div class="col-sm-12">
-                                <button type="submit" class="btn btn-raised g-bg-blush2">Submit</button>
+                                <button id="add-submit" class="btn btn-raised g-bg-blush2">Submit</button>
 <!--                                 <button type="submit" class="btn btn-raised btn-default ">Cancel</button>
  -->                            </div>
-                            </form>
+                          
                         </div>
                     </div>
 				</div>
@@ -150,5 +156,6 @@
 
 <script src="../assets/bundles/mainscripts.bundle.js"></script><!-- Custom Js --> 
 <script src="../assets/js/pages/forms/basic-form-elements.js"></script>
+<script src="add-entry.js"></script>
 </body>
 </html>
