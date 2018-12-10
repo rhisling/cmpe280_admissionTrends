@@ -30,11 +30,18 @@
     <div class="container">
       <div class="card-top"></div>
       <div class="card">
-                  <div align="center"><img src="/assets/images/logo-admission.png" height="150px" width="150px" alt="" /></div>
+        <div align="center">
+          <img
+            src="/assets/images/logo-admission.png"
+            height="150px"
+            width="150px"
+            alt=""
+          />
+        </div>
 
-        <h1 class="title">          
-          <!-- <span><%= title %></span> -->Login
-          <span class="msg">Sign in to start your session</span>
+        <h1 class="title">
+          <!-- <span><%= title %></span>
+          -->Login <span class="msg">Sign in to start your session</span>
         </h1>
         <% if (message) { %>
         <div class="alert alert-warning" role="alert"><%= message %></div>
@@ -79,12 +86,6 @@
               <div class="m-1">
                 <a href="/auth/google"
                   ><img src="./btn_google_dark.png" alt=""
-                /></a>
-              </div>
-
-              <div class="m-1">
-                <a href="/auth/facebook"
-                  ><img src="./btn_fb.png" height="40px" width="190px" alt=""
                 /></a>
               </div>
 
