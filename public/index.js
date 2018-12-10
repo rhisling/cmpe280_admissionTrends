@@ -480,6 +480,7 @@ function getSATMidpointResults(filterValue) {
             ],
             yAxes: [
               {
+                ticks: { beginAtZero: true },
                 scaleLabel: {
                   display: true,
                   labelString: 'SAT',
