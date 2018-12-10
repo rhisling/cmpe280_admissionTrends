@@ -2,8 +2,13 @@
   "name": "final_admissiontrends",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
+  "engines": {
+    "node": "10.9.0",
+    "npm": "6.4.1"
+  },
   "scripts": {
+    "start":"node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
