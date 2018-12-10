@@ -118,7 +118,6 @@ $(function() {
     $('#donut').empty();
     $('#donut').append('<canvas id="donut_chart" height="100"></canvas>');
 
-
     getTuitionOutGraph(filterCriteriaByUniv);
     getTuitionInGraph(filterCriteriaByUniv);
 
@@ -311,43 +310,41 @@ function drawGraphForSATAVG() {
   });
 }
 function getInOutStateFee(filterValue) {
-    // get the earningsResults
-    $.ajax({
-        url: 'index/alltuition',
-        dataType: 'json',
+  // get the earningsResults
+  $.ajax({
+    url: 'index/alltuition',
+    dataType: 'json',
 
-        success: function(results) {
-            console.log('Tuition Out Graph', JSON.stringify(results));
-            let univtuitionFeeOut;
-            let univtuitionFeeIn;
-            let AllUnivDetails=results;
-            let tuitionFeeOut=[];
-            let tuitionFeeIn=[];
-            let univ;
-            results
-                .filter(
-                    result => result['INSTNM'].toLowerCase() === filterValue.toLowerCase()
+    success: function(results) {
+      console.log('Tuition Out Graph', JSON.stringify(results));
+      let univtuitionFeeOut;
+      let univtuitionFeeIn;
+      let AllUnivDetails = results;
+      let tuitionFeeOut = [];
+      let tuitionFeeIn = [];
+      let univ;
+      results
+        .filter(
+          result => result['INSTNM'].toLowerCase() === filterValue.toLowerCase()
+        )
 
-                )
+        .forEach(result => {
+          univ = result['INSTNM'];
+          univtuitionFeeOut = result['TUITIONFEE_OUT'];
+          univtuitionFeeIn = result['TUITIONFEE_IN'];
+        });
 
-                .forEach(result => {
-                    univ=result['INSTNM']
-                    univtuitionFeeOut=result['TUITIONFEE_OUT'];
-                    univtuitionFeeIn=result['TUITIONFEE_IN'];
-                });
-
-            AllUnivDetails
-                .forEach(result=>{
-                    tuitionFeeOut.push(result['TUITIONFEE_OUT']);
-                    tuitionFeeIn.push(result['TUITIONFEE_IN']);
-
-                });
-            let lowMiddleIn = Math.floor((tuitionFeeIn.length - 1) / 2);
-            let highMiddleIn = Math.ceil((tuitionFeeIn.length - 1) / 2);
-            let medianIn =
-                (parseFloat(tuitionFeeIn[lowMiddleIn]) + parseFloat(tuitionFeeIn[highMiddleIn])) /
-                2;
-            console.log("medianIn in  getInOutStateFee",medianIn);
+      AllUnivDetails.forEach(result => {
+        tuitionFeeOut.push(result['TUITIONFEE_OUT']);
+        tuitionFeeIn.push(result['TUITIONFEE_IN']);
+      });
+      let lowMiddleIn = Math.floor((tuitionFeeIn.length - 1) / 2);
+      let highMiddleIn = Math.ceil((tuitionFeeIn.length - 1) / 2);
+      let medianIn =
+        (parseFloat(tuitionFeeIn[lowMiddleIn]) +
+          parseFloat(tuitionFeeIn[highMiddleIn])) /
+        2;
+      console.log('medianIn in  getInOutStateFee', medianIn);
 
             let lowMiddleOut = Math.floor((tuitionFeeOut.length - 1) / 2);
             let highMiddleOut = Math.ceil((tuitionFeeOut.length - 1) / 2);
@@ -514,30 +511,30 @@ function getSATMidpointResults(filterValue) {
             label: 'Critical Reading',
             fill: false,
             data: satvrmid,
-            borderColor: 'rgba(2, 128, 128, 1.00)',
-            backgroundColor: 'rgba(2, 128, 128, 0.5)',
-            pointBorderColor: 'rgba(2, 128, 128, 0)',
-            pointBackgroundColor: 'rgba(2, 128, 128, 0.9)',
+            borderColor: 'rgba(241, 97, 139, 1.00)',
+            backgroundColor: 'rgba(241, 97, 139, 0.5)',
+            pointBorderColor: 'rgba(241, 97, 139, 0)',
+            pointBackgroundColor: 'rgba(241, 97, 139, 0.9)',
             pointBorderWidth: 1
           },
           {
             label: 'Math',
             fill: false,
             data: satmtmid,
-            borderColor: 'rgba(155, 205, 49, 1.00)',
-            backgroundColor: 'rgba(155, 205, 49, 0.5)',
-            pointBorderColor: 'rgba(155, 205, 49, 0)',
-            pointBackgroundColor: 'rgba(155, 205, 49, 0.9)',
+            borderColor: 'rgba(98, 205, 224, 1.00)',
+            backgroundColor: 'rgba(98, 205, 224, 0.5)',
+            pointBorderColor: 'rgba(98, 205, 224, 0)',
+            pointBackgroundColor: 'rgba(98, 205, 224, 0.9)',
             pointBorderWidth: 1
           },
           {
             label: 'Writing',
             fill: false,
             data: satwrmid,
-            borderColor: 'rgba(245, 183, 150, 1.00)',
-            backgroundColor: 'rgba(245, 183, 150, 0.5)',
-            pointBorderColor: 'rgba(245, 183, 150, 0)',
-            pointBackgroundColor: 'rgba(245, 183, 150, 0.9)',
+            borderColor: 'rgba(72, 61, 139, 1.00)',
+            backgroundColor: 'rgba(72, 61, 139, 0.5)',
+            pointBorderColor: 'rgba(72, 61, 139, 0)',
+            pointBackgroundColor: 'rgba(72, 61, 139, 0.9)',
             pointBorderWidth: 1
           }
         ]
@@ -563,8 +560,8 @@ function getSATMidpointResults(filterValue) {
                 },
                 scaleLabel: {
                   display: true,
-                  labelString: 'YEAR',
-                  fontSize: 16
+                  labelString: 'Year',
+                  fontSize: 14
                 }
               }
             ],
@@ -573,8 +570,8 @@ function getSATMidpointResults(filterValue) {
                 ticks: { beginAtZero: true },
                 scaleLabel: {
                   display: true,
-                  labelString: 'SAT',
-                  fontSize: 16
+                  labelString: 'SAT (out of 800)',
+                  fontSize: 14
                 }
               }
             ]
@@ -607,7 +604,7 @@ function getGradDebtProjection(filterValue) {
         )
         .forEach(result => {
           let tempObj = {};
-          tempObj['debt'] = parseFloat(result['GRAD_DEBT_MDN_SUPP']) / 10000;
+          tempObj['debt'] = parseFloat(result['GRAD_DEBT_MDN_SUPP']);
           tempObj['year'] = result['YEAR'];
           datas.push(tempObj);
         });
@@ -651,13 +648,17 @@ function getGradDebtProjection(filterValue) {
             xAxes: [
               {
                 gridLines: { display: false },
-                scaleLabel: { display: true, labelString: 'YEAR', fontSize: 16 }
+                scaleLabel: { display: true, labelString: 'Year', fontSize: 16 }
               }
             ],
             yAxes: [
               {
                 ticks: { beginAtZero: true },
-                scaleLabel: { display: true, labelString: 'DEBT', fontSize: 16 }
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Debt ($USD)',
+                  fontSize: 14
+                }
               }
             ]
           }
@@ -737,7 +738,7 @@ function getEarningResults(filterValue) {
                 },
                 scaleLabel: {
                   display: true,
-                  labelString: 'YEAR',
+                  labelString: 'Year',
                   fontSize: 16
                 }
               }
@@ -747,8 +748,8 @@ function getEarningResults(filterValue) {
                 ticks: { beginAtZero: true },
                 scaleLabel: {
                   display: true,
-                  labelString: 'Mean Earnings',
-                  fontSize: 16
+                  labelString: 'Mean Earnings ($USD)',
+                  fontSize: 14
                 }
               }
             ]
@@ -1084,7 +1085,7 @@ function getGender(filterValue) {
           labels: ['Men', 'Women'],
           datasets: [
             {
-              label: 'Gender Distribution',
+              label: 'Gender Distribution (%)',
               backgroundColor: ['#20B2AA', '#FF8C00'],
               data: [datas[0]['men'], datas[0]['women']]
             }
@@ -1096,6 +1097,22 @@ function getGender(filterValue) {
             position: 'bottom',
             labels: {
               fontColor: '#000000'
+            }
+          },
+          plugins: {
+            datalabels: {
+              formatter: (value, ctx) => {
+                let datasets = ctx.chart.data.datasets;
+
+                if (datasets.indexOf(ctx.dataset) === datasets.length - 1) {
+                  let sum = datasets[0].data.reduce((a, b) => a + b, 0);
+                  let percentage = Math.round((value / sum) * 100) + '%';
+                  return percentage;
+                } else {
+                  return percentage;
+                }
+              },
+              color: '#fff'
             }
           }
         }
@@ -1163,22 +1180,19 @@ function getExpenditure(filterValue) {
           scales: {
             xAxes: [
               {
-                gridLines: {
-                  display: false
-                },
-                ticks: {
-                  beginAtZero: true
-                },
+                ticks: { beginAtZero: true },
                 scaleLabel: {
                   display: true,
-                  labelString: 'EXPENDITURE ($US)',
+                  labelString: 'Expenditure ($USD)',
                   fontSize: 14
                 }
               }
             ],
             yAxes: [
               {
-                scaleLabel: { display: true, labelString: 'YEAR', fontSize: 14 }
+                gridLines: { display: false },
+                barPercentage: 0.6,
+                scaleLabel: { display: true, labelString: 'Year', fontSize: 14 }
               }
             ]
           }
@@ -1188,7 +1202,6 @@ function getExpenditure(filterValue) {
         document.getElementById('line_chart4').getContext('2d'),
         config
       );
-
     },
     error: function(jqXHR, textStatus, errorThrown) {
       alert('error ' + textStatus + ' ' + errorThrown);
