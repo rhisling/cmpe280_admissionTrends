@@ -16,7 +16,7 @@ $(function() {
     $('#error-alert').hide();
     let sat = $('#SAT').val();
     let gpa = $('#GPA').val();
-    if (sat > 1600 || sat <= 0 || gpa > 5.0 || gpa <= 0) {
+    if (sat > 1600 || sat <= 0 || gpa > 4.0 || gpa <= 0) {
       $('#error-alert').show();
       $('#line_chart1').empty();
       $('#univ-tbody').empty();
