@@ -1,23 +1,21 @@
 ﻿'use strict';
 var realtime = 'on';
 
-
 ('use strict');
 $(function() {
-  let filterCriteriaByUniv = document.getElementById("univOption").innerHTML;//$('#univOption').val();
+  let filterCriteriaByUniv = document.getElementById('univOption').innerHTML; //$('#univOption').val();
   console.log(filterCriteriaByUniv);
-/*  let filterCriteriaByUniv = $('#univOption').val();
+  /*  let filterCriteriaByUniv = $('#univOption').val();
   $('#univOption').change(function() {
   filterCriteriaByUniv = $('#univOption').val();
   console.log(filterCriteriaByUniv);*/
 
   $('#line_chart1').empty();
   $('#line_chart2').empty();
-  
+
   drawGraphForSATAVG(filterCriteriaByUniv);
   drawGraphForTuitionFee(filterCriteriaByUniv);
-  });
-
+});
 
 function drawGraphForSATAVG(filterValue) {
   $.ajax({
@@ -26,8 +24,7 @@ function drawGraphForSATAVG(filterValue) {
     success: function(results) {
       //console.log('results:' + JSON.stringify(results));
       let datas = [];
-      results
-      .forEach(result => {
+      results.forEach(result => {
         if (
           datas.length > 0 &&
           datas.filter(data => data.year === result['YEAR']).length > 0
@@ -78,11 +75,32 @@ function drawGraphForSATAVG(filterValue) {
         data: data,
         options: {
           responsive: true,
-          legend: false
+          legend: false,
+          scales: {
+            xAxes: [
+              {
+                gridLines: { display: false },
+                scaleLabel: { display: true, labelString: 'Year', fontSize: 14 }
+              }
+            ],
+            yAxes: [
+              {
+                ticks: { beginAtZero: true },
+                scaleLabel: {
+                  display: true,
+                  labelString: 'SAT Score(out of 1600)',
+                  fontSize: 14
+                }
+              }
+            ]
+          }
         }
       };
 
-      new Chart(document.getElementById('line_chart1').getContext('2d'), config);
+      new Chart(
+        document.getElementById('line_chart1').getContext('2d'),
+        config
+      );
 
       console.log('labels:', labels);
     },
@@ -148,11 +166,32 @@ function drawGraphForTuitionFee(filterValue) {
         data: data,
         options: {
           responsive: true,
-          legend: false
+          legend: false,
+          scales: {
+            xAxes: [
+              {
+                gridLines: { display: false },
+                scaleLabel: { display: true, labelString: 'Year', fontSize: 16 }
+              }
+            ],
+            yAxes: [
+              {
+                ticks: { beginAtZero: true },
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Tuition Cost ($USD)',
+                  fontSize: 14
+                }
+              }
+            ]
+          }
         }
       };
 
-      new Chart(document.getElementById('line_chart2').getContext('2d'), config);
+      new Chart(
+        document.getElementById('line_chart2').getContext('2d'),
+        config
+      );
 
       console.log('labels:', labels);
     },
@@ -161,7 +200,6 @@ function drawGraphForTuitionFee(filterValue) {
     }
   });
 }
-
 
 /*function getGradDebtProjection(filterValue) {
   $.ajax({
