@@ -516,7 +516,7 @@ function getGradDebtProjection(filterValue) {
         )
         .forEach(result => {
           let tempObj = {};
-          tempObj['debt'] = parseInt(result['GRAD_DEBT_MDN_SUPP']);
+          tempObj['debt'] = parseFloat(result['GRAD_DEBT_MDN_SUPP']) / 10000;
           tempObj['year'] = result['YEAR'];
           datas.push(tempObj);
         });
@@ -559,23 +559,14 @@ function getGradDebtProjection(filterValue) {
           scales: {
             xAxes: [
               {
-                gridLines: {
-                  display: false
-                },
-                scaleLabel: {
-                  display: true,
-                  labelString: 'YEAR',
-                  fontSize: 16
-                }
+                gridLines: { display: false },
+                scaleLabel: { display: true, labelString: 'YEAR', fontSize: 16 }
               }
             ],
             yAxes: [
               {
-                scaleLabel: {
-                  display: true,
-                  labelString: 'DEBT',
-                  fontSize: 16
-                }
+                ticks: { beginAtZero: true },
+                scaleLabel: { display: true, labelString: 'DEBT', fontSize: 16 }
               }
             ]
           }
@@ -662,6 +653,7 @@ function getEarningResults(filterValue) {
             ],
             yAxes: [
               {
+                ticks: { beginAtZero: true },
                 scaleLabel: {
                   display: true,
                   labelString: 'Mean Earnings',

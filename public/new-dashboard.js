@@ -884,7 +884,17 @@ function getGPAScore() {
         datasets: [
           {
             label: 'Relative University GPA',
-            backgroundColor: 'rgba(255,99,132,0.2)',
+            backgroundColor: [
+              '#E78AB5',
+              '#E78AB5',
+              '#E78AB5',
+              '#E78AB5',
+              '#E78AB5',
+              'rgba(255,99,132,0.2)',
+              'rgba(255,99,132,0.2)',
+              'rgba(255,99,132,0.2)',
+              'rgba(255,99,132,0.2)'
+            ],
             borderColor: 'rgba(255,99,132,1)',
             borderWidth: 2,
             hoverBackgroundColor: 'rgba(255,99,132,0.4)',
@@ -905,7 +915,7 @@ function getGPAScore() {
               },
               scaleLabel: {
                 display: true,
-                labelString: 'Relative GPA',
+                labelString: 'Relative GPA (%)',
                 fontSize: 14
               }
             }
@@ -990,7 +1000,17 @@ function getRetentionRate() {
         datasets: [
           {
             label: 'Relative University Retention',
-            backgroundColor: '#f2a571',
+            backgroundColor: [
+              '#f2a571',
+              '#f2a571',
+              '#f2a571',
+              '#f2a571',
+              '#f2a571',
+              '#FED59A',
+              '#FED59A',
+              '#FED59A',
+              '#FED59A'
+            ],
             borderColor: '#f2721b',
             borderWidth: 2,
             hoverBackgroundColor: 'rgba(255,99,132,0.4)',
@@ -1011,16 +1031,14 @@ function getRetentionRate() {
               },
               scaleLabel: {
                 display: true,
-                labelString: 'Relative Retention Rate',
+                labelString: 'Relative Retention Rate (%)',
                 fontSize: 14
               }
             }
           ],
           xAxes: [
             {
-              gridLines: {
-                display: false
-              },
+              gridLines: { display: false },
               scaleLabel: {
                 display: true,
                 labelString: 'Universities',
