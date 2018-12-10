@@ -58,7 +58,8 @@ passport.use(
       clientID: keys.facebookClientID,
       clientSecret: keys.facebookClientSecret,
       callbackURL: '/auth/facebook/callback',
-      profileFields: ['id', 'displayName', 'photos', 'emails']
+      profileFields: ['id', 'displayName', 'photos', 'emails'],
+      proxy: true
     },
     (accessToken, refreshToken, profile, done) => {
       console.log('Facebook profile', profile);
