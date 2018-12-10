@@ -361,13 +361,13 @@ function getInOutStateFee(filterValue) {
             $('#univ-tbody').empty();
             $('#univ-thead').empty();
             $('#univ-thead').append(
-                '<tr style="background:linear-gradient(45deg, #dd5e89, #f7bb97);"><th></th><th style="text-align: center;">' + univShort + '&nbsp&nbsp</th><th style="text-align: center;">Median&nbsp&nbsp</th></tr>'
+                '<tr style="background:linear-gradient(45deg, #dd5e89, #f7bb97);"><th style="width: 30%"></th><th style="text-align: center;">' + univShort + '</th><th style="text-align: center;">Median</th></tr>'
             );
             $('#univ-tbody').append(
-                '<tr><td>InTuition</td></td><td style="text-align: center;">&nbsp&nbsp' + univtuitionFeeIn + '</td><td style="text-align: center;">' +  medianIn+'</td></tr>'
+                '<tr><td>In State Tuition</td><td style="text-align: center;">' + univtuitionFeeIn + '</td><td style="text-align: center;">' +  medianIn+'</td></tr>'
             );
             $('#univ-tbody').append(
-                '<tr><td>OutTuition</td></td><td style="text-align: center;">' + univtuitionFeeOut + '</td><td style="text-align: center;">' + medianOut +'</td></tr>'
+                '<tr><td>Out State Tuition</td><td style="text-align: center;">' + univtuitionFeeOut + '</td><td style="text-align: center;">' + medianOut +'</td></tr>'
             );
 
 
