@@ -74,57 +74,51 @@ function getRandomData() {
 
 ('use strict');
 $(function() {
-  //   new Chart(
-  //     document.getElementById('line_chart').getContext('2d'),
-  //     getChartJs('line')
-  //   );
-  //   new Chart(
-  //     document.getElementById('bar_chart').getContext('2d'),
-  //     getChartJs('bar')
-  //   );
-  //   new Chart(
-  //     document.getElementById('line_chart1').getContext('2d'),
-  //     getChartJs('line')
-  //   );
-
   let filterCriteriaByUniv = $('#univOption option:selected').val();
+  let type = $('input[name=sat]:checked').val();
+
+  $('input[name=sat]').on('click', function() {
+    $('#line1').empty();
+    $('#line1').append('<canvas id="line_chart1" height="150"></canvas>');
+    let radioVal = $('input[name=sat]:checked').val();
+    getSATMidpointResults(filterCriteriaByUniv, radioVal);
+  });
+
   $('#univOption').change(function() {
     filterCriteriaByUniv = $('#univOption option:selected').val();
     console.log(filterCriteriaByUniv);
     //When drop down is changed, call the 4 methods again
-    //$('#morris-area-chart').empty();
-    // $('#line_chart1').empty();
-    // $('#line_chart2').empty();
-    // $('#line_chart3').empty();
-    // $('#line_chart4').empty();
-    // $('#bar_chart1').empty();
-    // $('#bar_chart2').empty();
-    // $('#donut_chart').empty();
+    // $('input[name=sat]').on('click', function() {
+    //   let radioVal = $('input[name=sat]:checked').val();
+    //   getSATMidpointResults(filterCriteriaByUniv, radioVal);
+    // });
+    let type = $('input[name=sat]:checked').val();
+    //alert('type from ready:' + type);
     $('#line1').empty();
-    $('#line1').append('<canvas id="line_chart1" height="100"></canvas>');
+    $('#line1').append('<canvas id="line_chart1" height="150"></canvas>');
 
     $('#line2').empty();
-    $('#line2').append('<canvas id="line_chart2" height="100"></canvas>');
+    $('#line2').append('<canvas id="line_chart2" height="150"></canvas>');
 
     $('#line3').empty();
-    $('#line3').append('<canvas id="line_chart3" height="100"></canvas>');
+    $('#line3').append('<canvas id="line_chart3" height="150"></canvas>');
 
     $('#line4').empty();
-    $('#line4').append('<canvas id="line_chart4" height="100"></canvas>');
+    $('#line4').append('<canvas id="line_chart4" height="150"></canvas>');
 
     $('#bar2').empty();
-    $('#bar2').append('<canvas id="bar_chart2" height="100"></canvas>');
+    $('#bar2').append('<canvas id="bar_chart2" height="150"></canvas>');
 
     $('#donut').empty();
-    $('#donut').append('<canvas id="donut_chart" height="100"></canvas>');
+    $('#donut').append('<canvas id="donut_chart" height="150"></canvas>');
 
     getTuitionOutGraph(filterCriteriaByUniv);
     getTuitionInGraph(filterCriteriaByUniv);
 
-    getSATMidpointResults(filterCriteriaByUniv);
+    getSATMidpointResults(filterCriteriaByUniv, type);
     getGradDebtProjection(filterCriteriaByUniv);
     getEarningResults(filterCriteriaByUniv);
-    getDiversityResults(filterCriteriaByUniv);
+    //getDiversityResults(filterCriteriaByUniv);
     getRetentionGraph(filterCriteriaByUniv);
     getLoanGraph(filterCriteriaByUniv);
     getGender(filterCriteriaByUniv);
@@ -139,11 +133,11 @@ $(function() {
   // clearCanvas('bar_chart2');
   // clearCanvas('donut_chart');
 
-  drawGraphForSATAVG();
-  getSATMidpointResults(filterCriteriaByUniv);
+  //drawGraphForSATAVG();
+  getSATMidpointResults(filterCriteriaByUniv, type);
   getGradDebtProjection(filterCriteriaByUniv);
   getEarningResults(filterCriteriaByUniv);
-  getDiversityResults(filterCriteriaByUniv);
+  //getDiversityResults(filterCriteriaByUniv);
   getTuitionOutGraph(filterCriteriaByUniv);
   getTuitionInGraph(filterCriteriaByUniv);
   getRetentionGraph(filterCriteriaByUniv);
@@ -346,55 +340,64 @@ function getInOutStateFee(filterValue) {
         2;
       console.log('medianIn in  getInOutStateFee', medianIn);
 
-            let lowMiddleOut = Math.floor((tuitionFeeOut.length - 1) / 2);
-            let highMiddleOut = Math.ceil((tuitionFeeOut.length - 1) / 2);
-            let medianOut =
-                (parseFloat(tuitionFeeOut[lowMiddleOut]) + parseFloat(tuitionFeeIn[highMiddleOut])) /
-                2;
-            console.log("medianOut in  getInOutStateFee",medianOut);
-            console.log("univtuitionFeeOut in  getInOutStateFee",univtuitionFeeOut);
-            console.log("univtuitionFeeIn in  getInOutStateFee",univtuitionFeeIn);
-            let univShort=getShortName(univ);
-            $('#univ-tbody').empty();
-            $('#univ-thead').empty();
-            $('#univ-thead').append(
-                '<tr style="background:linear-gradient(45deg, #dd5e89, #f7bb97);"><th style="width: 30%"></th><th style="text-align: center;">' + univShort + '</th><th style="text-align: center;">Median</th></tr>'
-            );
-            $('#univ-tbody').append(
-                '<tr><td>In State Tuition</td><td style="text-align: center;">' + univtuitionFeeIn + '</td><td style="text-align: center;">' +  medianIn+'</td></tr>'
-            );
-            $('#univ-tbody').append(
-                '<tr><td>Out State Tuition</td><td style="text-align: center;">' + univtuitionFeeOut + '</td><td style="text-align: center;">' + medianOut +'</td></tr>'
-            );
-
-
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            alert('error ' + textStatus + ' ' + errorThrown);
-        }
-    });
+      let lowMiddleOut = Math.floor((tuitionFeeOut.length - 1) / 2);
+      let highMiddleOut = Math.ceil((tuitionFeeOut.length - 1) / 2);
+      let medianOut =
+        (parseFloat(tuitionFeeOut[lowMiddleOut]) +
+          parseFloat(tuitionFeeIn[highMiddleOut])) /
+        2;
+      console.log('medianOut in  getInOutStateFee', medianOut);
+      console.log('univtuitionFeeOut in  getInOutStateFee', univtuitionFeeOut);
+      console.log('univtuitionFeeIn in  getInOutStateFee', univtuitionFeeIn);
+      let univShort = getShortName(univ);
+      $('#univ-tbody').empty();
+      $('#univ-thead').empty();
+      $('#univ-thead').append(
+        '<tr style="background:linear-gradient(45deg, #dd5e89, #f7bb97);"><th style="width: 30%"></th><th style="text-align: center;">' +
+          univShort +
+          '</th><th style="text-align: center;">Median</th></tr>'
+      );
+      $('#univ-tbody').append(
+        '<tr><td>In State Tuition</td><td style="text-align: center;">' +
+          univtuitionFeeIn +
+          '</td><td style="text-align: center;">' +
+          medianIn +
+          '</td></tr>'
+      );
+      $('#univ-tbody').append(
+        '<tr><td>Out State Tuition</td><td style="text-align: center;">' +
+          univtuitionFeeOut +
+          '</td><td style="text-align: center;">' +
+          medianOut +
+          '</td></tr>'
+      );
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      alert('error ' + textStatus + ' ' + errorThrown);
+    }
+  });
 }
 function getShortName(uName) {
-    switch (uName) {
-        case 'University of California-Berkeley':
-            return 'UCB';
-        case 'University of California-Davis':
-            return 'UCD';
-        case 'University of California-Irvine':
-            return 'UCI';
-        case 'University of California-Los Angeles':
-            return 'UCLA';
-        case 'University of California-Riverside':
-            return 'UCR';
-        case 'University of California-San Diego':
-            return 'UCSD';
-        case 'University of California-Santa Barbara':
-            return 'UCSB';
-        case 'University of California-Santa Cruz':
-            return 'UCSC';
-        case 'University of California-Merced':
-            return 'UCM';
-    }
+  switch (uName) {
+    case 'University of California-Berkeley':
+      return 'UCB';
+    case 'University of California-Davis':
+      return 'UCD';
+    case 'University of California-Irvine':
+      return 'UCI';
+    case 'University of California-Los Angeles':
+      return 'UCLA';
+    case 'University of California-Riverside':
+      return 'UCR';
+    case 'University of California-San Diego':
+      return 'UCSD';
+    case 'University of California-Santa Barbara':
+      return 'UCSB';
+    case 'University of California-Santa Cruz':
+      return 'UCSC';
+    case 'University of California-Merced':
+      return 'UCM';
+  }
 }
 function getTuitionOutGraph(filterValue) {
   // get the earningsResults
@@ -464,7 +467,7 @@ function getTuitionInGraph(filterValue) {
     }
   });
 }
-function getSATMidpointResults(filterValue) {
+function getSATMidpointResults(filterValue, type) {
   // get the rangeResults
   $.ajax({
     url: 'index/range',
@@ -494,47 +497,39 @@ function getSATMidpointResults(filterValue) {
       );
 
       let labels = [];
-      let satvrmid = [];
-      let satmtmid = [];
-      let satwrmid = [];
+      // let satvrmid = [];
+      // let satmtmid = [];
+      // let satwrmid = [];
+      //alert('filterValue:' + filterValue);
+      let sat = [];
+      let labelsat;
+      //alert('in method type:' + type);
       datas.forEach(data => {
         labels.push(data['year']);
-        satvrmid.push(data['SATVRMID']);
-        satmtmid.push(data['SATMTMID']);
-        satwrmid.push(data['SATWRMID']);
+        if (type === 'Critical Reading') {
+          sat.push(data['SATVRMID']);
+          labelsat = 'Critical Reading';
+        } else if (type === 'Math') {
+          sat.push(data['SATMTMID']);
+          labelsat = 'Math';
+        } else {
+          sat.push(data['SATWRMID']);
+          labelsat = 'Writing';
+        }
       });
 
+      //alert(sat);
       let data = {
         labels: labels,
         datasets: [
           {
-            label: 'Critical Reading',
+            label: labelsat,
             fill: false,
-            data: satvrmid,
+            data: sat,
             borderColor: 'rgba(241, 97, 139, 1.00)',
             backgroundColor: 'rgba(241, 97, 139, 0.5)',
             pointBorderColor: 'rgba(241, 97, 139, 0)',
             pointBackgroundColor: 'rgba(241, 97, 139, 0.9)',
-            pointBorderWidth: 1
-          },
-          {
-            label: 'Math',
-            fill: false,
-            data: satmtmid,
-            borderColor: 'rgba(98, 205, 224, 1.00)',
-            backgroundColor: 'rgba(98, 205, 224, 0.5)',
-            pointBorderColor: 'rgba(98, 205, 224, 0)',
-            pointBackgroundColor: 'rgba(98, 205, 224, 0.9)',
-            pointBorderWidth: 1
-          },
-          {
-            label: 'Writing',
-            fill: false,
-            data: satwrmid,
-            borderColor: 'rgba(72, 61, 139, 1.00)',
-            backgroundColor: 'rgba(72, 61, 139, 0.5)',
-            pointBorderColor: 'rgba(72, 61, 139, 0)',
-            pointBackgroundColor: 'rgba(72, 61, 139, 0.9)',
             pointBorderWidth: 1
           }
         ]
@@ -668,25 +663,24 @@ function getGradDebtProjection(filterValue) {
         document.getElementById('line_chart2').getContext('2d'),
         config
       );
-      let debt0=(((dataset[dataset.length-1] - dataset[0])/dataset[0]) *100).toFixed(2)
-        $('#explain-debt').empty();
-        if (debt0>0){
-
-
-            $('#explain-debt').append(
-                '<h4 style="font-style: italic; font-size: 13px; text-align: center;color: #808080;">Debt increased by ' + debt0+ '% from 2013 to 2017.</h4>'
-            );
-
-        }
-        else{
-
-
-            $('#explain-debt').append(
-                '<h4 style="font-style: italic; font-size: 13px; text-align: center;color: #808080;">Debt decreased by ' + debt0 * -1+ '% from 2013 to 2017.</h4>'
-            );
-
-        }
-
+      let debt0 = (
+        ((dataset[dataset.length - 1] - dataset[0]) / dataset[0]) *
+        100
+      ).toFixed(2);
+      $('#explain-debt').empty();
+      if (debt0 > 0) {
+        $('#explain-debt').append(
+          '<h4 style="font-style: italic; font-size: 13px; text-align: center;color: #808080;">Debt increased by ' +
+            debt0 +
+            '% from 2013 to 2017.</h4>'
+        );
+      } else {
+        $('#explain-debt').append(
+          '<h4 style="font-style: italic; font-size: 13px; text-align: center;color: #808080;">Debt decreased by ' +
+            debt0 * -1 +
+            '% from 2013 to 2017.</h4>'
+        );
+      }
     },
     error: function(jqXHR, textStatus, errorThrown) {
       alert('error ' + textStatus + ' ' + errorThrown);
@@ -779,24 +773,24 @@ function getEarningResults(filterValue) {
         document.getElementById('line_chart3').getContext('2d'),
         config
       );
-        let debt0=(((dataset[dataset.length-1] - dataset[0])/dataset[0]) *100).toFixed(2)
-        $('#explain-earning').empty();
-        if (debt0>0){
-
-
-            $('#explain-earning').append(
-                '<h4 style="font-style: italic; font-size: 13px; text-align: center;color: #808080;">Earnings increased by ' + debt0+ '% from 2013 to 2017.</h4>'
-            );
-
-        }
-        else{
-
-
-            $('#explain-earning').append(
-                '<h4 style="font-style: italic; font-size: 13px; text-align: center;color: #808080;">Earnings decreased by ' + debt0 * -1+ '% from 2013 to 2017.</h4>'
-            );
-
-        }
+      let debt0 = (
+        ((dataset[dataset.length - 1] - dataset[0]) / dataset[0]) *
+        100
+      ).toFixed(2);
+      $('#explain-earning').empty();
+      if (debt0 > 0) {
+        $('#explain-earning').append(
+          '<h4 style="font-style: italic; font-size: 13px; text-align: center;color: #808080;">Earnings increased by ' +
+            debt0 +
+            '% from 2013 to 2017.</h4>'
+        );
+      } else {
+        $('#explain-earning').append(
+          '<h4 style="font-style: italic; font-size: 13px; text-align: center;color: #808080;">Earnings decreased by ' +
+            debt0 * -1 +
+            '% from 2013 to 2017.</h4>'
+        );
+      }
     },
     error: function(jqXHR, textStatus, errorThrown) {
       alert('error ' + textStatus + ' ' + errorThrown);
@@ -1155,27 +1149,32 @@ function getGender(filterValue) {
         }
       });
 
-
-
-        console.log("gender details ",parseFloat(datas[0]['men'])-parseFloat(datas[0]['women']));
-        $('#explain-gender').empty();
-        if (parseFloat(datas[0]['men'])>parseFloat(datas[0]['women'])){
-            let val=(parseFloat(datas[0]['men'])-parseFloat(datas[0]['women'])).toFixed(1);
-            console.log("val is",val);
-            $('#explain-gender').append(
-                '<h4 style="font-style: italic; font-size: 13px; text-align: center;color: #808080;">There are ' + val+ '% more male students than female students.</h4>'
-            );
-
-        }
-        else{
-           let val=(parseFloat(datas[0]['women'])-parseFloat(datas[0]['men'])).toFixed(1)
-console.log("val is",val);
-            $('#explain-gender').append(
-                '<h4 style="font-style: italic; font-size: 13px; text-align: center;color: #808080;">There are ' + val+ '% more female students than male students.</h4>'
-            );
-
-        }
-
+      console.log(
+        'gender details ',
+        parseFloat(datas[0]['men']) - parseFloat(datas[0]['women'])
+      );
+      $('#explain-gender').empty();
+      if (parseFloat(datas[0]['men']) > parseFloat(datas[0]['women'])) {
+        let val = (
+          parseFloat(datas[0]['men']) - parseFloat(datas[0]['women'])
+        ).toFixed(1);
+        console.log('val is', val);
+        $('#explain-gender').append(
+          '<h4 style="font-style: italic; font-size: 13px; text-align: center;color: #808080;">There are ' +
+            val +
+            '% more male students than female students.</h4>'
+        );
+      } else {
+        let val = (
+          parseFloat(datas[0]['women']) - parseFloat(datas[0]['men'])
+        ).toFixed(1);
+        console.log('val is', val);
+        $('#explain-gender').append(
+          '<h4 style="font-style: italic; font-size: 13px; text-align: center;color: #808080;">There are ' +
+            val +
+            '% more female students than male students.</h4>'
+        );
+      }
     },
     error: function(jqXHR, textStatus, errorThrown) {
       alert('error ' + textStatus + ' ' + errorThrown);
@@ -1256,31 +1255,30 @@ function getExpenditure(filterValue) {
             ]
           }
         }
-
       };
       new Chart(
         document.getElementById('line_chart4').getContext('2d'),
         config
       );
-        let expenditure=(((in_exp[in_exp.length-1] - in_exp[0])/in_exp[0]) *100).toFixed(2)
-        console.log("expenditure in ",in_exp)
-        $('#explain-expenditure').empty();
-        if (expenditure<0){
-
-
-            $('#explain-expenditure').append(
-                '<h4 style="font-style: italic; font-size: 13px; text-align: center;color: #808080;">The expenditure increased by ' + expenditure *-1+ '% from 2013 to 2017.</h4>'
-            );
-
-        }
-        else{
-
-
-            $('#explain-expenditure').append(
-                '<h4 style="font-style: italic; font-size: 13px; text-align: center;color: #808080;">The expenditure decreased by ' + expenditure+ '% from 2013 to 2017.</h4>'
-            );
-
-        }
+      let expenditure = (
+        ((in_exp[in_exp.length - 1] - in_exp[0]) / in_exp[0]) *
+        100
+      ).toFixed(2);
+      console.log('expenditure in ', in_exp);
+      $('#explain-expenditure').empty();
+      if (expenditure < 0) {
+        $('#explain-expenditure').append(
+          '<h4 style="font-style: italic; font-size: 13px; text-align: center;color: #808080;">The expenditure increased by ' +
+            expenditure * -1 +
+            '% from 2013 to 2017.</h4>'
+        );
+      } else {
+        $('#explain-expenditure').append(
+          '<h4 style="font-style: italic; font-size: 13px; text-align: center;color: #808080;">The expenditure decreased by ' +
+            expenditure +
+            '% from 2013 to 2017.</h4>'
+        );
+      }
     },
     error: function(jqXHR, textStatus, errorThrown) {
       alert('error ' + textStatus + ' ' + errorThrown);

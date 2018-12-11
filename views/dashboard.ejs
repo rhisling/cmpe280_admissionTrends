@@ -13,6 +13,7 @@
                     <small class="text-muted">Welcome to AdmissionTrends</small>
                 </div>
                 <div class="col-md-4 p-4" style="text-align:right">Select University:</div>
+                
                 <select class="form-control col-md-3 m-3" id="univOption" style="border: 1px solid black" required>
                     <option selected value="University of California-Berkeley">UC Berkeley</option>
                     <option value="University of California-Irvine">UC Irvine</option>
@@ -74,6 +75,16 @@
                 <div class="card h-80">
                     <div class="header">
                         <h2 style="text-align:center;text-transform: none">Student SAT Score Midpoint</h2>
+                    </div>
+                    <div style="text-align:center">
+                        <input type="radio" id="reading" name="sat" value="Critical Reading" checked>
+                        <label for="reading">Critical Reading</label>
+                    
+                        <input type="radio" id="math" name="sat" value="Math">
+                        <label for="math">Math</label>
+                    
+                        <input type="radio" id="writing" name="sat" value="Writing">
+                        <label for="writing">Writing</label>
                     </div>
                     <div id="line1" class="body h-50">
                         <canvas id="line_chart1" height="150"></canvas>
