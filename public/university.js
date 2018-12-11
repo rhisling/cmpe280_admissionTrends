@@ -80,6 +80,7 @@ function drawGraphForSATAVG(filterValue) {
             xAxes: [
               {
                 gridLines: { display: false },
+                barPercentage: 0.6,
                 scaleLabel: { display: true, labelString: 'Year', fontSize: 14 }
               }
             ],
@@ -171,6 +172,7 @@ function drawGraphForTuitionFee(filterValue) {
             xAxes: [
               {
                 gridLines: { display: false },
+                barPercentage: 0.6,
                 scaleLabel: { display: true, labelString: 'Year', fontSize: 16 }
               }
             ],
