@@ -674,7 +674,7 @@ function getGradDebtProjection(filterValue) {
 
 
             $('#explain-debt').append(
-                '<h4 style="font-style: italic; font-size: 15px; text-align: center;color: blue;">The debt increases by ' + debt0+ '% from 2013 to 2017</h4>'
+                '<h4 style="font-style: italic; font-size: 13px; text-align: center;color: #808080;">Debt increased by ' + debt0+ '% from 2013 to 2017.</h4>'
             );
 
         }
@@ -682,7 +682,7 @@ function getGradDebtProjection(filterValue) {
 
 
             $('#explain-debt').append(
-                '<h4 style="font-style: italic; font-size: 15px; text-align: center;color: blue;">The debt decreases by ' + debt0 * -1+ '% from 2013 to 2017</h4>'
+                '<h4 style="font-style: italic; font-size: 13px; text-align: center;color: #808080;">Debt decreased by ' + debt0 * -1+ '% from 2013 to 2017.</h4>'
             );
 
         }
@@ -785,7 +785,7 @@ function getEarningResults(filterValue) {
 
 
             $('#explain-earning').append(
-                '<h4 style="font-style: italic; font-size: 15px; text-align: center;color: blue;">The earnings increase by ' + debt0+ '% from 2013 to 2017</h4>'
+                '<h4 style="font-style: italic; font-size: 13px; text-align: center;color: #808080;">Earnings increased by ' + debt0+ '% from 2013 to 2017.</h4>'
             );
 
         }
@@ -793,7 +793,7 @@ function getEarningResults(filterValue) {
 
 
             $('#explain-earning').append(
-                '<h4 style="font-style: italic; font-size: 15px; text-align: center;color: blue;">The earnings decrease by ' + debt0 * -1+ '% from 2013 to 2017</h4>'
+                '<h4 style="font-style: italic; font-size: 13px; text-align: center;color: #808080;">Earnings decreased by ' + debt0 * -1+ '% from 2013 to 2017.</h4>'
             );
 
         }
@@ -1163,7 +1163,7 @@ function getGender(filterValue) {
             let val=(parseFloat(datas[0]['men'])-parseFloat(datas[0]['women'])).toFixed(1);
             console.log("val is",val);
             $('#explain-gender').append(
-                '<h4 style="font-style: italic; font-size: 15px; text-align: center;color: blue;">Male students are ' + val+ '% more than Female students</h4>'
+                '<h4 style="font-style: italic; font-size: 13px; text-align: center;color: #808080;">There are ' + val+ '% more male students than female students.</h4>'
             );
 
         }
@@ -1171,7 +1171,7 @@ function getGender(filterValue) {
            let val=(parseFloat(datas[0]['women'])-parseFloat(datas[0]['men'])).toFixed(1)
 console.log("val is",val);
             $('#explain-gender').append(
-                '<h4 style="font-style: italic; font-size: 15px; text-align: center;color: blue;">Female students are ' + val+ '% more than Male students</h4>'
+                '<h4 style="font-style: italic; font-size: 13px; text-align: center;color: #808080;">There are ' + val+ '% more female students than male students.</h4>'
             );
 
         }
@@ -1269,7 +1269,7 @@ function getExpenditure(filterValue) {
 
 
             $('#explain-expenditure').append(
-                '<h4 style="font-style: italic; font-size: 15px; text-align: center;color: blue;">The expenditure increases by ' + expenditure *-1+ '% from 2013 to 2017</h4>'
+                '<h4 style="font-style: italic; font-size: 13px; text-align: center;color: #808080;">The expenditure increased by ' + expenditure *-1+ '% from 2013 to 2017.</h4>'
             );
 
         }
@@ -1277,7 +1277,7 @@ function getExpenditure(filterValue) {
 
 
             $('#explain-expenditure').append(
-                '<h4 style="font-style: italic; font-size: 15px; text-align: center;color: blue;">The expenditure decreases by ' + expenditure+ '% from 2013 to 2017</h4>'
+                '<h4 style="font-style: italic; font-size: 13px; text-align: center;color: #808080;">The expenditure decreased by ' + expenditure+ '% from 2013 to 2017.</h4>'
             );
 
         }
