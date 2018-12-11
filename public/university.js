@@ -24,6 +24,9 @@ function drawGraphForSATAVG(filterValue) {
     success: function(results) {
       //console.log('results:' + JSON.stringify(results));
       let datas = [];
+
+      let sum = 0;
+      let mean_value=0;
       results.forEach(result => {
         if (
           datas.length > 0 &&
@@ -53,153 +56,330 @@ function drawGraphForSATAVG(filterValue) {
       );
       let labels = [];
       let ucData = [];
+      let satDiff = [];
 
       datas.forEach(data => {
         labels.push(data['year']);
+        sum = sum + parseInt(data[String(filterValue)]);
         ucData.push(data[String(filterValue)]);
       });
+      console.log("UCB ",ucData);
+      mean_value= parseFloat(sum/ucData.length);
+      console.log("mean ",mean_value);
 
-      let data = {
+      ucData.forEach(result => {
+          satDiff.push((parseFloat(result) - mean_value).toFixed(2));
+      });
+      console.log('sat diff ', satDiff);
+        var canvas = document.getElementById('mySatChart');
+
+        let data = {
         labels: labels,
         datasets: [
           {
             label: String(filterValue),
-            data: ucData,
-            backgroundColor: '#dd5e89'
+            backgroundColor: [
+                '#d4d4d4',
+                '#d4d4d4',
+                '#d4d4d4',
+                '#d4d4d4',
+                '#d4d4d4'
+                ],
+              borderColor: '#0b3e6f',//'#798388',
+              borderWidth: 2,
+              hoverBackgroundColor: '#0b3e6f',//'rgba(255,99,132,0.4)',
+              hoverBorderColor: 'rgba(255,99,132,1)',
+
+              data: satDiff
+            //backgroundColor: '#dd5e89'
           }
         ]
       };
+        var option = {
+            scales: {
+                yAxes: [
+                    {
+                        stacked: true,
+                        gridLines: {
+                            display: true,
+                            color: 'rgba(255,99,132,0.2)'
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Relative SAT Score Midpoint',
+                            fontSize: 14
+                        }
+                    }
+                ],
+                xAxes: [
+                    {
+                        gridLines: {
+                            display: false
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Year',
+                            fontSize: 14
+                        }
+                    }
+                ]
+            }
+        };
 
-      let config = {
-        type: 'bar',
-        data: data,
-        options: {
-          responsive: true,
-          legend: false,
-          scales: {
-            xAxes: [
-              {
-                gridLines: { display: false },
-                scaleLabel: { display: true, labelString: 'Year', fontSize: 14 }
-              }
-            ],
-            yAxes: [
-              {
-                ticks: { beginAtZero: true },
-                scaleLabel: {
-                  display: true,
-                  labelString: 'SAT Score(out of 1600)',
-                  fontSize: 14
-                }
-              }
-            ]
-          }
-        }
-      };
-
-      new Chart(
-        document.getElementById('line_chart1').getContext('2d'),
-        config
-      );
-
-      console.log('labels:', labels);
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-      alert('error ' + textStatus + ' ' + errorThrown);
+        var mySatChart = Chart.Bar(canvas, {
+            data: data,
+            options: option
+        });
     }
   });
 }
+
+//
+//       let config = {
+//         type: 'bar',
+//         data: data,
+//         options: {
+//           responsive: true,
+//           legend: false,
+//           scales: {
+//             xAxes: [
+//               {
+//                 gridLines: { display: false },
+//                 scaleLabel: { display: true, labelString: 'Year', fontSize: 14 }
+//               }
+//             ],
+//             yAxes: [
+//               {
+//                 ticks: { beginAtZero: true },
+//                 scaleLabel: {
+//                   display: true,
+//                   labelString: 'SAT Score(out of 1600)',
+//                   fontSize: 14
+//                 }
+//               }
+//             ]
+//           }
+//         }
+//       };
+//
+//       new Chart(
+//         document.getElementById('line_chart1').getContext('2d'),
+//         config
+//       );
+//
+//       console.log('labels:', labels);
+//     },
+//     error: function(jqXHR, textStatus, errorThrown) {
+//       alert('error ' + textStatus + ' ' + errorThrown);
+//     }
+//   });
+// }
+
+
 
 function drawGraphForTuitionFee(filterValue) {
-  $.ajax({
-    url: 'index/tuition',
-    dataType: 'json',
-    success: function(results) {
-      //console.log('results:' + JSON.stringify(results));
-      let datas = [];
-      results.forEach(result => {
-        if (
-          datas.length > 0 &&
-          datas.filter(data => data.year === result['YEAR']).length > 0
-        ) {
-          name = result['INSTNM'];
-          datas.forEach((data, index) => {
-            if (data.year === result['YEAR']) {
-              data[name] = parseInt(result['TUITIONFEE_IN']);
-            }
-          });
-        } else {
-          name = result['INSTNM'];
-          let tempObj = {};
-          tempObj['year'] = result['YEAR'];
-          tempObj[name] = parseInt(result['TUITIONFEE_IN']);
-          datas.push(tempObj);
-        }
-      });
-      datas = datas.filter(data => data.year);
-      console.log('Processed data range lists:' + JSON.stringify(datas));
-      // for chronological ordering
-      datas.sort((a, b) =>
-        a['year'] > b['year'] ? 1 : b['year'] > a['year'] ? -1 : 0
-      );
-      let labels = [];
-      let ucbData = [];
+    $.ajax({
+        url: 'index/tuition',
+        dataType: 'json',
+        success: function(results) {
+            //console.log('results:' + JSON.stringify(results));
+            let datas = [];
+            let sum = 0;
+            let mean_value=0;
 
-      datas.forEach(data => {
-        labels.push(data['year']);
-        ucbData.push(data[String(filterValue)]);
-      });
-
-      let data = {
-        labels: labels,
-        datasets: [
-          {
-            label: String(filterValue),
-            data: ucbData,
-            backgroundColor: '#dd5e89'
-          }
-        ]
-      };
-
-      let config = {
-        type: 'bar',
-        data: data,
-        options: {
-          responsive: true,
-          legend: false,
-          scales: {
-            xAxes: [
-              {
-                gridLines: { display: false },
-                scaleLabel: { display: true, labelString: 'Year', fontSize: 16 }
-              }
-            ],
-            yAxes: [
-              {
-                ticks: { beginAtZero: true },
-                scaleLabel: {
-                  display: true,
-                  labelString: 'Tuition Cost ($USD)',
-                  fontSize: 14
+            results.forEach(result => {
+                if (
+                    datas.length > 0 &&
+                    datas.filter(data => data.year === result['YEAR']).length > 0
+                ) {
+                    name = result['INSTNM'];
+                    datas.forEach((data, index) => {
+                        if (data.year === result['YEAR']) {
+                            data[name] = parseInt(result['TUITIONFEE_IN']);
+                        }
+                    });
+                } else {
+                    name = result['INSTNM'];
+                    let tempObj = {};
+                    tempObj['year'] = result['YEAR'];
+                    tempObj[name] = parseInt(result['TUITIONFEE_IN']);
+                    datas.push(tempObj);
                 }
-              }
-            ]
-          }
+            });
+            datas = datas.filter(data => data.year);
+            console.log('Processed data range lists:' + JSON.stringify(datas));
+            // for chronological ordering
+            datas.sort((a, b) =>
+                a['year'] > b['year'] ? 1 : b['year'] > a['year'] ? -1 : 0
+            );
+            let labels = [];
+            let ucbData = [];
+            let tuitionDiff = [];
+
+            datas.forEach(data => {
+                labels.push(data['year']);
+                sum = sum + parseInt(data[String(filterValue)]);
+                ucbData.push(data[String(filterValue)]);
+            });
+            mean_value= parseFloat(sum/ucbData.length);
+            console.log("mean ",mean_value);
+
+            ucbData.forEach(result => {
+                tuitionDiff.push((parseFloat(result) - mean_value).toFixed(2));
+            });
+            console.log('sat diff ', tuitionDiff);
+            var canvas = document.getElementById('myTuitionChart');
+
+            let data = {
+                labels: labels,
+                datasets: [
+                    {
+                        label: String(filterValue),
+                        backgroundColor: [
+                            '#d4d4d4',
+                            '#d4d4d4',
+                            '#d4d4d4',
+                            '#d4d4d4',
+                            '#d4d4d4'
+                        ],
+                        borderColor: '#0b3e6f',//'#798388',
+                        borderWidth: 2,
+                        hoverBackgroundColor: '#0b3e6f',//'rgba(255,99,132,0.4)',
+                        hoverBorderColor: 'rgba(255,99,132,1)',
+
+                        data: tuitionDiff
+                        //backgroundColor: '#dd5e89'
+                    }
+                ]
+            };
+            var option = {
+                scales: {
+                    yAxes: [
+                        {
+                            stacked: true,
+                            gridLines: {
+                                display: true,
+                                color: 'rgba(255,99,132,0.2)'
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Relative Tuition Fees',
+                                fontSize: 14
+                            }
+                        }
+                    ],
+                    xAxes: [
+                        {
+                            gridLines: {
+                                display: false
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Year',
+                                fontSize: 14
+                            }
+                        }
+                    ]
+                }
+            };
+
+            var myTuitionChart = Chart.Bar(canvas, {
+                data: data,
+                options: option
+            });
         }
-      };
-
-      new Chart(
-        document.getElementById('line_chart2').getContext('2d'),
-        config
-      );
-
-      console.log('labels:', labels);
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-      alert('error ' + textStatus + ' ' + errorThrown);
-    }
-  });
+    });
 }
+// function drawGraphForTuitionFee(filterValue) {
+//   $.ajax({
+//     url: 'index/tuition',
+//     dataType: 'json',
+//     success: function(results) {
+//       //console.log('results:' + JSON.stringify(results));
+//       let datas = [];
+//       results.forEach(result => {
+//         if (
+//           datas.length > 0 &&
+//           datas.filter(data => data.year === result['YEAR']).length > 0
+//         ) {
+//           name = result['INSTNM'];
+//           datas.forEach((data, index) => {
+//             if (data.year === result['YEAR']) {
+//               data[name] = parseInt(result['TUITIONFEE_IN']);
+//             }
+//           });
+//         } else {
+//           name = result['INSTNM'];
+//           let tempObj = {};
+//           tempObj['year'] = result['YEAR'];
+//           tempObj[name] = parseInt(result['TUITIONFEE_IN']);
+//           datas.push(tempObj);
+//         }
+//       });
+//       datas = datas.filter(data => data.year);
+//       console.log('Processed data range lists:' + JSON.stringify(datas));
+//       // for chronological ordering
+//       datas.sort((a, b) =>
+//         a['year'] > b['year'] ? 1 : b['year'] > a['year'] ? -1 : 0
+//       );
+//       let labels = [];
+//       let ucbData = [];
+//
+//       datas.forEach(data => {
+//         labels.push(data['year']);
+//         ucbData.push(data[String(filterValue)]);
+//       });
+//
+//       let data = {
+//         labels: labels,
+//         datasets: [
+//           {
+//             label: String(filterValue),
+//             data: ucbData,
+//             backgroundColor: '#dd5e89'
+//           }
+//         ]
+//       };
+//
+//       let config = {
+//         type: 'bar',
+//         data: data,
+//         options: {
+//           responsive: true,
+//           legend: false,
+//           scales: {
+//             xAxes: [
+//               {
+//                 gridLines: { display: false },
+//                 scaleLabel: { display: true, labelString: 'Year', fontSize: 16 }
+//               }
+//             ],
+//             yAxes: [
+//               {
+//                 ticks: { beginAtZero: true },
+//                 scaleLabel: {
+//                   display: true,
+//                   labelString: 'Tuition Cost ($USD)',
+//                   fontSize: 14
+//                 }
+//               }
+//             ]
+//           }
+//         }
+//       };
+//
+//       new Chart(
+//         document.getElementById('line_chart2').getContext('2d'),
+//         config
+//       );
+//
+//       console.log('labels:', labels);
+//     },
+//     error: function(jqXHR, textStatus, errorThrown) {
+//       alert('error ' + textStatus + ' ' + errorThrown);
+//     }
+//   });
+// }
 
 /*function getGradDebtProjection(filterValue) {
   $.ajax({

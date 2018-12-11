@@ -1,5 +1,3 @@
 /node_modules
 .idea/
 config/dev.js
-/public/admin/assets
-/public/assets/
