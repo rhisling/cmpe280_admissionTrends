@@ -199,13 +199,8 @@ function getSATMidpointResults1() {
         data: data,
         options: {
           responsive: true,
-
-          title: {
-            display: true
-          },
-          legend: {
-            display: false
-          },
+          title: { display: true },
+          legend: { display: false },
           tooltips: {
             callbacks: {
               title: function(tooltipItems, data) {
@@ -229,6 +224,7 @@ function getSATMidpointResults1() {
           scales: {
             yAxes: [
               {
+                ticks: { beginAtZero: true },
                 display: true,
                 scaleLabel: {
                   display: true,
@@ -239,6 +235,7 @@ function getSATMidpointResults1() {
             ],
             xAxes: [
               {
+                ticks: { beginAtZero: true },
                 type: 'linear',
                 position: 'bottom',
                 display: true,
@@ -247,9 +244,7 @@ function getSATMidpointResults1() {
                   labelString: 'GPA (out of 4.0)',
                   fontSize: 14
                 },
-                gridLines: {
-                  display: true
-                }
+                gridLines: { display: true }
               }
             ]
           }
