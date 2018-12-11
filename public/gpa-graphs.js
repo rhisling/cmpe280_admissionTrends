@@ -232,8 +232,8 @@ function getSATMidpointResults1() {
                 display: true,
                 scaleLabel: {
                   display: true,
-                  labelString: 'SAT',
-                  fontSize: 16
+                  labelString: 'SAT (out of 1600)',
+                  fontSize: 14
                 }
               }
             ],
@@ -244,8 +244,8 @@ function getSATMidpointResults1() {
                 display: true,
                 scaleLabel: {
                   display: true,
-                  labelString: 'GPA',
-                  fontSize: 16
+                  labelString: 'GPA (out of 4.0)',
+                  fontSize: 14
                 },
                 gridLines: {
                   display: true
